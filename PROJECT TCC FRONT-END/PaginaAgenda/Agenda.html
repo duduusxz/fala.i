@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">  <!--Bibliotecas para fontes-->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>  <!--Bibliotecas para fontes-->
+    <link href="https://fonts.googleapis.com/css2?family=Young+Serif&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&family=Young+Serif&display=swap" rel="stylesheet"> <!--Bibliotecas para fontes-->
+    <link rel="shortcut icon" href="Images/Captura_de_tela_2025-03-14_174727-removebg-preview.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="agenda.css">
+    <script src="https://kit.fontawesome.com/345c519b8f.js" crossorigin="anonymous"></script>
+    <script src="Alerta.js"></script>
+    <title>Agenda</title>
+</head>
+<body>
+  <nav>
+    <div class="nav-left">
+      <img src="/PROJECT TCC FRONT-END/img/logo.png" alt="logo" width="60px" class="logo">
+    </div>
+  
+    <ul class="nav-menu">
+      <li><a href="../PaginaInicial/TelaInicial.html">Serviços</a></li>
+      <li><a href="PaginaCadastro.html">Quem somos</a></li>
+      <li><a href="PaginaInicial.html">Tutorial</a></li>
+      <li><a href="PaginaInicial.html">Contato</a></li>
+    </ul>
+  
+    <div class="nav-right">
+      <button class="account-btn" onclick="window.location.href='../PaginaConta/MinhaConta.html'">
+        <i class="fas fa-user"></i> Minha conta
+      </button>
+    </div>
+  </nav>
+    
+        <div class="main-content">
+          <div class="left">
+            <h1>Agende por aqui seus<br>próximos trabalhos!</h1>
+            <button class="add-task-btn" onclick="add_tarefa()">
+              <p class="add">+</p> Adicionar uma tarefa
+            </button>
+            <p id="texto"><b>Aqui você pode adicionar o trabalho como uma simples tarefa!</b></p>
+            <p id="texto2"><b>Conseguindo ver se está chegando para treinar ainda mais sua fala!</b></p>
+          </div>
+    
+          <div class="right">
+            <div class="calendar-icon">
+              <img src="/img/calendario.png" width="500px" alt="ícone de calendário">
+            </div>
+          </div>
+
+          <div id="overlay" class="overlay">
+            <div class="alerta-principal">
+              <p id="texto3"><b>Qual é a tarefa a ser adicionada??</b></p>
+              <div class="formulario">
+              <input type="date" class="data">
+              <input type="text" placeholder=" Digite o nome da tarefa!" class="tarefa">
+              <button onclick="fechar()">Add Tarefa</button>
+              <a href="../PaginaAgenda/Agenda.html" class="voltar">Voltar</a>
+            </div>
+            </div>
+          </div>
+      </div>
+    </body>
+    </html>
+</body>
+
+
+</html>

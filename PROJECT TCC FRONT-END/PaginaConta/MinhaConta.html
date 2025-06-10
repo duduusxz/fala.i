@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Minha Conta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Young+Serif&display=swap" rel="stylesheet"/>
+    <script src="https://kit.fontawesome.com/345c519b8f.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="MinhaConta.css"/>
+</head>
+<body>
+      <nav>
+        <div class="nav-left">
+          <img src="/PROJECT TCC FRONT-END/img/logo.png" alt="logo" width="60px" class="logo">
+        </div>
+      
+        <ul class="nav-menu">
+          <li id="bar"><a href="../PaginaInicial/TelaInicial.html">Serviços</a></li>
+          <li id="bar"><a href="PaginaCadastro.html">Quem somos</a></li>
+          <li id="bar"><a href="PaginaInicial.html">Tutorial</a></li>
+          <li id="bar"><a href="PaginaInicial.html">Contato</a></li>
+        </ul>
+      
+        <div class="nav-right">
+        </div>
+      </nav>
+
+      <div class="menu-container">
+    <div class="icon-menu">
+        <button class="bars" onclick="abrirmenu()"><i class="fas fa-bars"></i></button>
+    </div>
+
+    <div class="menu" id="menu">
+  <ul class="menu-itens">
+    <li id="navegacao">Home</li>
+    <li id="navegacao">Chatbot</li>
+    <li id="navegacao">Agenda</li>
+    <li id="navegacao">Aquecer</li>
+    <li id="navegacao">Ranking</li>
+    <li id="navegacao">Conta</li>
+    <li id="navegacao">Ajuda</li>
+    <li id="navegacao">Feedback</li>
+  </ul>
+</div>
+</div>
+
+  <div class="container">
+    <div class="perfil">
+      <img src="/img/calendario.png" alt="Foto de perfil" />
+      <h2>Eduardo Ataide Melo</h2>
+    </div>
+    <div class="funcoes">
+      <ul>
+        <li id="conta" onclick="window.location.href='../PaginaConta/Conta.html'">Conta <span>&gt;</span></li>
+        <li id="troca-conta" onclick="window.location.href='../PaginaInicial/TelaInicial.html'">Mudar de Conta <span>&gt;</span></li>
+        <li id="feedback" onclick="window.location.href='../PaginaInicial/TelaInicial.html'">Conta<span>&gt;</span></li>
+        <li id="acessibilidade" onclick="window.location.href='../PaginaInicial/TelaInicial.html'">Acessibilidade <span>&gt;</span></li>
+        <li id="ajuda" onclick="window.location.href='../PaginaInicial/TelaInicial.html'">Ajuda/ Suporte <span>&gt;</span></li>
+        <li id="sobre" onclick="window.location.href='../PaginaInicial/TelaInicial.html'">Sobre Nós <span>&gt;</span></li>
+        <li id="sair" onclick="window.location.href='../PaginaInicial/TelaInicial.html'">Sair <span>&gt;</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <script src="MinhaConta.js"></script>
+</body>
+</html>
