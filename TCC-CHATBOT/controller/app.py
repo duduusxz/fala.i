@@ -21,13 +21,13 @@ setup_database()
 
 @app.route("/")
 def index():
-    return render_template("chatbot/chatbot.html")
+    return render_template("PaginaChatbot/PaginaChatbot.html")
 
 @app.route("/resposta", methods=["POST"])
 def resposta():
     pergunta = request.form["pergunta"]
     resposta_chatbot = gerar_resposta(pergunta)
-    return render_template("chatbot/chatbot.html" , pergunta=pergunta, resposta=resposta_chatbot)
+    return render_template("PaginaChatbot/PaginaChatbot.html" , pergunta=pergunta, resposta=resposta_chatbot)
 
 
 
