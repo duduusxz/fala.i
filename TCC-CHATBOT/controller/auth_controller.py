@@ -56,3 +56,8 @@ def user_list():
     users = User.query.all()
     # Passa a lista de objetos 'user' para o template
     return render_template('users.html', users=users)
+
+
+#FIM LOGIN
+
+#Começo sistema agenda

@@ -1,10 +1,93 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Hello World</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="preconnect" href="https://fonts.googleapis.com">  <!--Bibliotecas para fontes-->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>  <!--Bibliotecas para fontes-->
+    <link href="https://fonts.googleapis.com/css2?family=Young+Serif&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&family=Young+Serif&display=swap" rel="stylesheet"> <!--Bibliotecas para fontes-->
+    <link rel="shortcut icon" href="Images/Captura_de_tela_2025-03-14_174727-removebg-preview.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='PaginaInicial.css') }}">
+    <script src="digitação.js"></script>
+    <script src="https://kit.fontawesome.com/345c519b8f.js" crossorigin="anonymous"></script>
+
+    <title>Página Inicial</title>
 </head>
 <body>
-    <h1>Hello, World!</h1>
+    
+    <nav>
+        <div class="nav-left">
+          <img src="/PROJECT TCC FRONT-END/img/logo.png" alt="logo" width="60px" class="logo">
+        </div>
+      
+        <ul class="nav-menu">
+          <li><a href="../PaginaInicial/TelaInicial.html">Serviços</a></li>
+          <li><a href="PaginaCadastro.html">Quem somos</a></li>
+          <li><a href="PaginaInicial.html">Tutorial</a></li>
+          <li><a href="PaginaInicial.html">Contato</a></li>
+        </ul>
+      
+        <div class="nav-right">
+          <button class="account-btn" onclick="window.location.href='../PaginaConta/MinhaConta.html'">
+            <i class="fas fa-user"></i> Minha conta
+          </button>
+        </div>
+      </nav>
+
+    <div class="geral">
+    <div class="left">
+    <header class="titulo">
+        <h1>FALA.I</h1>
+    </header>
+
+    <section class="comecando">
+        <div class="botao-comecar">
+            <button onclick="window.location.href='../PaginaChatbot/Chatbot.html'" id="botao-comecar">COMECE JÁ</button >
+        </div>
+        
+        <p id="textinho">
+            Comece agora a treinar sua oratória e arrasar nas suas próximas apresentações!
+        </p>
+
+    </section>
+    </div>
+
+
+    <div class="right">
+        <div class="espaco"><p id="textos">fefergfesfjhesfkjhsevfkjeshfvsekbfvsekcbveskcfhbvesakcjbsevckjbsevcksevckjsebcvksejhcvsekjcbvsemcbjsevkcgsevcbsevckjseagcvkjsgvsekgcvsejkcbsveckgsevcsegcvksehdbsekjfhserkfjhesfkjsehvfkjeyw4tviusryg kyeriwue yftkseuryfgw3iuyg w3kuryiw3uyr gfwqkhrdfg w3iurfy3qwju yfweju3vi ysvefkjsegfusegfjsehgvfjseyhgfjhrefg</p></div>
+    </div>
+</div>
+
+    <section class="cards-container">
+        <div class="card">
+            <div class="card-agenda" onclick="window.location.href='../PaginaAgenda/Agenda.html'">
+                <img src="/PROJECT TCC FRONT-END/img/calendario.png" width="250px" alt="Ícone de Agenda">
+            </div>
+            <button class="botao" onclick="window.location.href='../PaginaAgenda/Agenda.html'">
+                <a href="">AGENDA</a>
+            </button>
+        </div>
+
+        <div class="card">
+            <div class="card-microfone">
+                <img src="/PROJECT TCC FRONT-END/img/microfone.png" width="260px" alt="Ícone de Microfone">
+            </div>
+            <button class="botao">
+                <a href="">MICROFONE</a>
+            </button>
+        </div>
+
+        <div class="card">
+            <div class="card-ranking">
+                <img src="/PROJECT TCC FRONT-END/img/ranking.png" width="250px" alt="Ícone de Ranking">
+            </div>
+            <button class="botao">
+                <a href="">RANKING</a>
+            </button>
+        </div>
+    </section>
+
 </body>
 </html>
