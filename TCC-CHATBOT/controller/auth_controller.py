@@ -9,12 +9,24 @@ from flask import session
 auth_bp = Blueprint('auth', __name__)
 
 @auth_bp.route('/cadastro', methods=['GET', 'POST'])
-@auth_bp.route("/cadastro", methods=["GET", "POST"])
+
+
 def cadastro():
     if request.method == "POST":
         email = request.form["email"]
         rm = request.form["rm"]
         senha = request.form["senha"]
+
+
+        if(len (email) < 12 or len (email) > 50): # verifica  a quantidade de caracteres para o cadastro
+            msg = "Coisa"
+            return msg 
+        
+        if(len (rm) != 5):
+            msg = "Coisa"
+            return msg
+
+
 
         sucesso = cadastrar_usuario(email, rm, senha)
         if sucesso:
@@ -22,12 +34,12 @@ def cadastro():
             return redirect(url_for("auth.login")) 
         else:
             flash("Erro no cadastro. RM ou e-mail já cadastrados.")
-            return render_template("PaginaLogin.html")
+            return render_template("PaginaLogin/PaginaLogin.html")
 
     return render_template("PaginaLogin")
 
  
-    return render_template('PaginaLogin.html')
+    return render_template('/PaginaLogin/PaginaLogin.html')
 
 @auth_bp.route("/login", methods=["GET", "POST"])
 def login():
@@ -61,3 +73,7 @@ def user_list():
 #FIM LOGIN
 
 #Começo sistema agenda
+
+@auth_bp.route('/Agenda')
+def agenda():
+    return render_template('PaginaAgenda/PaginaAgenda.html')
