@@ -379,6 +379,10 @@ textarea:focus{
     outline: none;
 }
 
+textarea{
+  padding: 8px;
+}
+
 input{
     border-radius: 8px;
     width: 200px;
