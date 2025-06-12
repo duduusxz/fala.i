@@ -14,7 +14,7 @@ from controller.auth_controller import auth_bp
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'uma_chave_secreta_muito_longa_e_aleatoria_para_producao_1234567890'
-app.register_blueprint(auth_bp)
+app.register_blueprint(auth_bp) #coisas leves haha
 
 # ✅ Chamar a criação do banco/tabela
 setup_database()
