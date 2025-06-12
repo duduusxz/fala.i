@@ -76,6 +76,7 @@ input{
     color: white;
     margin-top: 10px;
     margin-bottom: 10px;
+    padding: 5px;
 }
 
 
@@ -152,6 +153,10 @@ p{
     color: white;
 }
 
+input:focus{
+    outline: solid 2px var(--cor-principal);
+}
+
 #rm{
     width: 253px;
     height: 36px;
@@ -196,6 +201,8 @@ button{
     width: 360px;
     height: 39px;
     border: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 500;
 }
 
 #entrar{
@@ -496,3 +503,4 @@ i {
         transform: translateY(-20px); /* Ajuste a altura do pulo conforme necessário */
     }
 }
+
