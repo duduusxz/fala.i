@@ -66,7 +66,7 @@ def login():
 
 #inicio da pagina de inicio e configuração
 
-@auth_bp.route("/Inicio") 
+@auth_bp.route("/inicio") 
 def deep():
     return render_template("/PaginaInicial/PaginaInicial.html")
 
@@ -86,7 +86,7 @@ def user_list():
 
 #Começo sistema agenda
 
-@auth_bp.route('/Agenda')
+@auth_bp.route('/agenda')
 def agenda():
     return render_template('PaginaAgenda/PaginaAgenda.html')
 

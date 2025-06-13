@@ -495,6 +495,7 @@ i {
   color: var(--cor-principal);
 }
 
+
 @keyframes pulo {
     0%, 100% {
         transform: translateY(0);
@@ -503,4 +504,3 @@ i {
         transform: translateY(-20px); /* Ajuste a altura do pulo conforme necessário */
     }
 }
-
