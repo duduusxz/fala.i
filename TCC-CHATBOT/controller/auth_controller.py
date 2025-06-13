@@ -74,6 +74,17 @@ def user_list():
 
 #Começo sistema agenda
 
+
+
 @auth_bp.route('/Agenda')
 def agenda():
     return render_template('PaginaAgenda/PaginaAgenda.html')
+
+
+#fim agenda 
+
+#inicio pagina termos
+
+@auth_bp.route('/termos')
+def termos():
+    return render_template('PaginaTermos/PaginaTermos.html')
