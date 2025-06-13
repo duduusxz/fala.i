@@ -1,0 +1,400 @@
+:root{
+  --fundo-branco: #ffffff;
+  --cor-principal:  #686bff;
+  --hover: #5557ff;
+  --cor-terciaria: #7779fd;
+  --cinza-claro: #e4e9f0;
+  --cinza-medio: #cfd4d8;
+  --roxo: #491f7a;
+  --fundo-cinza: #efefef;
+}
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+  overflow-x: hidden;
+}
+
+body {
+    background-color: #ffffff;
+    font-family: 'Young Serif', sans-serif;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    text-decoration: none;
+    align-items: center;
+    justify-content: center;
+    gap: 36px;
+    padding: 20px 0;
+    cursor: pointer;
+}
+
+nav ul li a {
+    color: #686bff;
+    text-decoration: none;
+    font-family: 'Young Serif', sans-serif;
+    font-style: normal;
+    transition: 0.4s;
+}
+
+nav ul li a:hover {
+    color: #686bff;
+}
+
+nav {
+    display: flex;
+    justify-content: space-around; /* Espaço entre os elementos */
+    align-items: center;
+    padding: 20px 40px;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    text-decoration: none;
+    align-items: center;
+    gap: 36px;
+    padding: 0;
+    margin: 0;
+}
+
+#bar{
+    transition: 0.2s;
+    font-weight: lighter;
+}
+
+#bar:hover{
+    transform: scale(1.10);
+}
+
+.nav-left,
+.nav-right {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.nav-left{
+    left: 50px;
+    position: relative;
+}
+
+.nav-menu {
+    display: flex;
+    gap: 30px;
+    list-style: none;
+    justify-content: center;
+    flex: 2;
+    padding: 0;
+    margin: 0;
+  }
+
+  .nav-menu li a {
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .logo {
+    margin-left: 10px;
+  }
+
+  .menu {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background-color: #e4e9f0;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 72px; /* defina uma largura fixa ou ajustável */
+    z-index: 1; /* para garantir que fique sobre o fundo */
+    transition: width 0.3s ease-in-out;
+    overflow: hidden;
+}
+
+.menu:hover{
+    width: 270px;
+}
+
+.menu.ativo {
+    width: 270px;
+}
+
+.bars {
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    align-items: center;
+    justify-content: center;
+    background-color: #e4e9f0;
+    transition: background-color 0.2s;
+    scale: 110%;
+    font-size: 15px;
+    cursor: pointer;
+    flex-direction: initial;
+}
+
+.bars:hover {
+    background-color: var(--cinza-medio);
+    transition: 0.3;
+}
+
+.icon-menu {
+    position: fixed; /* Ou fixed, dependendo do seu scroll */
+    top: 20px;
+    left: 0;
+    z-index: 2; /* Garante que fique acima de outros elementos */
+    width: 72px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    height: 60px;
+    flex-direction: column;
+    
+}
+
+  
+.container1, .container2, .container3, .container4{
+    background-color: var(--cinza-claro);
+    border-radius: 20px;
+    padding: 30px;
+    width: 550px; /* Original width */
+    margin: 40px auto 0;
+    transition: width 0.5s ease-in-out; /* Smooth transition for width changes */
+    flex-shrink: 0; /* Prevents shrinking within the flex container by default */
+}
+  
+  .perfil {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .perfil img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .troca-conta img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 25px;
+    margin-left: 30px;
+  }
+  
+  .funcoes {
+  margin-top: 40px;
+  background-color: var(--fundo-branco);
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.funcoes li {
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+  color: #491f7a;
+}
+
+h2{
+  font-weight: lighter;
+  color: var(--roxo);
+}
+  
+  .dados {
+    margin-top: 27px;
+    background-color: var(--fundo-branco);
+    padding: 20px;
+    border-radius: 12px;
+  }
+  
+  .dados li {
+    padding: 12px 0;
+    border-bottom: 1px solid #aaa;
+    display: flex;
+    justify-content: space-between;
+    color: var(--roxo);
+  }
+  .voltar{
+    padding-right: 480px;
+    color: #fceabb;
+    transition: 0.7s;
+    text-decoration: none;
+  }
+  
+  .voltar a:hover{
+    color: #FAD86B;
+  }
+
+.menu-itens {
+  list-style: none;
+  padding: 0;
+  margin-top: 80px;
+}
+
+.menu-itens li {
+  opacity: 0;
+  visibility: hidden;
+  margin-left: -9999px;
+  transition: opacity 0.3s ease, margin-left 0.3s ease;
+  color: var(--roxo);
+  padding: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#navegacao{
+  background-color: var(--cinza-claro);
+  height: 40px;
+  margin: 5px;
+  align-items: center;
+  justify-content: center;
+  align-items: center;
+  transition: 0.2s;
+  border-radius: 5px;
+}
+
+#navegacao:hover{
+  background-color: var(--cinza-medio);
+}
+
+.menu:hover .menu-itens li,
+.menu.ativo .menu-itens li {
+  opacity: 1;
+  visibility: visible;
+  margin-left: 0;
+}
+
+  .alterar-foto{
+    margin-top: 20px;
+    width: 100px;
+    height: 30px;
+    border: none;
+    background-color: var(--fundo-branco);
+    color: var(--roxo);
+    border-radius: 8px;
+  }
+  
+  #informacao, #informacao2{
+    font-size: 12px;
+  }
+  
+  #informacao{
+    padding-top: 10px;
+    color: var(--roxo);
+  }
+
+  #informacao2{
+    color: var(--roxo);
+  }
+
+  #container1, #container2, #container3, #container4{
+    left: 793.5px;
+    position: relative;
+    transition: transform 0.8s ease-in-out;
+  }
+  
+  .opcoes {
+    display: flex;
+    transition: transform 0.8s ease-in-out; /* Smooth transition for movement */
+    /* You might need to adjust gap or margin here */
+    right: 300px;
+    position: relative;
+    gap: 10px;
+  }
+
+  .seta-esquerda, .seta-direita {
+  position: absolute;
+  top: 55%;
+  transform: translateY(-50%);
+  background-color: #abaaff;
+  border: none;
+  padding: 5px 15px;
+  font-size: 24px;
+  cursor: pointer;
+  border-radius: 100%;
+  z-index: 2;
+  color: var(--fundo-branco);
+}
+
+.seta-esquerda {
+  left: 440px;
+}
+
+.seta-direita {
+  right: 440px;
+}
+
+#container2, #container3, #container4{
+  scale: 80%;
+  transition: transform 0.8s ease-in-out;
+}
+
+#editar{
+  border: none;
+  border-radius: 8px;
+  width: 75px;
+  background-color: var(--cor-terciaria);
+  color: #ffffff;
+}
+
+#enviar{
+  border: none;
+  border-radius: 8px;
+  width: 150px;
+  height: 30px;
+  background-color: var(--cor-terciaria);
+  color: #ffffff;
+  margin: 20px;
+  margin-left: 0;
+}
+
+#problema{
+  width: 450px;
+  max-width: 450px;
+  min-width: 450px;
+  height: 200px;
+  max-height: 200px;
+  min-height: 200px;
+  border-radius: 8px;
+  border: solid 1px #616161;
+}
+
+textarea:focus{
+    outline: none;
+}
+
+textarea{
+  padding: 8px;
+}
+
+input{
+    border-radius: 8px;
+    width: 200px;
+    height: 30px;
+    border: solid 1px #aaa;
+    background-color: transparent;
+    color: #616161;
+}
+
+#troca{
+  width: 50px;
+  height: 50px;
+  bottom: 25px;
+  position: relative;
+}
