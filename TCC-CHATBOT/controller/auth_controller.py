@@ -41,6 +41,9 @@ def cadastro():
  
     return render_template('/PaginaLogin/PaginaLogin.html')
 
+
+#Inicio na pagina de login rota e configuração
+
 @auth_bp.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
@@ -57,11 +60,17 @@ def login():
 
     return render_template("PaginaLogin/PaginaLogin.html")
 
+# Fim da pagina de login rota e configuração
+
+#inicio da pagina de inicio e configuração
+
 @auth_bp.route("/Inicio") 
 def deep():
     return render_template("/PaginaInicial/PaginaInicial.html")
 
+# Ffim da pagina de inicio e configuração
 
+#inicio para ver os users
 @auth_bp.route('/users')
 def user_list():
     # Busca TODOS os usuários do banco de dados
@@ -70,10 +79,19 @@ def user_list():
     return render_template('users.html', users=users)
 
 
-#FIM LOGIN
+#fim para ver os users
+
 
 #Começo sistema agenda
+
 
 @auth_bp.route('/Agenda')
 def agenda():
     return render_template('PaginaAgenda/PaginaAgenda.html')
+
+#fim sistema agenda
+
+#inicio termos de uso
+@auth_bp.route('/termos')
+def termos():
+    return render_template('PaginaTermos/PaginaTermos.html')
