@@ -21,7 +21,7 @@ setup_database()
 
 @app.route("/")
 def index():
-    return render_template("PaginaChatbot/PaginaChatbot.html")
+    return render_template("PaginaLogin/PaginaLogin.html")
 
 @app.route("/resposta", methods=["POST"])
 def resposta():
