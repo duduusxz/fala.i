@@ -94,6 +94,6 @@ def agenda():
 
 #inicio pagina termos
 
-@auth_bp.route('/termos') # rota definida para a página de termos
+@auth_bp.route('/termos') # rota definida para a página de termos abaixo: 
 def termos():
     return render_template('PaginaTermos/PaginaTermos.html')
