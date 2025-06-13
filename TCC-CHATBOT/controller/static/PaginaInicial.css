@@ -96,6 +96,7 @@ nav ul {
 
   .logo {
     margin-left: 10px;
+    animation: pulo 2s infinite;
   }
 
 .conta {
@@ -320,5 +321,15 @@ li:hover{
 @keyframes blink {
     50% { opacity: 0; } 
 }
+
+@keyframes pulo {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px); /* Ajuste a altura do pulo conforme necessário */
+    }
+}
+
 
 /*686bff*/
