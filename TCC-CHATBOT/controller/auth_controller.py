@@ -42,7 +42,9 @@ def cadastro():
     return render_template('PaginaLogin/PaginaLogin.html')
 
 
-@auth_bp.route("/login", methods=["GET", "POST"]) # Aqui defini a rota de login, que vai pegar as informações que está salva no banco de dados cadastrado e verificar nessa rota 
+#Inicio na pagina de login rota e configuração
+
+@auth_bp.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
         email = request.form["email"]
@@ -60,14 +62,19 @@ def login():
 
     return render_template("PaginaLogin/PaginaLogin.html")
 
+# Fim da pagina de login rota e configuração
 
+#inicio da pagina de inicio e configuração
 
+@auth_bp.route("/inicio") 
 @auth_bp.route("/inicio")  # rota definida para a página inicial
 def deep():
     return render_template("/PaginaInicial/PaginaInicial.html")
 
+# Ffim da pagina de inicio e configuração
 
-@auth_bp.route('/users') # rota definida para listar os usuários e ver todos por conta do SQLite3
+#inicio para ver os users
+@auth_bp.route('/users')
 def user_list():
     # Busca TODOS os usuários do banco de dados
     users = User.query.all() 
@@ -75,22 +82,25 @@ def user_list():
     return render_template('users.html', users=users) # vai renderizar a página de usuários, que é a users.html
 
 
-# fim
+#fim para ver os users
+
+@auth_bp.route('Inicio') # rota definida para a página inicial 
+def inicio():
+    return render_template('PaginaInicial/PaginaInicial.html')
 
 #Começo sistema agenda
 
 
 
-@auth_bp.route('/agenda')  # rota definida para a página de agenda
+@auth_bp.route('/Agenda')  # rota definida para a página de agenda
 def agenda():
     return render_template('PaginaAgenda/PaginaAgenda.html')
 
+#fim sistema agenda
 
-#fim agenda 
 
-#inicio pagina termos
+#inicio termos de uso
 
-@auth_bp.route('/termos') # rota definida para a página de termos abaixo: 
+@auth_bp.route('/termos')
 def termos():
     return render_template('PaginaTermos/PaginaTermos.html')
-

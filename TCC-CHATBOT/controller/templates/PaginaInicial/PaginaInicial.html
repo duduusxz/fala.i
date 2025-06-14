@@ -10,6 +10,7 @@
     <link rel="shortcut icon" href="Images/Captura_de_tela_2025-03-14_174727-removebg-preview.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='PaginaInicial.css') }}">
+     <link rel="shortcut icon" href="{{ url_for('static', filename='img/logo.png') }}" type="image/x-icon">
     <script src="digitação.js"></script>
     <script src="https://kit.fontawesome.com/345c519b8f.js" crossorigin="anonymous"></script>
 
@@ -19,7 +20,7 @@
     
     <nav>
         <div class="nav-left">
-          <img src="/PROJECT TCC FRONT-END/img/logo.png" alt="logo" width="60px" class="logo">
+          <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo do Chatbot" id="logo" class="logo" width="60px">
         </div>
       
         <ul class="nav-menu">
@@ -30,7 +31,9 @@
         </ul>
       
         <div class="nav-right">
-          <button class="account-btn" onclick="window.location.href='../PaginaConta/MinhaConta.html'">
+            <form action="/minha_conta">
+                <button class="account-btn" type="submit">
+            </form>
             <i class="fas fa-user"></i> Minha conta
           </button>
         </div>
@@ -63,7 +66,7 @@
     <section class="cards-container">
         <div class="card">
             <div class="card-agenda" onclick="window.location.href='../PaginaAgenda/Agenda.html'">
-                <img src="/PROJECT TCC FRONT-END/img/calendario.png" width="250px" alt="Ícone de Agenda">
+                <img src="{{ url_for('static', filename='img/calendario.png') }}" width="250px" alt="Ícone de Agenda">
             </div>
             <button class="botao" onclick="window.location.href='../PaginaAgenda/Agenda.html'">
                 <a href="">AGENDA</a>
@@ -72,7 +75,7 @@
 
         <div class="card">
             <div class="card-microfone">
-                <img src="/PROJECT TCC FRONT-END/img/microfone.png" width="260px" alt="Ícone de Microfone">
+                <img src="{{ url_for('static', filename='img/microfone.png') }}" width="260px" alt="Ícone de Microfone">
             </div>
             <button class="botao">
                 <a href="">MICROFONE</a>
@@ -81,7 +84,7 @@
 
         <div class="card">
             <div class="card-ranking">
-                <img src="/PROJECT TCC FRONT-END/img/ranking.png" width="250px" alt="Ícone de Ranking">
+                <img src="{{ url_for('static', filename='img/ranking.png') }}" width="250px" alt="Ícone de Ranking">
             </div>
             <button class="botao">
                 <a href="">RANKING</a>

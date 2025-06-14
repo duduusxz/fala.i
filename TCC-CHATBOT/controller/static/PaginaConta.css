@@ -105,6 +105,7 @@ nav ul {
 
   .logo {
     margin-left: 10px;
+      animation: pulo 2s infinite;
   }
 
   .menu {
@@ -397,4 +398,13 @@ input{
   height: 50px;
   bottom: 25px;
   position: relative;
+}
+
+@keyframes pulo {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px); /* Ajuste a altura do pulo conforme necessário */
+    }
 }
