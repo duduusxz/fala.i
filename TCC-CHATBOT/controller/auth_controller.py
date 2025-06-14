@@ -67,6 +67,7 @@ def login():
 #inicio da pagina de inicio e configuração
 
 @auth_bp.route("/inicio") 
+@auth_bp.route("/inicio")  # rota definida para a página inicial
 def deep():
     return render_template("/PaginaInicial/PaginaInicial.html")
 
@@ -83,10 +84,15 @@ def user_list():
 
 #fim para ver os users
 
+@auth_bp.route('Inicio') # rota definida para a página inicial 
+def inicio():
+    return render_template('PaginaInicial/PaginaInicial.html')
 
 #Começo sistema agenda
 
-@auth_bp.route('/agenda')
+
+
+@auth_bp.route('/Agenda')  # rota definida para a página de agenda
 def agenda():
     return render_template('PaginaAgenda/PaginaAgenda.html')
 
@@ -98,10 +104,3 @@ def agenda():
 @auth_bp.route('/termos')
 def termos():
     return render_template('PaginaTermos/PaginaTermos.html')
-
-#fim termos de uso
-
-# inicio da rota do minha conta 
-@auth_bp.route('/minha_conta')
-def minha_conta():
-    return render_template('PaginaConta/PaginaConta.html')

@@ -48,16 +48,16 @@
         <h3>Login</h3>
        <form metho=d"POST" action="/login" id="form-login">
         <p>E-mail</p>
-        <input type="email" placeholder="Digite seu email" id="email" name="email" >
+        <input type="email" placeholder="Digite seu email" id="email" name="email" required>
 
     <div class="linha-rm-senha">
         <div>
             <p>Rm</p>
-            <input type="text" placeholder="Digite seu Rm" id="rm" name="rm"  maxlength="5">
+            <input type="text" placeholder="Digite seu Rm" id="rm" required name="rm"  maxlength="5">
         </div>
         <div>
             <p>Senha</p>
-            <input type="password" placeholder="Digite sua senha" id="senha" name="senha" >
+            <input type="password" placeholder="Digite sua senha" id="senha" name="senha" required>
             <i class="fas fa-eye" id="toggleSenha" onclick="mostrarSenha()"></i>
         </div>
     </div>
@@ -80,27 +80,27 @@
             <h3>Cadastro</h3> 
               <form method="POST" action="/cadastro" id="form-cadastro">
                 <p>E-mail</p> 
-                <input type="email" id="email" name="email" placeholder="Digite seu email">
+                <input type="email" id="email" name="email" placeholder="Digite seu email" required>
 
                 <div class="linha-rm-senha">
                     <div>
                     <p>Rm</p>
-                    <input type="text" id="rm" name="rm" placeholder="Digite seu Rm" maxlength="5">
+                    <input type="text" id="rm" name="rm" placeholder="Digite seu Rm" maxlength="5" required>
                     </div>
                     <div>
                     <p>Senha</p>
-                    <input type="text" id="senha" name="senha" placeholder="Crie uma senha">
+                    <input type="text" id="senha" name="senha" placeholder="Crie uma senha" required>
                     </div>
                 </div>
 
                 <p>Confirme a senha</p>
-                <input type="text" id="confirmarSenha" name="confirmarSenha" placeholder="Digite a mesma senha do campo anterior">
+                <input type="text" id="confirmarSenha" name="confirmarSenha" placeholder="Digite a mesma senha do campo anterior" required>
 
                 <div class="cadastro-entrar">
             <div class="botoes-linha">
                 <button type="submit" id="cadastrar2">Cadastrar</button>
                 <p id="ou">ou</p>
-                <button type="submit" id="entrar2" onclick="moverContainer('esquerda')">Entrar</button>
+                <button type="button" id="entrar2" onclick="moverContainer('esquerda')">Entrar</button>
             </div>
         </div>
                  </form>
