@@ -17,7 +17,7 @@
 <body>
   <nav>
     <div class="nav-left">
-      <img src="/PROJECT TCC FRONT-END/img/logo.png" alt="logo" width="60px" class="logo">
+       <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo do Chatbot" id="logo" class="logo" width="60px"> 
     </div>
   
     <ul class="nav-menu">
@@ -28,9 +28,12 @@
     </ul>
   
     <div class="nav-right">
-      <button class="account-btn" onclick="window.location.href='../PaginaConta/MinhaConta.html'">
+      <form action="/minha_conta">
+        <button class="account-btn" onclick="window.location.href='../PaginaConta/MinhaConta.html'">
         <i class="fas fa-user"></i> Minha conta
       </button>
+      </form>
+      
     </div>
   </nav>
     
