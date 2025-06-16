@@ -1,13 +1,13 @@
 :root{
-    --fundo-branco: #ffffff;
-    --cor-principal:  #686bff;
-    --hover: #5557ff;
-    --cor-terciaria: #7779fd;
-    --cinza-claro: #e4e9f0;
-    --cinza-medio: #cfd4d8;
-    --roxo: #491f7a;
-    --fundo-cinza: #efefef;
-  }
+  --fundo-branco: #ffffff;
+  --cor-principal:  #686bff;
+  --hover: #5557ff;
+  --cor-terciaria: #7779fd;
+  --cinza-claro: #e4e4e4;
+  --cinza-medio: #cfd4d8;
+  --roxo: #491f7a;
+  --fundo-cinza: #efefef;
+}
   
   *{
       box-sizing: border-box;

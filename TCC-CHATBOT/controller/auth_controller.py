@@ -84,7 +84,7 @@ def user_list():
 
 #fim para ver os users
 
-@auth_bp.route('Inicio') # rota definida para a página inicial 
+@auth_bp.route('/inicio') # rota definida para a página inicial 
 def inicio():
     return render_template('PaginaInicial/PaginaInicial.html')
 
@@ -104,3 +104,12 @@ def agenda():
 @auth_bp.route('/termos')
 def termos():
     return render_template('PaginaTermos/PaginaTermos.html')
+
+#fim dos termos
+
+
+#inicio da minha conta
+
+@auth_bp.route('/minha_conta')
+def conta():
+    return render_template('PaginaConta/PaginaConta.html')

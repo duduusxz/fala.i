@@ -3,7 +3,7 @@
   --cor-principal:  #686bff;
   --hover: #5557ff;
   --cor-terciaria: #7779fd;
-  --cinza-claro: #e4e9f0;
+  --cinza-claro: #e4e4e4;
   --cinza-medio: #cfd4d8;
   --roxo: #491f7a;
   --fundo-cinza: #efefef;
@@ -218,7 +218,7 @@ nav ul {
 }
 
 .card-agenda, .card-microfone, .card-ranking {
-    background-color: var(--fundo-cinza);
+    background-color: var(--cinza-claro);
     width: 500px;
     height: 380px;
     border-radius: 15px;
@@ -294,7 +294,7 @@ li:hover{
 .espaco{
     border-radius: 15px;
     padding: 15px;
-    background-color: var(--fundo-cinza);
+    background-color: var(--cinza-claro);
     width: 580px;
     margin-top: 120px;
     margin-left: 200px;
