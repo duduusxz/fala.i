@@ -66,7 +66,7 @@ def login():
 
 #inicio da pagina de inicio e configuração
 
-@auth_bp.route("/inicio") 
+
 @auth_bp.route("/inicio")  # rota definida para a página inicial
 def deep():
     return render_template("/PaginaInicial/PaginaInicial.html")
@@ -92,7 +92,7 @@ def inicio():
 
 
 
-@auth_bp.route('/Agenda')  # rota definida para a página de agenda
+@auth_bp.route('/agenda')  # rota definida para a página de agenda
 def agenda():
     return render_template('PaginaAgenda/PaginaAgenda.html')
 
