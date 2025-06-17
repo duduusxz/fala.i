@@ -203,6 +203,7 @@ button{
     border: none;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 500;
+    cursor: pointer;
 }
 
 #entrar{
@@ -259,6 +260,8 @@ button{
     margin-top: 10px;
     font-family: Arial, Helvetica, sans-serif;
     color: var(--cinza-claro);
+    cursor: pointer;
+    text-decoration: underline;
 }
 
 #ou{
@@ -495,6 +498,19 @@ i {
   color: var(--cor-principal);
 }
 
+footer{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+}
+
+#ver-termos{
+    text-decoration: underline;
+    color: #67676b;
+    cursor: pointer;
+}
 
 @keyframes pulo {
     0%, 100% {
