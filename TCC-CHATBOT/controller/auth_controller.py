@@ -27,7 +27,8 @@ def cadastro():
         if len (senha) < 8 or len (senha) > 50:
             return jsonify({"erro": "Senha deve ter entre 8 e 50 caracteres."})
         
-        
+        if(confirmarSenha != senha):
+            return render_template('aviso.html', mensagem='As senhas não conferem. Tente novamente.') # verifica se a senha e a confirmação de senha são iguais
 
         sucesso = cadastrar_usuario(email, rm, senha) # se der sucesso com o cadastro, chama a função cadastrar_usuario do model.usuario_model
         # que vai inserir os dados no banco de dados
