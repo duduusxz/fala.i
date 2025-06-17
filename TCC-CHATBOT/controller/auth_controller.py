@@ -14,7 +14,13 @@ def cadastro():
     if request.method == "POST":
         email = request.form["email"]
         rm = request.form["rm"]
-        senha = request.form["senha"] # pega os dados do formulário de cadastro para verificar
+        senha = request.form["senha"]  # pega os dados do formulário de cadastro para verificar
+        confirmarSenha = request.form["confirmarSenha"]  # pega a confirmação de senha do formulário
+        
+        if confirmarSenha != senha:  # verifica se a confirmação de senha é igual à senha
+            return render_template("aviso.html", erro="As senhas não coincidem.")  # se não for igual, retorna erro
+        
+        
         
         if len (email ) < 10 or len (email) > 40:
             return jsonify({"erro": "Email deve ter entre 10 e 40 caracteres."})  # verifica se o email, rm e senha estão dentro dos limites de caracteres
@@ -26,6 +32,8 @@ def cadastro():
         
         if len (senha) < 8 or len (senha) > 50:
             return jsonify({"erro": "Senha deve ter entre 8 e 50 caracteres."})
+        
+        # verifica se a senha e a confirmação de senha são iguais
 
         sucesso = cadastrar_usuario(email, rm, senha) # se der sucesso com o cadastro, chama a função cadastrar_usuario do model.usuario_model
         # que vai inserir os dados no banco de dados
