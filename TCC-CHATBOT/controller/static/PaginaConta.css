@@ -3,7 +3,7 @@
   --cor-principal:  #686bff;
   --hover: #5557ff;
   --cor-terciaria: #7779fd;
-  --cinza-claro: #e4e4e4;
+--roxo-claro: #b2b3ff54;
   --cinza-medio: #cfd4d8;
   --roxo: #491f7a;
   --fundo-cinza: #efefef;
@@ -167,7 +167,7 @@ nav ul {
 
   
 .container1, .container2, .container3, .container4{
-    background-color: var(--cinza-claro);
+    background-color: var(--roxo-claro);
     border-radius: 20px;
     padding: 30px;
     width: 550px; /* Original width */
@@ -260,7 +260,7 @@ h2{
 }
 
 #navegacao{
-  background-color: var(--cinza-claro);
+  background-color: var(--roxo-claro);
   height: 40px;
   margin: 5px;
   align-items: center;

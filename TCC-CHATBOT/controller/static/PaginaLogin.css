@@ -3,7 +3,7 @@
   --cor-principal:  #686bff;
   --hover: #5557ff;
   --cor-terciaria: #7779fd;
-  --cinza-claro: #e4e4e4;
+--roxo-claro: #b2b3ff54;
   --cinza-medio: #cfd4d8;
   --roxo: #491f7a;
   --fundo-cinza: #efefef;
@@ -20,7 +20,7 @@ html, body{
 }
 
 body{
-    background-color: var(--cinza-claro);
+    background-color: var(--roxo-claro);
     box-sizing: border-box;
     padding: 0;
     margin: 0;
@@ -44,6 +44,7 @@ body{
     font-size: 27px;
     margin-top: 50px;
     margin-top: 0;
+    cursor: default;
 }
 
 .texto-apresentacao-bem-vindo{
@@ -54,6 +55,7 @@ body{
     font-style: normal;
     font-size: 16px;
     max-width: 500px;
+    cursor: default;
 }
 
 h3 {
@@ -203,6 +205,7 @@ button{
     border: none;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 500;
+    cursor: pointer;
 }
 
 #entrar{
@@ -258,7 +261,9 @@ button{
 #esqueci-senha{
     margin-top: 10px;
     font-family: Arial, Helvetica, sans-serif;
-    color: var(--cinza-claro);
+    color:#72c7ff;
+    cursor: pointer;
+    text-decoration: underline;
 }
 
 #ou{
@@ -277,6 +282,10 @@ button{
 
 body.dark-mode #esqueci-senha{
     color: #0062cb;
+}
+
+body.dark-mode #ver-termos{
+    color: #67676b;
 }
     
 body.dark-mode {
@@ -357,7 +366,7 @@ body.dark-mode .container-login{
     top: 47%; /* Reduzir este valor para mover o container para cima */
     right: 10%;
     transform: translateY(-50%);
-    background-color: var(--cinza-claro);
+    background-color: var(--roxo-claro);
     height: auto;
     padding: 40px;
     padding-bottom: 80px;
@@ -373,7 +382,7 @@ body.dark-mode .container-cadastro{
     top: 47%;
     left: 100%;
     transform: translateY(-50%);
-    background-color: var(--cinza-claro);
+    background-color: var(--roxo-claro);
     height: auto;
     padding: 40px;
     padding-bottom: 80px;
@@ -415,7 +424,7 @@ body.dark-mode .senha-esquecida{
     top: 47%;
     left: 100%;
     transform: translateY(-50%);
-    background-color: var(--cinza-claro);
+    background-color: var(--roxo-claro);
     height: auto;
     padding: 40px;
     padding-bottom: 80px;
@@ -495,6 +504,20 @@ i {
   color: var(--cor-principal);
 }
 
+footer{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+}
+
+#ver-termos{
+    text-decoration: underline;
+    color: #c0c0ca;
+    cursor: pointer;
+    padding-left: 140px;
+}
 
 @keyframes pulo {
     0%, 100% {
