@@ -22,6 +22,8 @@ def setup_database():
 def cadastrar_usuario(email, rm,  password):
     if not rm or not email or not password:
         return False
+    
+    
     try:
         hashed = bcrypt.hashpw(password.encode(), bcrypt.gensalt())
         with get_db_connection() as conn:
