@@ -44,6 +44,7 @@ body{
     font-size: 27px;
     margin-top: 50px;
     margin-top: 0;
+    cursor: default;
 }
 
 .texto-apresentacao-bem-vindo{
@@ -54,6 +55,7 @@ body{
     font-style: normal;
     font-size: 16px;
     max-width: 500px;
+    cursor: default;
 }
 
 h3 {
@@ -259,7 +261,7 @@ button{
 #esqueci-senha{
     margin-top: 10px;
     font-family: Arial, Helvetica, sans-serif;
-    color: var(--cinza-claro);
+    color:#72c7ff;
     cursor: pointer;
     text-decoration: underline;
 }
@@ -280,6 +282,10 @@ button{
 
 body.dark-mode #esqueci-senha{
     color: #0062cb;
+}
+
+body.dark-mode #ver-termos{
+    color: #67676b;
 }
     
 body.dark-mode {
@@ -508,8 +514,9 @@ footer{
 
 #ver-termos{
     text-decoration: underline;
-    color: #67676b;
+    color: #c0c0ca;
     cursor: pointer;
+    padding-left: 140px;
 }
 
 @keyframes pulo {
