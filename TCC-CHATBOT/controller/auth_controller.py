@@ -19,7 +19,7 @@ def cadastro():
         
         if confirmarSenha != senha:  # verifica se a confirmação de senha é igual à senha
             return render_template("aviso.html", erro="As senhas não coincidem.")  # se não for igual, retorna erro
-        
+
         
         
         if len (email ) < 10 or len (email) > 40:
@@ -66,7 +66,7 @@ def login():
             session["user_id"] = user_id 
             return render_template('/PaginaInicial/PaginaInicial.html', user_id=user_id)  ##se estiver correto vai pra page inicial
         else:
-            flash("RM, e-mail ou senha incorretos. Verifique os dados e tente novamente.") # se nao estiver vai alertar que deu erro
+            return render_template("aviso.html")  # se não for encontrado, retorna erro
 
     return render_template("PaginaLogin/PaginaLogin.html")
 
@@ -75,9 +75,6 @@ def login():
 #inicio da pagina de inicio e configuração
 
 
-@auth_bp.route("/inicio")  # rota definida para a página inicial
-def deep():
-    return render_template("/PaginaInicial/PaginaInicial.html")
 
 # Ffim da pagina de inicio e configuração
 
@@ -87,7 +84,7 @@ def user_list():
     # Busca TODOS os usuários do banco de dados
     users = User.query.all() 
     # Passa a lista de objetos "user" para o template
-    return render_template('users.html', users=users) # vai renderizar a página de usuários, que é a users.html
+    return render_template('users.html', users=users) # vai renderizar a página de usuários, que é a users.html 
 
 
 #fim para ver os users
@@ -121,3 +118,11 @@ def termos():
 @auth_bp.route('/minha_conta')
 def conta():
     return render_template('PaginaConta/PaginaConta.html')
+
+# fim minha conta
+
+# rota aviso
+
+@auth_bp.route('/aviso')
+def aviso():
+    return render_template('aviso.html')
