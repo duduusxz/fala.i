@@ -84,7 +84,7 @@ def user_list():
     # Busca TODOS os usuários do banco de dados
     users = User.query.all() 
     # Passa a lista de objetos "user" para o template
-    return render_template('users.html', users=users) # vai renderizar a página de usuários, que é a users.html
+    return render_template('users.html', users=users) # vai renderizar a página de usuários, que é a users.html 
 
 
 #fim para ver os users
