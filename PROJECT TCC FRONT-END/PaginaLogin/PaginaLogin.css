@@ -3,7 +3,7 @@
   --cor-principal:  #686bff;
   --hover: #5557ff;
   --cor-terciaria: #7779fd;
-  --cinza-claro: #e4e9f0;
+  --roxo-claro: #e4e9f0;
   --cinza-medio: #cfd4d8;
   --roxo: #491f7a;
   --fundo-cinza: #efefef;
@@ -20,7 +20,7 @@ html, body{
 }
 
 body{
-    background-color: var(--cinza-claro);
+    background-color: var(--roxo-claro);
     box-sizing: border-box;
     padding: 0;
     margin: 0;
@@ -251,7 +251,7 @@ button{
 #esqueci-senha{
     margin-top: 10px;
     font-family: Arial, Helvetica, sans-serif;
-    color: var(--cinza-claro);
+    color: var(--roxo-claro);
 }
 
 #ou{
@@ -350,7 +350,7 @@ body.dark-mode .container-login{
     top: 47%; /* Reduzir este valor para mover o container para cima */
     right: 10%;
     transform: translateY(-50%);
-    background-color: var(--cinza-claro);
+    background-color: var(--roxo-claro);
     height: auto;
     padding: 40px;
     padding-bottom: 80px;
@@ -366,7 +366,7 @@ body.dark-mode .container-cadastro{
     top: 47%;
     left: 100%;
     transform: translateY(-50%);
-    background-color: var(--cinza-claro);
+    background-color: var(--roxo-claro);
     height: auto;
     padding: 40px;
     padding-bottom: 80px;
@@ -408,7 +408,7 @@ body.dark-mode .senha-esquecida{
     top: 47%;
     left: 100%;
     transform: translateY(-50%);
-    background-color: var(--cinza-claro);
+    background-color: var(--roxo-claro);
     height: auto;
     padding: 40px;
     padding-bottom: 80px;

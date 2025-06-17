@@ -3,7 +3,7 @@
   --cor-principal:  #686bff;
   --hover: #5557ff;
   --cor-terciaria: #7779fd;
-  --cinza-claro: #e4e4e4;
+  --roxo-claro: #b2b3ff54;
   --cinza-medio: #cfd4d8;
   --roxo: #491f7a;
   --fundo-cinza: #efefef;
@@ -140,8 +140,8 @@ nav ul {
 
 .titulo {
     color: #686bff;
-    font-size: 50px;
-    font-family: 'Young Serif', sans-serif;
+    font-size: 60px;
+    font-family: 'Righteous';
     text-align: left;
     width: 30px;
     padding-top: 40px;
@@ -186,7 +186,7 @@ header{
 .botao-comecar button {
     background-color: #686bff;
     border: none;
-    width: 500px;
+    width: 550px;
     height: 80px;
     border-radius: 13px;
     font-size: 37px;
@@ -222,7 +222,7 @@ header{
 }
 
 .card-agenda, .card-microfone, .card-ranking {
-    background-color: var(--cinza-claro);
+    background-color: var(--roxo-claro);
     width: 500px;
     height: 380px;
     border-radius: 15px;
@@ -298,12 +298,12 @@ li:hover{
 .espaco{
     border-radius: 15px;
     padding: 15px;
-    background-color: var(--cinza-claro);
-    width: 580px;
+    background-color: var(--roxo-claro);
+    width: 670px;
     margin-top: 120px;
-    margin-left: 200px;
+    margin-left: 100px;
     height: 230px;
-    max-width: 580px;
+    max-width: 670px;
     overflow-wrap: break-word;
     word-break: break-word;
     white-space: normal;
@@ -361,5 +361,47 @@ li:hover{
     }
 }
 
+.oratoria-sessao{
+    padding: 90px;
+    padding-top: 54px;
+}
+
+#oratoria-img{
+    width: 625px;
+    height: 430px;
+    max-width: 625px;
+    max-height: 430px;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+.texto-oratoria{
+    width: 625px;
+    height: 430px;
+    max-width: 625px;
+    max-height: 430px;
+}
+
+.oratoria{
+    display: flex;
+    gap: 150px;
+    justify-content: center;
+}
+
+h3{
+    color: var(--roxo);
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 30px;
+    font-family: 'Titillium Web';
+}
+
+#texto-oratoria{
+    font-family: 'Titillium Web';
+    color: var(--roxo);
+    font-size: 18px;
+    text-indent: 1em;
+    text-align: justify;
+}
 
 /*686bff*/
