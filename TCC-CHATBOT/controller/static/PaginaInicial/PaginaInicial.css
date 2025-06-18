@@ -404,4 +404,19 @@ h3{
     text-align: justify;
 }
 
+.sessao-dicas{
+    padding: 90px;
+    padding-top: 54px;
+}
+
+.container-dicas{
+    display: flex;
+    gap: 150px;
+    justify-content: center;
+}
+
+.dica{
+    height: 100%;
+}
+
 /*686bff*/
