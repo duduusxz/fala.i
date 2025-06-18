@@ -66,7 +66,7 @@ def login():
             session["user_id"] = user_id 
             return render_template('/PaginaInicial/PaginaInicial.html', user_id=user_id)  ##se estiver correto vai pra page inicial
         else:
-            return render_template("aviso.html")  # se não for encontrado, retorna erro
+            return render_template("/PaginaInicial/PaginaInicial.html")  # se não for encontrado, retorna erro
 
     return render_template("PaginaLogin/PaginaLogin.html")
 
@@ -106,7 +106,7 @@ def agenda():
 
 #inicio termos de uso
 
-@auth_bp.route('/termos')
+@auth_bp.route('/termos')  # rota definida para a página de termos de uso
 def termos():
     return render_template('PaginaTermos/PaginaTermos.html')
 
