@@ -23,13 +23,17 @@ setup_database()
 def index():
     return render_template("PaginaLogin/PaginaLogin.html")
 
-@app.route("/resposta", methods=["POST"])
+@app.route("/resposta", methods=["POST", "GET"])
 def resposta():
-    pergunta = request.form["pergunta"]
-    resposta_chatbot = gerar_resposta(pergunta)
-    return render_template("PaginaChatbot/PaginaChatbot.html" , pergunta=pergunta, resposta=resposta_chatbot)
+    pergunta = None
+    resposta_chatbot = None
 
+    if request.method == "POST":
+        pergunta = request.form.get("pergunta")
+        if pergunta:
+            resposta_chatbot = gerar_resposta(pergunta)
 
+    return render_template("PaginaChatbot/PaginaChatbot.html", pergunta=pergunta, resposta=resposta_chatbot)
 
 
 if __name__ == "__main__":
