@@ -10,7 +10,7 @@
     <link rel="shortcut icon" href="Images/Captura_de_tela_2025-03-14_174727-removebg-preview.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
      <link rel="shortcut icon" href="{{ url_for('static', filename='img/logo.png') }}" type="image/x-icon">
-     <link rel="stylesheet" href="{{ url_for('static', filename='PaginaLogin.css') }}">
+     <link rel="stylesheet" href="{{ url_for('static', filename='PaginaLogin/PaginaLogin.css') }}">
    
     <title>Pagina Login Fala.i</title>
     <script src="https://kit.fontawesome.com/345c519b8f.js" crossorigin="anonymous"></script>
@@ -144,6 +144,19 @@
     </div>
 
     </div>
+
+    <div vw class="enabled">
+            <div vw-access-button class="active"></div>
+                <div vw-plugin-wrapper>
+                    <div class="vw-plugin-top-wrapper"></div>
+                </div>  
+        </div>
+        
+        <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+
+        <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+        </script>
     
     <footer>
         <form action="/termos">
@@ -151,7 +164,7 @@
         </form>
     </footer>
 
-     <script src="{{ url_for('static', filename='PaginaLogin.js') }}"></script>
+     <script src="{{ url_for('static', filename='PaginaLogin/PaginaLogin.js') }}"></script>
     
 </body>
 </html>
