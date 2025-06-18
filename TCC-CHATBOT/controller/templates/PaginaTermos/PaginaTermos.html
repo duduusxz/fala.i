@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Young+Serif&display=swap" rel="stylesheet"> 
     <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&family=Young+Serif&display=swap" rel="stylesheet"> <!--Bibliotecas para fontes-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-     <link rel="stylesheet" href="{{ url_for('static', filename='PaginaTermos.css') }}">
+     <link rel="stylesheet" href="{{ url_for('static', filename='PaginaTermos/PaginaTermos.css') }}">
      <link rel="shortcut icon" href="{{ url_for('static', filename='img/logo.png') }}" type="image/x-icon">
 </head>
 <body>
@@ -79,5 +79,18 @@
             <p>Se tiver dúvidas sobre os nossos Termos de Uso, entre em contato com a nossa equipe de suporte em fala.inossotcc@gmail.com.</p>
         </ul>
     </div>
+
+    <div vw class="enabled">
+            <div vw-access-button class="active"></div>
+                <div vw-plugin-wrapper>
+                    <div class="vw-plugin-top-wrapper"></div>
+                </div>  
+        </div>
+        
+        <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+
+        <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+        </script>
 </body>
 </html>
