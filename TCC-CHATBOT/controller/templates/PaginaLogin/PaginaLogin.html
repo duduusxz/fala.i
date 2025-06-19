@@ -160,9 +160,24 @@
     
     <footer>
             <a href="/termos" id="ver-termos">Ver termos e condições</a>
+
+            <div class="painel">
+                <label for="daltonismo">Daltonismo:</label>
+                <select id="daltonismo">
+                  <option value="normal">Normal</option>
+                  <option value="protanopia">Protanopia</option>
+                  <option value="deuteranopia">Deuteranopia</option>
+                  <option value="tritanopia">Tritanopia</option>
+                  <option value="achromatopsia">Achromatopsia</option>
+                </select>
+                <button onclick="adaptarSiteParaDaltonismo()">Ativar</button>
+              </div>
     </footer>
 
      <script src="{{ url_for('static', filename='PaginaLogin/PaginaLogin.js') }}"></script>
     
+
+
+
 </body>
 </html>

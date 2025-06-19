@@ -527,3 +527,23 @@ footer{
         transform: translateY(-20px); /* Ajuste a altura do pulo conforme necessário */
     }
 }
+
+.painel {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+    background: #111;
+    padding: 10px;
+    border-radius: 10px;
+  }
+
+  .painel label {
+    color: #0f0;
+  }
+
+  .painel select, .painel button {
+    margin: 5px;
+    padding: 5px 10px;
+    font-size: 14px;
+  }
