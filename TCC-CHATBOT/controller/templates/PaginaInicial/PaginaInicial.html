@@ -15,6 +15,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200..900&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/345c519b8f.js" crossorigin="anonymous"></script>
 
     <title>Página Inicial</title>
@@ -113,49 +116,94 @@
         <div class="dicas-principal">
             <div class="container-dicas">
             <div class="dica">
-                <div class="dica-interior">Expressão corporal</div>
-                <div class="dica-exterior">Uma expressão corporal bem gerenciada reforça a mensagem, torna a apresentação mais envolvente e ajuda a transmitir confiança ao público. <br>
-
-                Assim, o ideal é combinar seus gestos com a entonação da fala, marcando momentos em que o ouvinte deve prestar atenção. Dessa forma, é preciso cuidar para que seus sinais corporais e verbais passem a mesma mensagem.</div>
+                <div class="dica-inner">
+                    <div class="dica-front">
+                        <div class="dica-interior">Expressão corporal</div>
+                        <div><img src="{{ url_for('static', filename='img/logo.png') }}" alt="Foto" width="200px"></div>
+                    </div>
+                    
+                    <div class="dica-back">
+                        <div class="dica-exterior">
+                            Expressão corporal reforça a mensagem, torna a apresentação envolvente e transmite confiança. Combine gestos com entonação, marcando momentos para a atenção do ouvinte. Sinais corporais e verbais devem transmitir a mesma mensagem.
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="dica">
-                    <div class="dica-interior">Utilização de uma frase de impacto</div>
-                    <div class="dica-exterior">Lembra dos exemplos que citamos? Outra característica em comum entre eles também são frases marcantes, que resumem o discurso ou o representem muito bem. <br>
-
-                    Iniciar ou verbalizar uma mensagem forte gera maior conexão com o público, e ajuda a memorizar o que você falou.</div> 
+                <div class="dica-inner">
+                    <div class="dica-front">
+                        <div class="dica-interior">Utilização de uma frase de impacto</div>
+                    </div>
+                    
+                    <div class="dica-back">
+                        <div class="dica-exterior">
+                            Lembra dos exemplos citados? Outra característica comum são frases marcantes, que resumem ou representam bem o discurso. Iniciar ou verbalizar uma mensagem forte gera maior conexão com o público e ajuda a memorizar o que foi dito.
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         
         <div class="container-dicas">
-            <div class="dica">
-                <div class="dica-interior">Estudo e preparação</div>
-                <div class="dica-exterior">Para melhorar sua oratória, especialmente em apresentações ou reuniões, é importante realizar uma pesquisa aprofundada sobre o tema que você vai abordar. Para estudá-lo, uma dica é separar sua fala em tópicos, entendendo como cada ponto se liga ao outro. <br>
-
-                Isso porque, a preparação adequada não apenas aprimora a clareza da mensagem, mas também demonstra ao público que você é um especialista no assunto, construindo credibilidade.</div>
+           <div class="dica">
+                <div class="dica-inner">
+                    <div class="dica-front">
+                        <div class="dica-interior">Estudo e preparação</div>
+                    </div>
+                    
+                    <div class="dica-back">
+                        <div class="dica-exterior">
+                                Para melhorar sua oratória, pesquise bem o tema e organize a fala em tópicos conectados. Isso facilita o entendimento, aumenta sua segurança ao falar e mostra ao público que você domina o assunto, reforçando sua credibilidade e tornando a apresentação mais envolvente.
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="dica">
-                    <div class="dica-interior">Gerenciamento de tempo</div>
-                    <div class="dica-exterior">Discursos muito longos ou repetitivos podem prejudicar a absorção do que você está transmitindo, ou incomodar quem está ouvindo. <br>
+                <div class="dica-inner">
+                    <div class="dica-front">
+                        <div class="dica-interior">Gerenciamento de tempo</div>
+                    </div>
+                    
+                    <div class="dica-back">
+                        <div class="dica-exterior">
+                            Discursos muito longos ou repetitivos podem prejudicar a absorção do que você está transmitindo, ou incomodar quem está ouvindo. <br>
 
-                    Por isso, o ideal é sempre se atentar ao tempo e objetivo da sua fala, prendendo a atenção de quem está ouvindo.</div> 
+                            Por isso, o ideal é sempre se atentar ao tempo e objetivo da sua fala, prendendo a atenção de quem está ouvindo.
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
         <div class="container-dicas">
             <div class="dica">
-                <div class="dica-interior">Uso de exemplos visuais</div>
-                <div class="dica-exterior">De acordo com a Brain Rules, pessoas tendem a lembrar de 65% das informações se forem exibidas com recursos visuais. Por outro lado, quando a informação é apresentada verbalmente, elas só se lembram de 10% do que ouviram. <br>
-
-                Por isso, não deixe de explorar esse recurso também! Especialmente enfatizando o que mais importa.</div>
+                <div class="dica-inner">
+                    <div class="dica-front">
+                        <div class="dica-interior">Uso de exemplos visuais</div>
+                    </div>
+                    
+                    <div class="dica-back">
+                        <div class="dica-exterior">
+                            Segundo Brain Rules, as pessoas lembram 65% das informações quando apresentadas com recursos visuais, mas apenas 10% do que ouvem verbalmente. Por isso, use recursos visuais eficazes, sempre destacando o que é mais importante na mensagem.
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="dica">
-                    <div class="dica-interior">Encerramento marcante</div>
-                    <div class="dica-exterior">Um encerramento significativo deixa uma impressão duradoura, reforçando a relevância e a importância do que foi compartilhado. Por isso, termine sua apresentação de forma objetiva, resuma os pontos-chave de maneira sucinta e conclua com uma mensagem impactante. <br>
-
-                    Agora que você já sabe sobre esses detalhes, é importante entender como não deixar essas técnicas se perderem na rotina, certo? </div> 
+                <div class="dica-inner">
+                    <div class="dica-front">
+                        <div class="dica-interior">Encerramento marcante</div>
+                    </div>
+                    
+                    <div class="dica-back">
+                        <div class="dica-exterior">
+                            Um bom encerramento reforça a importância do que foi dito e deixa uma impressão duradoura. Finalize de forma objetiva, resuma os pontos principais e conclua com uma mensagem marcante. Agora, é essencial saber como manter essas práticas no dia a dia, certo?
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         </div>

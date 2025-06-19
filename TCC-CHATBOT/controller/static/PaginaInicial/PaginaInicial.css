@@ -432,20 +432,51 @@ h3{
 }
 
 .dica{
-    height: 100%;
+    height: 400px;
     width: 425px;
     max-width: 500px;
     display: flex;
     flex-direction: column;
     padding: 40px;
-    background-color: var(--roxo-claro);
-    border-radius: 10px;
+    background-color: #4c0a9f;
+    border-radius: 22px;
     text-align: justify;
     justify-content: center;
+    perspective: 1500px;
 }
 
-.dica-interior{
-    background-color: var(--cor-principal);
+.dica-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: justify;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+.dica:hover .dica-inner {
+    transform: rotateY(180deg);
+}
+
+.dica-front, .dica-back {
+    padding: 10px;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.dica-back {
+    transform: rotateY(180deg);
+}
+
+.dica-interior {
+    background-color: #4c0a9f;
     height: 60px;
     border-radius: 5px;
     text-align: center;
@@ -453,31 +484,24 @@ h3{
     display: flex;
     align-items: center;
     color: var(--fundo-branco);
-    font-family: 'Titillium Web';
+    font-family: 'Unbounded';
     font-size: 19px;
+    width: 350px;
 }
 
-.dica-exterior{
-    padding: 10px;
+.dica-exterior {
+    padding: 15px;
+    height: 450px;
     width: 350px;
     word-wrap: break-word;
-    margin-top: 20px;
-    border-radius: 5px;
+    border-radius: 20px;
     font-family: 'Titillium Web';
     color: var(--roxo);
     font-size: 18px;
     text-indent: 1em;
     background-color: var(--fundo-branco);
-}
-
-.dica-interior::after{
-    content: '';    
-    position: absolute;
-    left: 8px;
-    top: 5px;
-    border-width: 20px;
-    border-style: solid;
-    border-color: transparent var(--roxo) transparent transparent;
+    align-items: center;
+    display: flex;
 }
 
 /*686bff*/

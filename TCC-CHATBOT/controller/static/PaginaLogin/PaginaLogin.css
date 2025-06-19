@@ -533,17 +533,41 @@ footer{
     bottom: 20px;
     right: 20px;
     z-index: 9999;
-    background: #111;
+    background: #007BFF;
     padding: 10px;
     border-radius: 10px;
   }
 
   .painel label {
-    color: #0f0;
+    color: var(--fundo-branco);
   }
 
   .painel select, .painel button {
     margin: 5px;
     padding: 5px 10px;
     font-size: 14px;
+  }
+
+  #daltonismo-btn{
+    background-color: var(--fundo-branco);
+    color: #007BFF;
+    transition: 0.4s;
+  }
+
+  #daltonismo-btn:hover{
+    background-color: var(--fundo-cinza);
+  }
+
+  #daltonismo{
+    border: none;
+    border-radius: 5px;
+    height: 33px;
+    background-color: var(--fundo-branco);
+    color: #007BFF;
+    cursor: pointer;
+    transition: 0.4s;
+  }
+
+  #daltonismo:hover{
+    background-color: var(--fundo-cinza);
   }
