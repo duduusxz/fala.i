@@ -7,6 +7,7 @@
   --cinza-medio: #cfd4d8;
   --roxo: #491f7a;
   --fundo-cinza: #efefef;
+  --roxo-medio: #423291;
 }
 
 /* Reset de estilo */
@@ -46,7 +47,6 @@ nav ul li a {
 nav ul li a:hover {
     color: #686bff;
 }
-
 
 .conta{
     display: flex;
@@ -236,7 +236,6 @@ header{
     transform: scale(1.07);
 }
 
-
 .botao {
     width: 500px;
     background-color: #686bff;
@@ -341,8 +340,6 @@ li:hover{
     cursor: pointer;
     color: var(--cor-principal);
 }
-
-
 
 .geral{
     display: flex;
@@ -502,6 +499,37 @@ h3{
     background-color: var(--fundo-branco);
     align-items: center;
     display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
+
+audio{
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+
+.onda-superior,
+    .onda-inferior {
+      display: block;
+      width: 100%;
+      height: 200px;
+    }
+
+    .conteudo {
+      background: linear-gradient(to bottom, #5c5ee2 , #4f3cad, #423291);
+      padding: 60px 20px;
+      text-align: center;
+      color: white;
+      position: relative;
+    }
+
+    .onda-inferior {
+      transform: rotate(180deg);
+      margin-top: -5px;
+    }
+
+    .onda-superior{
+        margin: -5px;
+    }
 
 /*686bff*/
