@@ -499,6 +499,13 @@ h3{
     background-color: var(--fundo-branco);
     align-items: center;
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+audio{
+    margin-bottom: 10px;
+    border-radius: 10px;
 }
 
 .onda-superior,
