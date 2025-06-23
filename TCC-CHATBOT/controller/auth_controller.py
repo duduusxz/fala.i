@@ -132,7 +132,7 @@ def aviso():
 def ranking():   #essa funcao vai apenas mostrar o ranking com base no banco de dados
 
     jogadores = [
-        {"Nome": "Livia", "Pontos": 150},
+        {"Nome": "Livia", "Pontos": 160},
         {"Nome": "Livia", "Pontos": 190},
         {"Nome": "Livia", "Pontos": 180},
     ]  #criado um array para representar basicamento o banco de dados que vai possuir, com cada jogador e a sua quantidade de pontos
