@@ -126,3 +126,29 @@ def conta():
 @auth_bp.route('/aviso')
 def aviso():
     return render_template('aviso.html')
+
+#rota para ranking
+@auth_bp.route('/ranking')
+def ranking():   #essa funcao vai apenas mostrar o ranking com base no banco de dados
+
+    jogadores = [
+        {"Nome": "Livia", "Pontos": 150},
+        {"Nome": "Livia", "Pontos": 190},
+        {"Nome": "Livia", "Pontos": 180},
+    ]  #criado um array para representar basicamento o banco de dados que vai possuir, com cada jogador e a sua quantidade de pontos
+
+    for i, nome in enumerate(jogadores, start=1): # aqui ele vai percorrer a lista de jogadores, enumerando elas 
+        print(f"{i}º lugar: {jogadores['nome']} - {jogadores['pontos']} pontos") # aqui ele vai printar o ranking
+
+    
+    return render_template('ranking.html')
+
+
+# aqui se inicia uma outra funçao que vai fazer a verificação e order by no ranking
+
+def verificar():
+    return None
+
+
+
+
