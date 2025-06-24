@@ -283,10 +283,6 @@ button{
 body.dark-mode #esqueci-senha{
     color: #0062cb;
 }
-
-body.dark-mode #ver-termos{
-    color: #67676b;
-}
     
 body.dark-mode {
     background-color: var(--fundo-branco);
@@ -635,7 +631,7 @@ body.dark-mode section .wave span:nth-child(3){
 
 #toggle-daltonismo {
     width: 45px;
-    height: 69px;
+    height: 45px;
     border-radius: 8px;
     background-color: var(--hover);
     color: white;
