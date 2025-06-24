@@ -36,7 +36,7 @@ body{
 }
 
 .titulo-bem-vindo{
-    color: var(--fundo-branco);
+    color: #afb0e1;
     font-family: sans-serif;
     font-family: "Young Serif", serif;
     font-weight: 400;
@@ -48,7 +48,7 @@ body{
 }
 
 .texto-apresentacao-bem-vindo{
-    color: var(--cor-principal);
+    color: #afb0e1;
     font-family: sans-serif;
     font-family: "Young Serif", serif;
     font-weight: 400;
@@ -95,7 +95,7 @@ input{
     top: 47%; /* Reduzir este valor para mover o container para cima */
     right: 10%;
     transform: translateY(-50%);
-    background-color: #37353c;
+    background-color: #37353c7e;
     height: auto;
     padding: 40px;
     padding-bottom: 80px;
@@ -188,7 +188,7 @@ input:focus{
 
 
 #texto-apresentacao-bem-vindo{
-    color: var(--fundo-branco);
+    color: #afb0e1;
     max-width: 500px;
 }
 
@@ -616,9 +616,14 @@ section .wave span:nth-child(2) {
 }
 section .wave span:nth-child(3) {
   border-radius: 42.5%;
-  background: #ffffff;
+  background: #2a2a2a;
   animation: animate 15s linear infinite;
 }
+
+body.dark-mode section .wave span:nth-child(3){
+    background-color: #ffffff;
+}
+
 @keyframes animate {
   0% {
     transform: translate(-50%, -75%) rotate(0deg);
