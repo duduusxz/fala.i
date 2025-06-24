@@ -174,3 +174,10 @@ const coresOriginais = new Map();
       const valores = rgbStr.match(/\d+/g).map(Number);
       return [valores[0], valores[1], valores[2]];
     }
+
+    const toggleBtn = document.getElementById("toggle-daltonismo");
+  const painel = document.getElementById("painel-daltonismo");
+
+  toggleBtn.addEventListener("click", () => {
+    painel.classList.toggle("ativo");
+  });
