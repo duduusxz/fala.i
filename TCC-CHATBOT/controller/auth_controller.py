@@ -3,11 +3,26 @@ from flask import Blueprint, render_template, request, redirect, url_for, flash
 from model.usuario_model import cadastrar_usuario 
 from model.usuario_model import login_check
 from flask import session
+from flask import Blueprint, render_template, request
+from model.chat import gerar_resposta  # importar aqui
+import smtplib
+from email.mime.text import MIMEText
+from datetime import datetime, timedelta
+import secrets
+from model.usuario_model import salvar_token, validar_token, atualizar_senha_por_email, excluir_token
+import os
+from dotenv import load_dotenv
 
+
+load_dotenv()
 #importações  para realizar o sistema de autenticação
 
 
 auth_bp = Blueprint('auth', __name__) # começa a definir o blueprint para autenticação
+
+@auth_bp.route("/")
+def index():
+    return render_template("PaginaLogin/PaginaLogin.html")
 
 @auth_bp.route('/cadastro', methods=['GET', 'POST'])  # define nessa linha a rota de cadastro, que vai pegar as informações do usuário e postar no form
 def cadastro():
@@ -71,6 +86,78 @@ def login():
     return render_template("PaginaLogin/PaginaLogin.html")
 
 # Fim da pagina de login rota e configuração
+
+# Início do envio de e-mail para redefinição de senha
+def enviar_email(destinatario, assunto, corpo_html):
+    remetente = os.getenv("EMAIL_REMETENTE")
+    senha = os.getenv("EMAIL_SENHA")
+
+    msg = MIMEText(corpo_html, "html")
+    msg["Subject"] = assunto
+    msg["From"] = remetente
+    msg["To"] = destinatario
+
+    try:
+        with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
+            server.login(remetente, senha)
+            server.sendmail(remetente, destinatario, msg.as_string())
+            print("E-mail enviado com sucesso.")
+    except Exception as e:
+        print("Erro ao enviar e-mail:", e)
+
+@auth_bp.route("/esqueci-senha", methods=["GET", "POST"])
+def esqueci_senha():
+    if request.method == "POST":
+        email = request.form["email"]
+        token = secrets.token_urlsafe(32)
+        expires_at = datetime.now() + timedelta(hours=1)
+
+        salvar_token(email, token, expires_at)
+
+        link = url_for("auth.resetar_senha", token=token, _external=True)
+        corpo = f"""
+        <h2>Redefinição de Senha</h2>
+        <p>Clique no link para redefinir sua senha:</p>
+        <a href="{link}">Redefinir senha</a><br><br>
+        <p>Este link é válido por 1 hora.</p>
+        """
+        enviar_email(email, "Redefinição de Senha", corpo)
+        flash("Um link foi enviado para seu e-mail.")
+        return redirect(url_for("auth.login"))
+
+    return render_template("PaginaLogin/EsqueciSenha.html")
+
+@auth_bp.route("/resetar-senha/<token>", methods=["GET", "POST"])
+def resetar_senha(token):
+    resultado = validar_token(token)
+    if not resultado:
+        flash("Token inválido ou expirado.")
+    
+
+    email, _ = resultado
+    if request.method == "POST":
+        nova_senha = request.form["senha"]
+        confirmar = request.form["confirmarSenha"]
+        if nova_senha != confirmar:
+            flash("As senhas não coincidem.")
+            return render_template("PaginaResetar/PaginaResetar.html", token=token)
+
+        atualizar_senha_por_email(email, nova_senha)
+        excluir_token(token)
+        
+        sucesso = atualizar_senha_por_email(senha)
+        
+        if sucesso:
+          flash("Senha atualizada com sucesso.")
+          return redirect(url_for("auth.login"))
+        else:
+          flash("Erro ao atualizar a senha. Tente novamente.")
+          
+    
+
+    return render_template("PaginaResetar/PaginaResetar.html", token=token)
+
+#fim do envio de e-mail para redefinição de senha
 
 #inicio da pagina de inicio e configuração
 
@@ -150,5 +237,19 @@ def verificar():
     return None
 
 
+@auth_bp.route("/resposta", methods=["POST", "GET"])
+def resposta():
+    pergunta = None
+    resposta_chatbot = None
+
+    if request.method == "POST":
+        pergunta = request.form.get("pergunta")
+        if pergunta:
+            resposta_chatbot = gerar_resposta(pergunta)
+
+    return render_template("PaginaChatbot/PaginaChatbot.html", pergunta=pergunta, resposta=resposta_chatbot)
+
+
+#inicia esqueci senha e enviar email
 
 

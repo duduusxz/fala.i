@@ -110,36 +110,40 @@
 
 
         
-
-        
         </div>
     </div>
 
     <div class="senha-esquecida" id="senha-esquecida">
-        <div class="esquecida">
-            <h3>Senhaaaaa</h3> 
+    <div class="esquecida">
+        <h3>Recuperar senha</h3> 
+        <form method="POST" action="{{ url_for('auth.esqueci_senha') }}">
+
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="mensagens-flash">
+                <ul>
+                    {% for message in messages %}
+                    <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                </div>
+            {% endif %}
+            {% endwith %}
+
+
             <p>E-mail</p> 
-            <input type="email" placeholder="  Digite seu email" id="email" name="email"> 
+            <input type="email" placeholder="Digite seu email" name="email" required >
 
-            <div class="linha-rm-senha">
-                <div>
-                    <p>Rm</p>
-                    <input type="text" placeholder="  Digite seu Rm" id="rm" name="rm" maxlength="5">
-                </div>
-                <div>
-                    <p>Senha</p>
-                    <input type="tetx" placeholder="  Crie sua senha" id="senha" name="senha">
-                </div>
-            </div>
-
-
-        <div class="entrar-cadastro">
             <div class="linha-botoes">
-                <button type="submit" id="entrar">Entrar</button>
+                <button type="submit" id="enviar">Enviar link</button>
                 <p id="ou">ou</p>
-                <button type="submit" id="cadastrar" onclick="moverContainer2('direita')">Cadastrar</button>
+                <button type="button" id="voltar-login" onclick="moverContainer('esquerda')">Voltar</button>
             </div>
-        </div>
+        </form>
+    </div>
+</div>
+
+        
         </div>
     </div>
 

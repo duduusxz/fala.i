@@ -19,21 +19,8 @@ app.register_blueprint(auth_bp) #coisas leves haha
 # ✅ Chamar a criação do banco/tabela
 setup_database()
 
-@app.route("/")
-def index():
-    return render_template("PaginaLogin/PaginaLogin.html")
 
-@app.route("/resposta", methods=["POST", "GET"])
-def resposta():
-    pergunta = None
-    resposta_chatbot = None
 
-    if request.method == "POST":
-        pergunta = request.form.get("pergunta")
-        if pergunta:
-            resposta_chatbot = gerar_resposta(pergunta)
-
-    return render_template("PaginaChatbot/PaginaChatbot.html", pergunta=pergunta, resposta=resposta_chatbot)
 
 
 if __name__ == "__main__":
