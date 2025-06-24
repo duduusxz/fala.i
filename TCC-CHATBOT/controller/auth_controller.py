@@ -3,6 +3,9 @@ from flask import Blueprint, render_template, request, redirect, url_for, flash
 from model.usuario_model import cadastrar_usuario 
 from model.usuario_model import login_check
 from flask import session
+import sqlite3
+import bcrypt
+
 
 #importações  para realizar o sistema de autenticação
 
@@ -25,7 +28,7 @@ def cadastro():
         if len (email ) < 10 or len (email) > 40:
             return jsonify({"erro": "Email deve ter entre 10 e 40 caracteres."})  # verifica se o email, rm e senha estão dentro dos limites de caracteres
         
-            print("erro bobao")
+            
         
         if len (rm) < 5 or len (rm) > 5:
             return jsonify({"erro": "RM deve ter exatamente 5 caracteres."})
@@ -35,7 +38,9 @@ def cadastro():
         
         # verifica se a senha e a confirmação de senha são iguais
 
-        sucesso = cadastrar_usuario(email, rm, senha) # se der sucesso com o cadastro, chama a função cadastrar_usuario do model.usuario_model
+
+        sucesso = cadastrar_usuario(email, rm, senha)
+ # se der sucesso com o cadastro, chama a função cadastrar_usuario do model.usuario_model
         # que vai inserir os dados no banco de dados
         if sucesso:
             flash("Cadastro realizado com sucesso! Faça login.") # se for sucesso vai exibir msg e mandar vc para outra página ( Login)
@@ -66,7 +71,7 @@ def login():
             session["user_id"] = user_id 
             return render_template('/PaginaInicial/PaginaInicial.html', user_id=user_id)  ##se estiver correto vai pra page inicial
         else:
-            return render_template("/PaginaInicial/PaginaInicial.html")  # se não for encontrado, retorna erro
+            flash("RM, e-mail ou senha incorretos.") # se não for encontrado, retorna erro
 
     return render_template("PaginaLogin/PaginaLogin.html")
 
