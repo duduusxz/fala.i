@@ -17,12 +17,19 @@
 
 </head>
 <body class="dark-mode">
-
-    <div class="controls">
+<section>
+    
+  <div class="wave">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <div class="controls">
         <button class="toggle-mode" onclick="toggleMode()">Alternar Modo</button>
         <button id="increase-font">A+</button>
         <button id="decrease-font">A-</button>
     </div>
+    
 
     <div class="titulo-logo">
         <div class="container-bem-vindo">
@@ -66,7 +73,7 @@
             <div class="linha-botoes">
                 <button type="submit" id="entrar">Entrar</button>
                 <p id="ou">ou</p>
-                <button type="submit" id="cadastrar" onclick="moverContainer('direita')">Cadastrar</button>
+                <button type="button" id="cadastrar" onclick="moverContainer('direita')">Cadastrar</button>
             </div>
             <a id="esqueci-senha" onclick="moverContainer2('direita')">Esqueci minha senha</a>
         </div>
@@ -159,20 +166,27 @@
         </script>
     
     <footer>
-            <a href="/termos" id="ver-termos">Ver termos e condições</a>
+    <a href="/termos" id="ver-termos">Ver termos e condições</a>
 
-            <div class="painel">
-                <label for="daltonismo">Daltonismo:</label>
-                <select id="daltonismo">
-                  <option value="normal">Normal</option>
-                  <option value="protanopia">Protanopia</option>
-                  <option value="deuteranopia">Deuteranopia</option>
-                  <option value="tritanopia">Tritanopia</option>
-                  <option value="achromatopsia">Achromatopsia</option>
-                </select>
-                <button onclick="adaptarSiteParaDaltonismo()" id="daltonismo-btn">Ativar</button>
-              </div>
-    </footer>
+    <!-- Botão que ativa -->
+<button id="toggle-daltonismo">☰</button>
+
+<!-- Painel de Daltonismo -->
+<div class="painel" id="painel-daltonismo">
+    <label for="daltonismo">Daltonismo:</label>
+    <select id="daltonismo">
+      <option value="normal">Normal</option>
+      <option value="protanopia">Protanopia</option>
+      <option value="deuteranopia">Deuteranopia</option>
+      <option value="tritanopia">Tritanopia</option>
+      <option value="achromatopsia">Achromatopsia</option>
+    </select>
+    <button onclick="adaptarSiteParaDaltonismo()" id="daltonismo-btn">Ativar</button>
+</div>
+</footer>
+</section>
+
+    
 
      <script src="{{ url_for('static', filename='PaginaLogin/PaginaLogin.js') }}"></script>
     
