@@ -558,4 +558,24 @@ audio{
 #painel-daltonismo {
     display: none; /* escondido por padrão */
 }
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(1px);
+  background-color: rgba(52, 52, 52, 0.1); /* leve escurecimento opcional */
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+/* Quando ativado */
+body.blur-ativa::before {
+  opacity: 1;
+}
 /*686bff*/
