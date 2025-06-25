@@ -10,7 +10,7 @@
     <link rel="shortcut icon" href="Images/Captura_de_tela_2025-03-14_174727-removebg-preview.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
      <link rel="shortcut icon" href="{{ url_for('static', filename='img/logo.png') }}" type="image/x-icon">
-     <link rel="stylesheet" href="{{ url_for('static', filename='PaginaLogin/PaginaLogin.css') }}">
+     <link rel="stylesheet" href="{{ url_for('static', filename='PaginaCadastro/PaginaCadastro.css') }}">
    
     <title>Pagina Login Fala.i</title>
     <script src="https://kit.fontawesome.com/345c519b8f.js" crossorigin="anonymous"></script>
@@ -50,37 +50,40 @@
    
 
     <div class="tudo">
-    <div class="container-login" id="container-login">
-        <div class="login">
-        <h3>Login</h3>
-       <form method="POST" action="/login" id="form-login">
-        <p>E-mail</p>
-        <input type="email" placeholder="Digite seu email" id="email" name="email" required>
+    <div class="container-cadastro" id="container-cadastro">
+        <div class="cadastro">
+            <h3>Cadastro</h3> 
+              <form method="POST" action="/cadastro" id="form-cadastro">
+                <p>E-mail</p> 
+                <input type="email" id="email" name="email" placeholder="Digite seu email" required>
 
-    <div class="linha-rm-senha">
-        <div>
-            <p>Rm</p>
-            <input type="text" placeholder="Digite seu Rm" id="rm" required name="rm"  maxlength="5">
-        </div>
-        <div>
-            <p>Senha</p>
-            <input type="password" placeholder="Digite sua senha" id="senha" name="senha" required>
-            <i class="fas fa-eye" id="toggleSenha" onclick="mostrarSenha()"></i>
-        </div>
-    </div>
+                <div class="linha-rm-senha">
+                    <div>
+                    <p>Rm</p>
+                    <input type="text" id="rm" name="rm" placeholder="Digite seu Rm" maxlength="5" required>
+                    </div>
+                    <div>
+                    <p>Senha</p>
+                    <input type="text" id="senha" name="senha" placeholder="Crie uma senha" required>
+                    </div>
+                </div>
 
-     <div class="entrar-cadastro">
-            <div class="linha-botoes">
-                <button type="submit" id="entrar">Entrar</button>
+                  <p>Confirme a senha</p>
+                <input type="text" id="confirmarSenha" name="confirmarSenha" placeholder="Digite a mesma senha do campo anterior" required>
+
+                <div class="cadastro-entrar">
+            <div class="botoes-linha">
+                <button type="submit" id="cadastrar2">Cadastrar</button>
                 <p id="ou">ou</p>
-                <button type="button" id="cadastrar" onclick="moverContainer('direita')">Cadastrar</button>
+                <button type="button" id="entrar2" onclick="moverContainer('esquerda')">Entrar</button>
             </div>
-            <a id="esqueci-senha" onclick="moverContainer2('direita')">Esqueci minha senha</a>
         </div>
+                 </form>
+            
+                </div>
+            </div>
         </div>
     </div>
-</form>
-
     </div>
 
     <div vw class="enabled">
