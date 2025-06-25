@@ -28,48 +28,6 @@ document.getElementById("decrease-font").addEventListener("click", function () {
     
 }); 
 
-        
-
-let posicaoAtual = 0;
-
-function moverContainer(direcao) {
-    const containerLogin = document.getElementById('container-login');
-    const containerCadastro = document.getElementById('container-cadastro');
-
-    if (direcao === 'direita' && posicaoAtual < 1) {
-        posicaoAtual++;
-    } else if (direcao === 'esquerda' && posicaoAtual > -1) {
-        posicaoAtual--;
-    }
-
-    if (posicaoAtual === 0) {
-        containerLogin.style.transform = 'translateX(0) translateY(-50%)';
-        containerCadastro.style.transform = 'translateX(0) translateY(-50%)';
-    } else if (posicaoAtual === 1) {
-        containerLogin.style.transform = 'translateX(200%) translateY(-50%)';
-        containerCadastro.style.transform = 'translateX(-140%) translateY(-50%) scale(1.10)';
-    }
-}
-
-function moverContainer2(direcao) {
-    const containerLogin = document.getElementById('container-login');
-    const senhaEsquecida = document.getElementById('senha-esquecida');
-
-    if (direcao === 'direita' && posicaoAtual < 1) {
-        posicaoAtual++;
-    } else if (direcao === 'esquerda' && posicaoAtual > -1) {
-        posicaoAtual--;
-    }
-
-    if (posicaoAtual === 0) {
-        containerLogin.style.transform = 'translateX(0) translateY(-50%)';
-        senhaEsquecida.style.transform = 'translateX(0) translateY(-50%)';
-    } else if (posicaoAtual === 1) {
-        containerLogin.style.transform = 'translateX(200%) translateY(-50%)';
-        senhaEsquecida.style.transform = 'translateX(-140%) translateY(-55%) scale(1.10)';
-    }
-}
-
 function mostrarSenha() {
   const input = document.getElementById("senha");
   const icon = document.getElementById("toggleSenha");

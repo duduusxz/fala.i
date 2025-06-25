@@ -154,6 +154,7 @@ def ranking():   #essa funcao vai apenas mostrar o ranking com base no banco de 
 def verificar():
     return None
 
-
-
-
+# inicio rota esqueci a senha
+@auth_bp.route('/esqueci_senha')
+def esqueci_senha():
+    return render_template('PaginaEsqueciSenha/PaginaEsqueciSenha.html')
