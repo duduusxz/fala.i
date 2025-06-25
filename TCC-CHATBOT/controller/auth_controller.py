@@ -49,7 +49,7 @@ def cadastro():
             flash("Erro no cadastro. RM ou e-mail já cadastrados.") # caso dê erro, exibe msg de erro
             return render_template("PaginaLogin/PaginaLogin.html")
 
-    return render_template("PaginaLogin") # aqui rennderiza a página de cadastro, que é a PaginaLogin.html ( Ambas estão juntas no template)
+    return render_template("PaginaCadastro/PaginaCadastro.html") # aqui rennderiza a página de cadastro, que é a PaginaLogin.html ( Ambas estão juntas no template)
 
  
     return render_template('PaginaLogin/PaginaLogin.html')
