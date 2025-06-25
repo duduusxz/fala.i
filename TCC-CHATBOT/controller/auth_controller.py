@@ -43,7 +43,7 @@ def cadastro():
  # se der sucesso com o cadastro, chama a função cadastrar_usuario do model.usuario_model
         # que vai inserir os dados no banco de dados
         if sucesso:
-            flash("Cadastro realizado com sucesso! Faça login.") # se for sucesso vai exibir msg e mandar vc para outra página ( Login)
+             # se for sucesso vai exibir msg e mandar vc para outra página ( Login)
             return redirect(url_for("auth.login")) 
         else:
             flash("Erro no cadastro. RM ou e-mail já cadastrados.") # caso dê erro, exibe msg de erro
@@ -68,8 +68,8 @@ def login():
         user_id = login_check(rm, email, senha) # chama a função login_check do model.usuario_model, que vai verificar se o usuário existe e se a senha está correta
         # Se o usuário for encontrado, user_id será o ID do usuário, caso contrário será None ( Cada cadastrado possui o seu ID unico)
         if user_id:
-            session["user_id"] = user_id 
-            return render_template('/PaginaInicial/PaginaInicial.html', user_id=user_id)  ##se estiver correto vai pra page inicial
+            session["user_id"] = user_id
+            return redirect(url_for('auth.inicio', user_id=user_id))  ##se estiver correto vai pra page inicial
         else:
             flash("RM, e-mail ou senha incorretos.") # se não for encontrado, retorna erro
 
