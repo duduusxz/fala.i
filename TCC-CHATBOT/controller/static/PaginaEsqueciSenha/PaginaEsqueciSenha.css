@@ -73,7 +73,7 @@ h3 {
 
 input {
   border-radius: 13px;
-  width: 529px;
+  width: 100%;
   height: 36px;
   border: solid 1px white;
   background-color: transparent;
@@ -91,9 +91,9 @@ input {
   gap: 20px; /* Espaço entre os containers */
 }
 
-.container-cadastro {
+.senha-esquecida {
   position: absolute;
-  top: 51%;
+  top: 47%;
   right: 10%;
   transform: translateY(-50%);
   background-color: #37353c7e;
@@ -108,10 +108,6 @@ input {
   transition: transform 1s ease;
 }
 
-.login {
-  padding: 10px 30px 20px 30px; /* Reduzir o primeiro valor (padding superior) */
-}
-
 .esquecida {
   padding: 10px 30px 20px 30px; /* Reduzir o primeiro valor (padding superior) */
 }
@@ -124,40 +120,25 @@ input:focus {
   outline: solid 2px var(--cor-principal);
 }
 
-#rm {
-  width: 253px;
-  height: 36px;
-  border: solid 1px white;
-  color: white;
-  background-color: transparent;
-}
-
-#senha {
-  width: 253px;
-  height: 36px;
-  border: solid 1px white;
-  background-color: transparent;
-  color: white;
-  transition: transform 0.5s ease-in-out;
-}
-
-.linha-rm-senha {
-  display: flex;
-  gap: 20px; /* Espaço entre os campos */
-}
-
-#email {
-  border: solid 1px white;
-  color: white;
-}
-
 #texto-apresentacao-bem-vindo {
   color: #afb0e1;
   max-width: 500px;
 }
 
-#texto1 {
-  color: var(--cor-terciaria);
+#login-caminho{
+    margin-top: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    color:#72c7ff;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.caminhos{
+  display: flex;
+}
+
+#ou{
+  margin: 10px;
 }
 
 .controls button{
@@ -173,51 +154,10 @@ button {
   font-family: Arial, Helvetica, sans-serif;
   font-weight: 500;
   cursor: pointer;
-}
-
-#entrar {
-  border: none;
   color: white;
-}
-
-#cadastrar2 {
-  border: none;
-  color: white;
-}
-
-#cadastrar {
-  width: 130px;
-  background-color: #0099ff;
-  border: none;
-  color: white;
-}
-
-#entrar2 {
-  width: 130px;
-  background-color: #0099ff;
-  border: none;
-  color: white;
-  height: 39px;
-  border: none;
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: 500;
-  cursor: pointer;
-  border-radius: 10px;
-  justify-content: center;
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  font-size: 13px;
 }
 
 .entrar-cadastro {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 30px;
-}
-
-.cadastro-entrar {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -230,36 +170,10 @@ button {
   margin-top: 20px;
 }
 
-.botoes-linha {
-  display: flex;
-  gap: 8px;
-  margin-top: 20px;
-}
-
-#esqueci-senha {
-  margin-top: 10px;
-  font-family: Arial, Helvetica, sans-serif;
-  color: #72c7ff;
-  cursor: pointer;
-  text-decoration: underline;
-}
-
-#ou {
-  margin-top: 10px;
-}
-
 .container-bem-vindo {
   position: absolute;
   left: 135px;
   top: 150px;
-}
-
-#confirma-senha {
-  margin-top: 10px;
-}
-
-body.dark-mode #esqueci-senha {
-  color: #0062cb;
 }
 
 body.dark-mode {
@@ -282,37 +196,12 @@ body.light-mode {
   border-radius: 5px;
 }
 
+body.dark-mode #login-caminho{
+    color: #0062cb;
+}
+
 body.dark-mode #texto-apresentacao-bem-vindo {
   color: var(--cor-terciaria);
-}
-
-body.dark-mode #rm {
-  color: var(--cor-terciaria);
-  border: solid 1px var(--cor-terciaria);
-}
-
-body.dark-mode #senha {
-  color: var(--cor-terciaria);
-  border: solid 1px var(--cor-terciaria);
-}
-
-body.dark-mode #entrar {
-  color: var(--fundo-branco);
-  border: none;
-}
-
-body.dark-mode #cadastrar {
-  color: var(--fundo-branco);
-  border: none;
-}
-
-body.dark-mode #email {
-  color: var(--cor-terciaria);
-  border: solid 1px var(--cor-terciaria);
-}
-
-body.dark-mode #louco {
-  color: var(--cor-principal);
 }
 
 body.dark-mode p {
@@ -335,9 +224,20 @@ body.dark-mode .titulo-bem-vindo {
   color: var(--cor-principal);
 }
 
-body.dark-mode .container-cadastro {
+body.dark-mode input {
+  border-radius: 13px;
+  width: 100%;
+  height: 36px;
+  border: solid 1px var(--cor-principal);
+  background-color: transparent;
+  color: var(--cor-terciaria);
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+body.dark-mode .senha-esquecida {
   position: absolute;
-  top: 51%;
+  top: 47%;
   right: 10%;
   transform: translateY(-50%);
   background-color: var(--roxo-claro);
@@ -350,48 +250,6 @@ body.dark-mode .container-cadastro {
   display: flex;
   border-radius: 10px;
   transition: transform 1s ease;
-}
-
-body.dark-mode .login {
-  padding: 10px 30px 20px 30px; /* Reduzir o primeiro valor (padding superior) */
-}
-
-body.dark-mode input {
-  border-radius: 13px;
-  width: 529px;
-  height: 36px;
-  border: solid 1px var(--cor-principal);
-  background-color: transparent;
-  color: var(--cor-terciaria);
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-body.dark-mode i {
-  position: absolute;
-  transform: translateY(-50%);
-  right: 60px;
-  top: 59%;
-  cursor: pointer;
-  color: var(--cor-principal);
-}
-
-body.dark-mode .senha-esquecida {
-  position: absolute;
-  top: 47%;
-  left: 100%;
-  transform: translateY(-50%);
-  background-color: var(--roxo-claro);
-  height: auto;
-  padding: 40px;
-  padding-bottom: 80px;
-  width: 40%;
-  align-items: center;
-  justify-content: center;
-  display: flex;
-  border-radius: 10px;
-  transition: transform 1s ease;
-  scale: 90%;
 }
 
 .controls {
@@ -441,24 +299,6 @@ body.dark-mode .senha-esquecida {
 .account-btn:hover {
   background-color: #5557ff;
   transform: scale(1.05);
-}
-
-i {
-  position: absolute;
-  transform: translateY(-50%);
-  right: 60px;
-  top: 59%;
-  cursor: pointer;
-  color: #67676b;
-}
-
-#toggleSenha2 {
-  position: absolute;
-  transform: translateY(-50%);
-  right: 60px;
-  top: 49.5%;
-  cursor: pointer;
-  color: var(--cor-principal);
 }
 
 footer {
