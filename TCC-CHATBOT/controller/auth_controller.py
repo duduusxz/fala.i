@@ -1,7 +1,12 @@
 # controller/auth_controller.py
 from flask import Blueprint, render_template, request, redirect, url_for, flash
-from model.usuario_model import cadastrar_usuario 
-from model.usuario_model import login_check
+
+from flask import Blueprint, render_template, request, redirect, url_for, flash
+from model.usuario_model import cadastrar_usuario, login_check, buscar_usuario_por_rm_e_email 
+from model.usuario_model import listar_todos_usuarios
+from flask import session
+import sqlite3
+import bcrypt
 from flask import session
 import sqlite3
 import bcrypt
@@ -64,6 +69,9 @@ def login():
         rm = request.form["rm"]
         senha = request.form["senha"] # pega os dados do formulário de login para verificar
         # Verifica se o usuário existe e a senha está correta ( Ambos criados no banco UsuarioModel)
+        
+        usuario = buscar_usuario_por_rm_e_email(rm, email)
+
 
         user_id = login_check(rm, email, senha) # chama a função login_check do model.usuario_model, que vai verificar se o usuário existe e se a senha está correta
         # Se o usuário for encontrado, user_id será o ID do usuário, caso contrário será None ( Cada cadastrado possui o seu ID unico)
@@ -165,3 +173,9 @@ def esqueci_senha():
 def nova_senha():
     return render_template('PaginaNovaSenha/PaginaNovaSenha.html')
 #fim da rota nova senha
+
+@auth_bp.route('/usuarios')
+def listar_usuarios():
+    from usuario_model import listar_todos_usuarios  # Certifique-se de ter essa função
+    usuarios = listar_todos_usuarios()
+    return render_template('users.html', usuarios=usuarios)

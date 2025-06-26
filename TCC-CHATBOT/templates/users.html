@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Usuários Cadastrados</title>
+</head>
+<body>
+    <h1>Usuários no Sistema</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Email</th>
+                <th>RM</th>
+                <th>Senha</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for usuario in usuarios %}
+            <tr>
+                <td>{{ usuario.id }}</td>
+                <td>{{ usuario.email }}</td>
+                <td>{{ usuario.rm }}</td>
+                <td>{{ usuario.senha }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ url_for('dashboard') }}">Voltar ao Dashboard</a>
+</body>
+</html>

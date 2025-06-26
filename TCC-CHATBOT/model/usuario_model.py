@@ -41,7 +41,12 @@ def cadastrar_usuario(email, rm,  password):
     except sqlite3.IntegrityError:
         return False # se não ele retorna erro do banco (Igual com o SQlExcpetion do java que já utilizei)
     
-    
+def buscar_usuario_por_rm_e_email(rm, email):
+    with get_db_connection() as conn:
+        cursor = conn.cursor()
+        cursor.execute('SELECT * FROM usuarios WHERE rm = ? AND email = ?', (rm, email))
+        usuario = cursor.fetchone()
+        return dict(usuario) if usuario else None
     
 def login_check(rm, email, password): # faz a verificação do user, faz a conexao e verifica se o dado que a pessoa inseriu condiz com que ela verifica
     try: 
@@ -56,3 +61,13 @@ def login_check(rm, email, password): # faz a verificação do user, faz a conex
 
     except Exception as e: # caso nao retornar o ID do user , que é criado no insert, ele não executa mais
         return None
+    
+def listar_todos_usuarios():
+    with get_db_connection() as conn:
+        conn.row_factory = sqlite3.Row
+        cursor = conn.cursor()
+        cursor.execute('SELECT * FROM usuarios')
+        usuarios = cursor.fetchall()
+        return [dict(usuario) for usuario in usuarios]
+
+
