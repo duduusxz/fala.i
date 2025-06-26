@@ -9,10 +9,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&family=Young+Serif&display=swap" rel="stylesheet"> <!--Bibliotecas para fontes-->
     <link rel="shortcut icon" href="Images/Captura_de_tela_2025-03-14_174727-removebg-preview.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-     <link rel="shortcut icon" href="{{ url_for('static', filename='img/logo.png') }}" type="image/x-icon">
-     <link rel="stylesheet" href="{{ url_for('static', filename='PaginaLogin/PaginaLogin.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/logo.png') }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='PaginaNovaSenha/PaginaNovaSenha.css') }}">
    
-    <title>Pagina Login Fala.i</title>
+    <title>Redefinir Senha</title>
     <script src="https://kit.fontawesome.com/345c519b8f.js" crossorigin="anonymous"></script>
 
 </head>
@@ -29,59 +29,26 @@
         <button id="increase-font">A+</button>
         <button id="decrease-font">A-</button>
     </div>
-    
 
-    <div class="titulo-logo">
-        <div class="container-bem-vindo">
-            <div class="titulo-bem-vindo">
-                <h1>Bem Vindo ao FALA.I</h1>
-            </div>
+<div class="tudo">
+    <div class="container-nova-senha">
+        <h3>Redefina sua senha</h3>
+        <label for="">Nova senha</label>
+        <input type="text" name="nova-senha" placeholder="Insira sua nova senha">
+        <label for="">Confirmar senha</label>
+        <input type="text" name="confirmar-nova-senha" placeholder="Confirme a nova senha">
+        <button type="submit" id="btn-nova-senha">Confirmar</button>
 
-            <div class="texto-apresentacao-bem-vindo">
-                <p id="texto-apresentacao-bem-vindo"></p>
-            </div>
-
-            <div class="logo-bem-vindo">
-                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo do Chatbot" id="logo" class="logo">
-            </div>
-        </div>
-    </div>
-
-   
-
-    <div class="tudo">
-    <div class="container-login" id="container-login">
-        <div class="login">
-        <h3>Login</h3>
-       <form method="POST" action="/login" id="form-login">
-        <p>E-mail</p>
-        <input type="email" placeholder="Digite seu email" id="email" name="email" required>
-
-    <div class="linha-rm-senha">
-        <div>
-            <p>Rm</p>
-            <input type="text" placeholder="Digite seu Rm" id="rm" required name="rm"  maxlength="5">
-        </div>
-        <div>
-            <p>Senha</p>
-            <input type="password" placeholder="Digite sua senha" id="senha" name="senha" required>
-        </div>
-    </div>
-
-     <div class="entrar-cadastro">
-            <div class="linha-botoes">
-                <button type="submit" id="entrar">Entrar</button>
+        <div class="entrar-cadastro">
+            <div class="caminhos">
+                <a id="login-caminho" href="/">Login</a>
                 <p id="ou">ou</p>
-                    <a href="/cadastro" id="cadastrar">Cadastrar</a>
+                <a href="/cadastro" id="login-caminho">Cadastro</a>
             </div>
-                <a id="esqueci-senha" href="/esqueci_senha">Esqueci minha senha</a>
-        </div>
         </div>
     </div>
-</form>
-
-    </div>
-
+</div>
+    
     <div vw class="enabled">
             <div vw-access-button class="active"></div>
                 <div vw-plugin-wrapper>
@@ -118,7 +85,7 @@
 
     
 
-     <script src="{{ url_for('static', filename='PaginaLogin/PaginaLogin.js') }}"></script>
+     <script src="{{ url_for('static', filename='PaginaNovaSenha/PaginaNovaSenha.js') }}"></script>
     
 
 

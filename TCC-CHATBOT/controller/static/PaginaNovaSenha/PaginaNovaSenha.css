@@ -26,38 +26,21 @@ body {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
-#logo {
-  width: 200px;
-  margin-top: 70px;
+.tudo{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-.logo {
-  animation: pulo 2s infinite;
-}
-
-.titulo-bem-vindo {
-  color: #afb0e1;
-  font-family: sans-serif;
-  font-family: "Young Serif", serif;
-  font-weight: 400;
-  font-style: normal;
-  font-size: 27px;
-  margin-top: 50px;
-  margin-top: 0;
-  cursor: default;
-}
-
-.texto-apresentacao-bem-vindo {
-  color: #afb0e1;
-  font-family: sans-serif;
-  font-family: "Young Serif", serif;
-  font-weight: 400;
-  font-style: normal;
-  font-size: 16px;
-  max-width: 500px;
-  cursor: default;
+label{
+    color: #afb0e1;
 }
 
 h3 {
@@ -83,33 +66,18 @@ input {
   padding: 5px;
 }
 
-.tudo {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 20px; /* Espaço entre os containers */
-}
-
-.senha-esquecida {
+.container-nova-senha{
   position: absolute;
-  top: 47%;
-  right: 10%;
-  transform: translateY(-50%);
   background-color: #37353c7e;
-  height: auto;
+  height: 60%;
+  gap: 10px;
   padding: 40px;
-  padding-bottom: 80px;
   width: 40%;
-  align-items: center;
   justify-content: center;
-  display: flex;
   border-radius: 10px;
-  transition: transform 1s ease;
-}
-
-.esquecida {
-  padding: 10px 30px 20px 30px; /* Reduzir o primeiro valor (padding superior) */
+  transition: all 0.7s ease;
+  display: flex;
+  flex-direction: column;
 }
 
 p {
@@ -118,11 +86,6 @@ p {
 
 input:focus {
   outline: solid 2px var(--cor-principal);
-}
-
-#texto-apresentacao-bem-vindo {
-  color: #afb0e1;
-  max-width: 500px;
 }
 
 #login-caminho{
@@ -171,12 +134,6 @@ button {
   margin-top: 20px;
 }
 
-.container-bem-vindo {
-  position: absolute;
-  left: 135px;
-  top: 150px;
-}
-
 body.dark-mode {
   background-color: var(--fundo-branco);
   color: #feffec;
@@ -201,8 +158,8 @@ body.dark-mode #login-caminho{
     color: #0062cb;
 }
 
-body.dark-mode #texto-apresentacao-bem-vindo {
-  color: var(--cor-terciaria);
+body.dark-mode label{
+    color: var(--cor-principal);
 }
 
 body.dark-mode p {
@@ -221,10 +178,6 @@ body.dark-mode h3 {
   margin-top: -20px; /* Adicionar uma margem negativa aqui */
 }
 
-body.dark-mode .titulo-bem-vindo {
-  color: var(--cor-principal);
-}
-
 body.dark-mode input {
   border-radius: 13px;
   width: 100%;
@@ -236,21 +189,18 @@ body.dark-mode input {
   margin-bottom: 10px;
 }
 
-body.dark-mode .senha-esquecida {
+body.dark-mode .container-nova-senha{
   position: absolute;
-  top: 47%;
-  right: 10%;
-  transform: translateY(-50%);
   background-color: var(--roxo-claro);
-  height: auto;
+  height: 60%;
+  gap: 10px;
   padding: 40px;
-  padding-bottom: 80px;
   width: 40%;
-  align-items: center;
   justify-content: center;
-  display: flex;
   border-radius: 10px;
-  transition: transform 1s ease;
+  transition: all 0.7s ease;
+  display: flex;
+  flex-direction: column;
 }
 
 .controls {
@@ -280,26 +230,6 @@ body.dark-mode .senha-esquecida {
 
 .controls button:hover {
   text-decoration: underline;
-}
-
-.account-btn {
-  background-color: #686bff;
-  color: #feffec;
-  font-size: 16px;
-  padding: 10px 20px;
-  border: none;
-  cursor: pointer;
-  border-radius: 8px;
-  transition: 0.4s;
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  width: 150px;
-}
-
-.account-btn:hover {
-  background-color: #5557ff;
-  transform: scale(1.05);
 }
 
 footer {
@@ -527,4 +457,34 @@ body.dark-mode section .wave span:nth-child(3) {
   transform: scale(1) translateX(0) translateY(0);
   opacity: 1;
   pointer-events: all;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(3px);
+  background-color: rgba(52, 52, 52, 0.07); /* leve escurecimento opcional */
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* Quando ativado */
+body.blur-ativa::before {
+  opacity: 1;
+}
+/*686bff*/
+
+.container-nova-senha:hover{
+    transform: scale(110%);
+    box-shadow: 0 0 5px #8f8fc118;
+}
+
+body.dark-mode .container-nova-senha:hover{
+    box-shadow: 0 0 5px #11111158;
 }

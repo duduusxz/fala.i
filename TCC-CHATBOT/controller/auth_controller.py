@@ -158,3 +158,10 @@ def verificar():
 @auth_bp.route('/esqueci_senha')
 def esqueci_senha():
     return render_template('PaginaEsqueciSenha/PaginaEsqueciSenha.html')
+#fim da rota esqueci senha
+
+# inicio rota nova senha
+@auth_bp.route('/nova_senha')
+def nova_senha():
+    return render_template('PaginaNovaSenha/PaginaNovaSenha.html')
+#fim da rota nova senha
