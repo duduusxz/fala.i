@@ -1,21 +1,30 @@
+# Controller para autenticação de usuários
 # controller/auth_controller.py
-from flask import Blueprint, render_template, request, redirect, url_for, flash
 
-from flask import Blueprint, render_template, request, redirect, url_for, flash
-from model.usuario_model import cadastrar_usuario, login_check, buscar_usuario_por_rm_e_email 
-from model.usuario_model import listar_todos_usuarios
-from flask import session
-import sqlite3
-import bcrypt
-from flask import session
-import sqlite3
-import bcrypt
+from flask import Blueprint, render_template, request, redirect, url_for, flash, session
+from model.usuario_model import cadastrar, buscar_usuario_por_rm_e_email, listar_todos_usuarios
+from model.usuario_model import buscar_usuario_por_email  # ou outras funções
+
+from model import usuario_model  # Usado para chamar criar_tabela(), se necessário
+from werkzeug.security import generate_password_hash, check_password_hash
+from flask import jsonify
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+
 
 
 #importações  para realizar o sistema de autenticação
 
 
 auth_bp = Blueprint('auth', __name__) # começa a definir o blueprint para autenticação
+
+# define uma chave secreta para a aplicação, que é usada para proteger as sessões do usuário
+usuario_model.criar_tabela() 
+
+
+# chama a função criar_tabela do model.usuario_model, que vai criar a tabela de usuários no banco de dados se ela não existir
+
 
 @auth_bp.route('/cadastro', methods=['GET', 'POST'])  # define nessa linha a rota de cadastro, que vai pegar as informações do usuário e postar no form
 def cadastro():
@@ -26,15 +35,13 @@ def cadastro():
         confirmarSenha = request.form["confirmarSenha"]  # pega a confirmação de senha do formulário
         
         if confirmarSenha != senha:  # verifica se a confirmação de senha é igual à senha
-            return render_template("aviso.html", erro="As senhas não coincidem.")  # se não for igual, retorna erro
+            flash("Erro, coloque a senha igual ")  # se não for igual, retorna erro
 
-        
         
         if len (email ) < 10 or len (email) > 40:
             return jsonify({"erro": "Email deve ter entre 10 e 40 caracteres."})  # verifica se o email, rm e senha estão dentro dos limites de caracteres
         
             
-        
         if len (rm) < 5 or len (rm) > 5:
             return jsonify({"erro": "RM deve ter exatamente 5 caracteres."})
         
@@ -43,21 +50,21 @@ def cadastro():
         
         # verifica se a senha e a confirmação de senha são iguais
 
-
-        sucesso = cadastrar_usuario(email, rm, senha)
- # se der sucesso com o cadastro, chama a função cadastrar_usuario do model.usuario_model
-        # que vai inserir os dados no banco de dados
-        if sucesso:
-             # se for sucesso vai exibir msg e mandar vc para outra página ( Login)
-            return redirect(url_for("auth.login")) 
-        else:
-            flash("Erro no cadastro. RM ou e-mail já cadastrados.") # caso dê erro, exibe msg de erro
-            return render_template("PaginaLogin/PaginaLogin.html")
-
+        if usuario_model.buscar_usuario_por_email( email):
+            print("Usuário já cadastrado com esse RM ou e-mail.")
+            return redirect(url_for("auth.cadastro"))  # se o usuário já estiver cadastrado, redireciona para a página de login
+        
+        senha_hash = generate_password_hash(senha)
+        usuario_model.cadastrar(rm, email, senha_hash) # chama a função cadastrar do model.usuario_model, que vai inserir os dados no banco de dados
+        
+        print("Usuário cadastrado com sucesso!") # se o usuário for cadastrado com sucesso, retorna essa mensagem
+        return redirect(url_for("auth.login"))  # redireciona para a página de login após o cadastro
+        
+        
     return render_template("PaginaCadastro/PaginaCadastro.html") # aqui rennderiza a página de cadastro, que é a PaginaLogin.html ( Ambas estão juntas no template)
 
  
-    return render_template('PaginaLogin/PaginaLogin.html')
+   
 
 
 #Inicio na pagina de login rota e configuração
@@ -70,45 +77,157 @@ def login():
         senha = request.form["senha"] # pega os dados do formulário de login para verificar
         # Verifica se o usuário existe e a senha está correta ( Ambos criados no banco UsuarioModel)
         
-        usuario = buscar_usuario_por_rm_e_email(rm, email)
+        usuario = usuario_model.buscar_usuario_por_rm_e_email(rm, email)
 
+        if  usuario and check_password_hash(usuario['senha'], senha):
+            
+            session['usuario_id'] = usuario['id']  # Armazena o ID do usuário na sessão
+            session['usuario_email'] = usuario['email']  # Armazena o email do usuário na sessão
+            session['usuario_rm'] = usuario['rm']  # Armazena o RM do usuário na sessão
 
-        user_id = login_check(rm, email, senha) # chama a função login_check do model.usuario_model, que vai verificar se o usuário existe e se a senha está correta
-        # Se o usuário for encontrado, user_id será o ID do usuário, caso contrário será None ( Cada cadastrado possui o seu ID unico)
-        if user_id:
-            session["user_id"] = user_id
-            return redirect(url_for('auth.inicio', user_id=user_id))  ##se estiver correto vai pra page inicial
-        else:
-            flash("RM, e-mail ou senha incorretos.") # se não for encontrado, retorna erro
+            flash("Login realizado com sucesso!")
+            return redirect(url_for('auth.inicio'))
+            # se o usuário for encontrado, retorna essa mensagem
 
     return render_template("PaginaLogin/PaginaLogin.html")
 
 # Fim da pagina de login rota e configuração
 
-#inicio da pagina de inicio e configuração
+#inicio para função de logout
 
-
+auth_bp.route('/logout')
+def logout():
+    session.clear()  # Limpa a sessão do usuário
+    flash("Você foi desconectado com sucesso.")
+    
+    return redirect(url_for('auth.login'))  # Redireciona para a página de login após o logout
 
 # Ffim da pagina de inicio e configuração
 
 #inicio para ver os users
-@auth_bp.route('/users')
-def user_list():
-    # Busca TODOS os usuários do banco de dados
-    users = User.query.all() 
-    # Passa a lista de objetos "user" para o template
-    return render_template('users.html', users=users) # vai renderizar a página de usuários, que é a users.html 
 
+@auth_bp.route('/usuarios') # rota para ver os users, ele chama a importação do usuario_model para listar os usuários cadastrados
+def listar_usuarios():
+    from usuario_model import listar_todos_usuarios  # Certifique-se de ter essa função
+    usuarios = listar_todos_usuarios()
+    return render_template('users.html', usuarios=usuarios)
 
 #fim para ver os users
 
+#inicio rota de nova senha
+
+@auth_bp.route('/nova_senha', methods=['GET', 'POST'])  # rota definida para a página de nova senha
+def nova_senha():
+    email = request.args.get('email') or request.form.get('email')
+    
+    if request.method == 'POST':
+        nova_senha = request.form['nova_senha']
+        senha_hash = generate_password_hash(nova_senha)  # Gera o hash da nova senha
+        usuario_model.atualizar_senha(email, senha_hash)
+        # Atualiza a senha no banco de dados
+        flash("Senha atualizada com sucesso!")
+        return redirect(url_for('auth.login'))
+    
+    return render_template('PaginaNovaSenha/PaginaNovaSenha.html', email=email)  # Renderiza a página de nova senha, passando o email do usuário
+
+
+
+# inicio rota esqueci a senha
+@auth_bp.route('/esqueci_senha', methods=['GET', 'POST'])
+def esqueci_senha():
+    if request.method == 'POST':
+        email = request.form['email']
+        rm = request.form['rm']
+        
+        usuario = usuario_model.buscar_usuario_por_rm_e_email(rm, email)
+        
+        if not usuario: # se nao tiver user da o flash q n pode redefinir senha
+            flash("Usuário não encontrado. Verifique seu RM e email.")
+            return redirect(url_for('auth.esqueci_senha'))  # redireciona para a página de esqueci senha
+        
+        
+    
+        #conecta no servidor SMPTP e configura o envio de email
+        
+        host = "smtp.gmail.com"  # servidor SMTP do Gmail
+        port = 587  # porta para envio de email
+        login = "fala.i.contact@gmail.com"
+        password = "veitocpyuezkjcbe"
+        
+        #conecta a porta e configura o server
+        
+        server = smtplib.SMTP(host, port)
+        server.ehlo() # inicia a conexão com o servidor SMTP
+        server.starttls() # inicia a conexão TLS para segurança
+        server.login(login, password)  # faz o login no servidor SMTP com o email e senha
+        
+        #cria o link e envia o email
+        
+        link = f"http://localhost:5000/nova_senha?email={email}"
+            # cria o link para a página de nova senha, passando o email do usuário
+            
+        corpo = f"Olá! Clique no link para redefinir a sua senha: {link}"
+        
+        email_msg = MIMEMultipart() # cria a mensagem de email
+        email_msg['From'] = login  # define o remetente do email
+        email_msg['To'] = email  # define o destinatário do email
+        email_msg['Subject'] = "Redefinição de Senha Fala.i" #assunto email  
+        email_msg.attach(MIMEText(corpo, 'plain'))  # anexa o corpo do email
+        
+        sucesso = server.sendmail(email_msg['From'], email_msg['To'], email_msg.as_string()) 
+        # envia o email
+        
+        server.quit()
+        
+        if not sucesso:
+            flash("Email enviado com sucesso! Verifique sua caixa de entrada.")
+        else:
+            flash("Erro ao enviar o email. Tente novamente mais tarde.")
+    
+        return redirect(url_for('auth.login'))  # redireciona para a página de esqueci senha após enviar o email
+    
+    return render_template('PaginaEsqueciSenha/PaginaEsqueciSenha.html')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#fim da rota esqueci senha
+
+
+
+
+#inicio da pagina de inicio e configuração
 @auth_bp.route('/inicio') # rota definida para a página inicial 
 def inicio():
-    return render_template('PaginaInicial/PaginaInicial.html')
+    
+
+    if 'usuario_id' not in session:
+        flash("Você precisa fazer login primeiro.")
+        return redirect(url_for('auth.login'))
+    
+    return render_template('PaginaInicial/PaginaInicial.html', usuario_email=session ['usuario_email'], usuario_rm=session['usuario_rm'])  # renderiza a página inicial, que é a PaginaInicial.html, passando o email e o RM do usuário logado na sessão
+
+#fim da pagina de inicio e configuração
+
 
 #Começo sistema agenda
-
-
 
 @auth_bp.route('/agenda')  # rota definida para a página de agenda
 def agenda():
@@ -162,20 +281,7 @@ def ranking():   #essa funcao vai apenas mostrar o ranking com base no banco de 
 def verificar():
     return None
 
-# inicio rota esqueci a senha
-@auth_bp.route('/esqueci_senha')
-def esqueci_senha():
-    return render_template('PaginaEsqueciSenha/PaginaEsqueciSenha.html')
-#fim da rota esqueci senha
+
 
 # inicio rota nova senha
-@auth_bp.route('/nova_senha')
-def nova_senha():
-    return render_template('PaginaNovaSenha/PaginaNovaSenha.html')
-#fim da rota nova senha
 
-@auth_bp.route('/usuarios')
-def listar_usuarios():
-    from usuario_model import listar_todos_usuarios  # Certifique-se de ter essa função
-    usuarios = listar_todos_usuarios()
-    return render_template('users.html', usuarios=usuarios)

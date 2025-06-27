@@ -33,11 +33,12 @@
 <div class="tudo">
     <div class="container-nova-senha">
         <h3>Redefina sua senha</h3>
-        <label for="">Nova senha</label>
-        <input type="text" name="nova-senha" placeholder="Insira sua nova senha">
-        <label for="">Confirmar senha</label>
-        <input type="text" name="confirmar-nova-senha" placeholder="Confirme a nova senha">
-        <button type="submit" id="btn-nova-senha">Confirmar</button>
+        <form method="POST">
+    <input type="hidden" name="email" value="{{ email }}">
+    <label>Nova senha:</label>
+    <input type="password" name="nova_senha" required><br>
+    <button type="submit">Redefinir</button>
+</form>
 
         <div class="entrar-cadastro">
             <div class="caminhos">
