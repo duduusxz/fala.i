@@ -53,12 +53,26 @@
         <div class="senha-esquecida" id="senha-esquecida">
         <div class="esquecida">
             <h3>Esqueceu a Senha?</h3> 
-            <p>E-mail</p> 
-            <input type="email" placeholder="  Digite seu email" id="email" name="email">
-            <p>Informe seu e-mail e pressione Enviar. Você receberá um link: clique nele para criar uma nova senha e, em seguida, volte aqui para entrar com suas novas credenciais.</p>
+           <form method="POST">
+    <label>Email:</label>
+    <input type="email" name="email" required><br>
+    <label>RM:</label>
+    <input type="text" name="rm" required><br>
+    <button type="submit">Enviar link de redefinição</button>
+</form>
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul>
+      {% for msg in messages %}
+        <li>{{ msg }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
 
 
-        <div class="entrar-cadastro">
+        <!--<div class="entrar-cadastro">
             <div class="linha-botoes">
                 <button type="submit" id="entrar">Enviar</button>
             </div>
@@ -70,7 +84,9 @@
         </div>
         </div>
     </div>
+  !-->
 
+        </div>
     </div>
 
     <div vw class="enabled">

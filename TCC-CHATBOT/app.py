@@ -2,8 +2,15 @@ import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from flask import Flask, session
-
 from controller.auth_controller import auth_bp
+import smtplib #smtp é o recurso usado para enviar e-mails, criar servers e enviar email
+from email.mime.multipart import MIMEMultipart #padrão de envio de mensagem, manda por mime ( codificado )
+from email.mime.text import MIMEText #para enviar e-mails com texto
+from flask import Flask, render_template, request, redirect, url_for, flash, session
+
+from model import usuario_model  # importa o módulo usuario_model para manipular o banco de dados de ususuarioss
+
+from werkzeug.security import generate_password_hash, check_password_hash 
 
 
 
@@ -12,17 +19,18 @@ from controller.auth_controller import auth_bp
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from flask import Flask, render_template, request, jsonify, redirect, url_for, flash
-from model.usuario_model import setup_database
+from model.usuario_model import criar_tabela
 from model.chat import gerar_resposta
 from controller.auth_controller import auth_bp
 
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'uma_chave_secreta_muito_longa_e_aleatoria_para_producao_1234567890'
+app.secret_key = 'chave_secreta_segura' 
 app.register_blueprint(auth_bp) #coisas leves haha
 
 # ✅ Chamar a criação do banco/tabela
-setup_database()
+criar_tabela()
 
 @app.route("/")
 def index():
