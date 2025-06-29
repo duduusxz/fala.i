@@ -33,3 +33,52 @@ window.addEventListener('scroll', function(){
   onda7.style.backgroundPositionX = 100 + rolagemPos * 0.5 + 'px'
   onda8.style.backgroundPositionX = 100 + rolagemPos * -0.5 + 'px'
 })
+
+// Intersection Observer para fade in
+document.addEventListener("DOMContentLoaded", () => {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("fade-animate")
+        }
+      })
+    },
+    {
+      threshold: 0.1,
+      rootMargin: "-50px",
+    },
+  )
+
+  // Observar todos os elementos com classe fade-in
+  const fadeElements = document.querySelectorAll(".fade-in")
+  fadeElements.forEach((el) => observer.observe(el))
+})
+
+// Função para toggle do menu mobile
+function toggleMobileMenu() {
+  const menu = document.getElementById("nav-menu")
+  menu.classList.toggle("active")
+}
+
+// Fechar menu mobile ao clicar em um link
+document.addEventListener("DOMContentLoaded", () => {
+  const menuLinks = document.querySelectorAll(".nav-menu a")
+  const menu = document.getElementById("nav-menu")
+
+  menuLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      menu.classList.remove("active")
+    })
+  })
+})
+
+// Fechar menu mobile ao clicar fora dele
+document.addEventListener("click", (event) => {
+  const menu = document.getElementById("nav-menu")
+  const toggle = document.querySelector(".mobile-menu-toggle")
+
+  if (!menu.contains(event.target) && !toggle.contains(event.target)) {
+    menu.classList.remove("active")
+  }
+})
