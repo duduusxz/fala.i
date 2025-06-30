@@ -5,8 +5,6 @@ from dotenv import load_dotenv
 # Aqui é realizado as importações para realizar
 
 
-
-
 load_dotenv() ## aqui ele carrega a API 
 api_key = os.getenv("GEMINI_API_KEY") #Faz a requisição 
 

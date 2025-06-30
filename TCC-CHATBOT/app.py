@@ -27,7 +27,7 @@ from controller.auth_controller import auth_bp
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'uma_chave_secreta_muito_longa_e_aleatoria_para_producao_1234567890'
 app.secret_key = 'chave_secreta_segura' 
-app.register_blueprint(auth_bp) #coisas leves haha
+app.register_blueprint(auth_bp) #registra rotas com blueprint, para manipular com "auth.exemplo", sem problemas
 
 # ✅ Chamar a criação do banco/tabela
 criar_tabela()

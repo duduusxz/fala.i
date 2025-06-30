@@ -119,6 +119,7 @@ def listar_usuarios():
 @auth_bp.route('/nova_senha', methods=['GET', 'POST'])  # rota definida para a página de nova senha
 def nova_senha():
     email = request.args.get('email') or request.form.get('email')
+
     
     if request.method == 'POST':
         nova_senha = request.form['nova_senha']

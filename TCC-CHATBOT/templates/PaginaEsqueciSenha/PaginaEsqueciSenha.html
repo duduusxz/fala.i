@@ -51,16 +51,18 @@
 
     <div class="tudo">
         <div class="senha-esquecida" id="senha-esquecida">
-        <div class="esquecida">
+            <div class="esquecida">
             <h3>Esqueceu a Senha?</h3> 
            <form method="POST">
     <label>Email:</label>
-    <input type="email" name="email" required><br>
+    <input type="email" name="email" required minlength="10" maxlength="40"><br>
     <label>RM:</label>
-    <input type="text" name="rm" required><br>
-    <button type="submit">Enviar link de redefinição</button>
+    <input type="text" name="rm" required minlength="5" maxlength="5"><br>
+    <button type="submit">Enviar hiperligação de redefinição</button>
 </form>
-
+ </div>
+        </div>
+            </div>
 {% with messages = get_flashed_messages() %}
   {% if messages %}
     <ul>
@@ -86,8 +88,8 @@
     </div>
   !-->
 
-        </div>
-    </div>
+
+
 
     <div vw class="enabled">
             <div vw-access-button class="active"></div>
