@@ -71,9 +71,14 @@ h3 {
   margin-top: -20px; /* Adicionar uma margem negativa aqui */
 }
 
+label{
+  color: var(--fundo-branco);
+}
+
 input {
   border-radius: 13px;
   width: 100%;
+  min-width: 529px;
   height: 36px;
   border: solid 1px white;
   background-color: transparent;
@@ -88,7 +93,6 @@ input {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  gap: 20px; /* Espaço entre os containers */
 }
 
 .senha-esquecida {
@@ -99,9 +103,11 @@ input {
   background-color: #37353c7e;
   height: auto;
   padding: 40px;
+  padding-top: 0px;
+  min-height: 460px;
   padding-bottom: 80px;
   width: 40%;
-  align-items: center;
+  align-items: center;  
   justify-content: center;
   display: flex;
   border-radius: 10px;
@@ -109,7 +115,7 @@ input {
 }
 
 .esquecida {
-  padding: 10px 30px 20px 30px; /* Reduzir o primeiro valor (padding superior) */
+  padding: 1px 30px 20px 30px; /* Reduzir o primeiro valor (padding superior) */
 }
 
 p {
@@ -167,6 +173,7 @@ button {
 
 .linha-botoes {
   display: flex;
+  flex-direction: column;
   gap: 8px;
   margin-top: 20px;
 }
@@ -225,15 +232,21 @@ body.dark-mode .titulo-bem-vindo {
   color: var(--cor-principal);
 }
 
+body.dark-mode label{
+  color: var(--cor-principal);
+}
+
 body.dark-mode input {
   border-radius: 13px;
   width: 100%;
+  min-width: 529px;
   height: 36px;
   border: solid 1px var(--cor-principal);
   background-color: transparent;
-  color: var(--cor-terciaria);
+  color: var(--cor-principal);
   margin-top: 10px;
   margin-bottom: 10px;
+  padding: 5px;
 }
 
 body.dark-mode .senha-esquecida {
@@ -244,9 +257,11 @@ body.dark-mode .senha-esquecida {
   background-color: var(--roxo-claro);
   height: auto;
   padding: 40px;
+  padding-top: 0px;
+  min-height: 460px;
   padding-bottom: 80px;
   width: 40%;
-  align-items: center;
+  align-items: center;  
   justify-content: center;
   display: flex;
   border-radius: 10px;
