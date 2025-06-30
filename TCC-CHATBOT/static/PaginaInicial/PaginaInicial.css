@@ -212,6 +212,7 @@ header {
   margin-top: -200px;
   color: #feffec;
   transition: 0.4s;
+  box-shadow: 0 0 12px #5e06d8;
 }
 
 .botao-comecar button:hover {
