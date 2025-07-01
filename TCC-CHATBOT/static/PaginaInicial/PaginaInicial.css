@@ -1150,3 +1150,20 @@ iframe{
   font-weight: 400;
   color: var(--fundo-branco);
 }
+
+footer{
+  padding: 90px;
+  height: 100%;
+  padding-top: 45px
+}
+
+#logo-footer{
+  width: 80px;
+}
+
+.footer-inicio{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
