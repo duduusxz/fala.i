@@ -340,7 +340,7 @@ header {
 .conteudo {
   background: linear-gradient(to bottom, #5c5ee2, #4f3cad, #423291);
   padding: 60px 20px;
-  text-align: center;
+  text-align: justify;
   color: white;
   position: relative;
   margin: 0;
@@ -1115,4 +1115,38 @@ body::before {
 /* Quando ativado */
 body.blur-ativa::before {
   opacity: 1;
+}
+
+.sessao-videos{
+  padding: 90px;
+  padding-top: 10px;
+  width: 100%;
+  background: linear-gradient(to bottom, var(--fundo-branco) 22%, var(--cor-principal), var(--roxo));
+}
+
+.videos-dicas{
+  gap: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+iframe{
+  border-radius: 10px;
+  width: 420px;
+  height: 238px;
+}
+
+.video{
+  display: flex;
+  flex-direction: column;
+  text-wrap: wrap;
+  width: 420px;
+}
+
+.titulo-video{
+  font-family: Arial, Helvetica, sans-serif;
+  margin-top: 10px;
+  font-weight: 400;
+  color: var(--fundo-branco);
 }
