@@ -11,7 +11,7 @@ def get_db_connection(): #faz a requisição com o banco SQLIte3 que é um banco
 
 def criar_tabela(): # cria a tabela de usuarios, que vai conter as informações do user
     with get_db_connection() as conn:
-        cursor = conn.cursor() # estabelece conexao 
+        cursor = conn.cursor() # estabelece conexao
         cursor.execute('''
             CREATE TABLE IF NOT EXISTS usuarios (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -21,7 +21,12 @@ def criar_tabela(): # cria a tabela de usuarios, que vai conter as informações
                 senha BLOB NOT NULL
             )
         ''')
+
+        cursor.execute('SELECT * FROM usuarios')
         conn.commit()
+
+        resultados = cursor.fetchall()
+        print("Usuários cadastrados atualmente:", resultados)
         print("Tabela de usuários criada com sucesso!") # caso a tabela seja criada com sucesso, ele retorna essa mensagem
 
 def cadastrar(rm, email, senha):
