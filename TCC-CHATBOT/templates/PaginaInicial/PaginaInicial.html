@@ -51,10 +51,11 @@
                 <h1>FALA.I</h1>
             </header>
             <section class="comecando fade-in fade-delay-1">
+                <form action="/resposta">
                 <div class="botao-comecar">
-                    <button onclick="window.location.href='../PaginaChatbot/Chatbot.html'" id="botao-comecar">COMECE JÁ</button>
+                    <button id="botao-comecar">COMECE JÁ</button>
                 </div>
-                
+                </form>
                 <p id="textinho">
                     Comece agora a treinar sua oratória e arrasar nas suas próximas apresentações!
                 </p>
@@ -74,12 +75,15 @@
 
     <section class="cards-container fade-in">
         <div class="card fade-delay-1">
-            <div class="card-agenda" onclick="window.location.href='../PaginaAgenda/Agenda.html'">
+            <div class="card-agenda">
                 <img src="{{ url_for('static', filename='img/calendario.png') }}" width="250px" alt="Ícone de Agenda">
             </div>
-            <button class="botao" onclick="window.location.href='../PaginaAgenda/Agenda.html'">
-                <a href="">AGENDA</a>
+            <form action="/agenda">
+            <button class="botao">
+                <a>AGENDA</a>
             </button>
+            <form>
+
         </div>
         <div class="card fade-delay-2">
             <div class="card-microfone">

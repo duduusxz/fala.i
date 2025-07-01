@@ -163,17 +163,57 @@ def esqueci_senha():
         server.login(login, password)  # faz o login no servidor SMTP com o email e senha
         
         #cria o link e envia o email
-        
-        link = f"http://localhost:5000/nova_senha?email={email}"
-            # cria o link para a página de nova senha, passando o email do usuário
-            
-        corpo = f"Olá! Clique no link para redefinir a sua senha: {link}"
-        
+
+        banner_url = "https://i.postimg.cc/QNmfFJKx/banner.png"
+
+
+        link   = f"http://localhost:5000/nova_senha?email={email}" # cria o link para a página de nova senha, passando o email do usuário
+        linkSuporte = f"http://localhost:5000/inicio?email={email}"
+
+        corpo_html = f"""
+        <html>
+          <body style="font-family: Arial, sans-serif; background-color: #f3f0fa; padding: 20px;">
+            <div style="max-width: 600px; margin: auto; background-color: #ffffff; border-radius: 10px; padding: 25px; box-shadow: 0px 4px 8px rgba(0,0,0,0.1);">
+
+              <img src="{banner_url}" alt="Banner" style="width: 100%; max-height: 200px; object-fit: cover; border-radius: 8px 8px 0 0;">
+
+              <h2 style="color: #5e35b1;">🔐 Redefinição de Senha</h2>
+
+              <p>Olá,</p>
+
+              <p>Recebemos uma solicitação para redefinir a sua senha em nossa plataforma. Isso pode acontecer quando você esquece a senha ou deseja reforçar a segurança da sua conta.</p>
+
+              <p>Se foi você quem solicitou essa alteração, clique no botão abaixo para continuar com a redefinição de forma segura:</p>
+
+              <p style="text-align: center; margin: 30px 0;">
+                <a href="{link}" style="background-color: #7e57c2; color: white; padding: 14px 28px; border-radius: 6px; text-decoration: none; font-size: 16px; font-weight: bold;">
+                   Redefinir Senha
+                </a>
+              </p>
+
+              <p>Se você <strong>não reconhece esta solicitação</strong>, por favor entre em contato com nosso suporte imediatamente para garantir a segurança da sua conta.</p>
+
+              <p style="text-align: center; margin: 25px 0;">
+                <a href="{linkSuporte}" style="background-color: #7e57c2; color: white; padding: 12px 24px; border-radius: 6px; text-decoration: none; font-size: 15px; font-weight: bold;">
+                   Falar com o Suporte
+                </a>
+              </p>
+
+              <p style="font-size: 14px; color: #666;">💡 Dica de segurança: Nunca compartilhe sua senha com ninguém e altere-a regularmente para manter sua conta protegida.</p>
+
+              <p style="margin-top: 30px;">Atenciosamente,<br>
+              <strong>Equipe de Suporte</strong><br>
+              Fala.i</p>
+            </div>
+          </body>
+        </html>
+        """
+
         email_msg = MIMEMultipart() # cria a mensagem de email
         email_msg['From'] = login  # define o remetente do email
         email_msg['To'] = email  # define o destinatário do email
         email_msg['Subject'] = "Redefinição de Senha Fala.i" #assunto email  
-        email_msg.attach(MIMEText(corpo, 'plain'))  # anexa o corpo do email
+        email_msg.attach(MIMEText(corpo_html, 'html'))  # anexa o corpo do email
         
         sucesso = server.sendmail(email_msg['From'], email_msg['To'], email_msg.as_string()) 
         # envia o email
@@ -188,25 +228,6 @@ def esqueci_senha():
         return redirect(url_for('auth.login'))  # redireciona para a página de esqueci senha após enviar o email
     
     return render_template('PaginaEsqueciSenha/PaginaEsqueciSenha.html')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 #fim da rota esqueci senha
