@@ -23,6 +23,11 @@ def criar_tabela(): # cria a tabela de usuarios, que vai conter as informações
         ''')
 
         cursor.execute('SELECT * FROM usuarios')
+        usuarios = cursor.fetchall() #o fecthal pega todos os registros da tabela 
+
+        print("Usuários cadastrados atualmente:")
+        for usuarios in usuarios:
+            print(dict(usuarios)) #transforma em um dicionario legivel para ler
         conn.commit()
 
         resultados = cursor.fetchall()
