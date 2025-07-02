@@ -1,4 +1,5 @@
 :root {
+  /* Modo Claro */
   --fundo-branco: #ffffff;
   --cor-principal: #686bff;
   --hover: #5557ff;
@@ -7,6 +8,31 @@
   --cinza-medio: #cfd4d8;
   --roxo: #491f7a;
   --fundo-cinza: #efefef;
+  --texto-primario: #686bff;
+  --texto-secundario: #c0c0ca;
+  --fundo-container: #b2b3ff54;
+  --wave-1: #9f90c3;
+  --wave-2: #afb0e1;
+  --wave-3: #ffffff;
+  --wave-bg: #7274cd;
+  --shadow-hover: #8f8fc118;
+}
+
+/* Modo Escuro */
+[data-theme="dark"] {
+  --fundo-branco: #1a1a1a;
+  --cor-principal: #8b8dff;
+  --hover: #7779ff;
+  --cor-terciaria: #9b9dff;
+  --roxo-claro: #2a2a3a;
+  --cinza-medio: #404040;
+  --roxo: #6b4f8a;
+  --fundo-cinza: #2d2d2d;
+  --texto-primario: #b8baff;
+  --texto-secundario: #8a8a9a;
+  --fundo-container: #2825307e;
+  --wave-3: #1a1a1a;
+  --shadow-hover: #11111158;
 }
 
 * {
@@ -32,44 +58,49 @@ body {
   flex-direction: column;
 }
 
-.tudo{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.tudo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-label{
-    color: #afb0e1;
+label {
+  color: var(--texto-primario);
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 500;
 }
 
 h3 {
   font-family: "Titillium Web", sans-serif;
-  font-weight: 200;
   font-weight: 400;
   font-style: normal;
   font-size: 40px;
-  color: white;
+  color: var(--texto-primario);
   margin-bottom: 15px;
-  margin-top: -20px; /* Adicionar uma margem negativa aqui */
+  margin-top: -20px;
 }
 
 input {
   border-radius: 13px;
   width: 100%;
   height: 36px;
-  border: solid 1px white;
+  border: solid 1px var(--cor-principal);
   background-color: transparent;
-  color: white;
+  color: var(--texto-primario);
   margin-top: 10px;
   margin-bottom: 10px;
   padding: 5px;
 }
 
-.container-nova-senha{
+input::placeholder {
+  color: var(--texto-secundario);
+}
+
+.container-nova-senha {
   position: absolute;
-  background-color: #37353c7e;
-  height: 60%;
+  background-color: var(--fundo-container);
+  height: auto;
   gap: 10px;
   padding: 40px;
   width: 40%;
@@ -78,35 +109,74 @@ input {
   transition: all 0.7s ease;
   display: flex;
   flex-direction: column;
+  backdrop-filter: blur(10px);
+  border: none;
+}
+
+.container-nova-senha:hover {
+  transform: scale(110%);
+  box-shadow: 0 0 5px var(--shadow-hover);
 }
 
 p {
-  color: white;
+  color: var(--texto-primario);
 }
 
 input:focus {
   outline: solid 2px var(--cor-principal);
 }
 
-#login-caminho{
-    margin-top: 10px;
-    font-family: Arial, Helvetica, sans-serif;
-    color:#72c7ff;
-    cursor: pointer;
-    text-decoration: underline;
-    font-size: 15px;
+#login-caminho {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #0062cb;
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: 15px;
+  transition: color 0.3s ease;
 }
 
-.caminhos{
+[data-theme="dark"] #login-caminho {
+  color: #4a9eff;
+}
+
+#login-caminho:hover {
+  color: var(--hover);
+}
+
+.caminhos {
   display: flex;
 }
 
-#ou{
-  margin: 10px;
+#ou {
+  margin-left: 10px;
+  margin-right: 10px;
+  color: var(--texto-primario);
 }
 
-.controls button{
-    width: 300px;
+/* Botão Toggle Modo Escuro */
+.toggle-mode {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--cor-principal);
+  color: var(--fundo-branco);
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.toggle-mode:hover {
+  background-color: var(--hover);
+  transform: scale(1.1);
 }
 
 button {
@@ -121,6 +191,11 @@ button {
   color: white;
 }
 
+button:hover {
+  background-color: var(--hover);
+}
+
+
 .entrar-cadastro {
   display: flex;
   flex-direction: column;
@@ -128,94 +203,13 @@ button {
   height: 30px;
 }
 
-.linha-botoes {
-  display: flex;
-  gap: 8px;
-  margin-top: 20px;
-}
-
-body.dark-mode {
-  background-color: var(--fundo-branco);
-  color: #feffec;
-}
-body.light-mode {
-  background-color: #29272f;
-  color: #feffec;
-}
-.toggle-mode {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: #feffec;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-body.dark-mode #login-caminho{
-    color: #0062cb;
-}
-
-body.dark-mode label{
-    color: var(--cor-principal);
-}
-
-body.dark-mode p {
-  color: var(--cor-principal);
-}
-
-body.dark-mode h3 {
-  color: var(--cor-principal);
-  font-family: "Titillium Web", sans-serif;
-  font-weight: 200;
-  font-weight: 400;
-  font-style: normal;
-  font-size: 40px;
-  color: var(--hover);
-  margin-bottom: 15px;
-  margin-top: -20px; /* Adicionar uma margem negativa aqui */
-}
-
-body.dark-mode input {
-  border-radius: 13px;
-  width: 100%;
-  height: 36px;
-  border: solid 1px var(--cor-principal);
-  background-color: transparent;
-  color: var(--cor-terciaria);
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-body.dark-mode .container-nova-senha{
-  position: absolute;
-  background-color: var(--roxo-claro);
-  height: 60%;
-  gap: 10px;
-  padding: 40px;
-  width: 40%;
-  justify-content: center;
-  border-radius: 10px;
-  transition: all 0.7s ease;
-  display: flex;
-  flex-direction: column;
-}
-
 .controls {
   position: fixed;
   top: 20px;
-  left: 100px;
+  left: 130px;
   z-index: 9999;
   display: flex;
-  gap: 4px; /* diminui o espaço entre eles */
-}
-
-#increase-font,
-#decrease-font {
-  position: initial; /* remove o posicionamento relativo que bagunçava */
-  max-width: 100px;
+  gap: 4px;
 }
 
 .controls button {
@@ -223,9 +217,11 @@ body.dark-mode .container-nova-senha{
   border: none;
   font-size: 15px;
   cursor: pointer;
-  color: #007bff;
-  margin: 0; /* Remove margens dos botões */
-  display: inline-block; /* Garante que os botões fiquem na mesma linha */
+  color: var(--cor-principal);
+  margin: 0;
+  display: inline-block;
+  max-width: 50px;
+  width: 360px;
 }
 
 .controls button:hover {
@@ -242,7 +238,7 @@ footer {
 
 #ver-termos {
   text-decoration: underline;
-  color: #c0c0ca;
+  color: var(--texto-secundario);
   cursor: pointer;
   padding-left: 140px;
 }
@@ -253,55 +249,8 @@ footer {
     transform: translateY(0);
   }
   50% {
-    transform: translateY(
-      -20px
-    ); /* Ajuste a altura do pulo conforme necessário */
+    transform: translateY(-20px);
   }
-}
-
-.painel {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 9999;
-  background: #007bff;
-  padding: 10px;
-  border-radius: 10px;
-}
-
-.painel label {
-  color: var(--fundo-branco);
-}
-
-.painel select,
-.painel button {
-  margin: 5px;
-  padding: 5px 10px;
-  font-size: 14px;
-}
-
-#daltonismo-btn {
-  background-color: var(--fundo-branco);
-  color: #007bff;
-  transition: 0.4s;
-}
-
-#daltonismo-btn:hover {
-  background-color: var(--fundo-cinza);
-}
-
-#daltonismo {
-  border: none;
-  border-radius: 5px;
-  height: 33px;
-  background-color: var(--fundo-branco);
-  color: #007bff;
-  cursor: pointer;
-  transition: 0.4s;
-}
-
-#daltonismo:hover {
-  background-color: var(--fundo-cinza);
 }
 
 @import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap");
@@ -316,15 +265,17 @@ section {
   align-items: center;
   min-height: 100vh;
 }
+
 section .wave {
   position: absolute;
   left: 0;
   width: 100%;
   height: 100%;
-  background: #7274cd;
+  background: var(--wave-bg);
   box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.5);
   transition: 0.5s;
 }
+
 section .wave span {
   content: "";
   position: absolute;
@@ -333,27 +284,24 @@ section .wave span {
   top: 0;
   left: 50%;
   transform: translate(-50%, -75%);
-  background: #7778cf;
 }
+
 section .wave span:nth-child(1) {
   border-radius: 45%;
-  background: #9f90c3;
+  background: var(--wave-1);
   animation: animate 5s linear infinite;
 }
 
 section .wave span:nth-child(2) {
   border-radius: 40%;
-  background: #afb0e1;
+  background: var(--wave-2);
   animation: animate 10s linear infinite;
 }
+
 section .wave span:nth-child(3) {
   border-radius: 42.5%;
-  background: #2a2a2a;
+  background: var(--wave-3);
   animation: animate 15s linear infinite;
-}
-
-body.dark-mode section .wave span:nth-child(3) {
-  background-color: #ffffff;
 }
 
 @keyframes animate {
@@ -365,100 +313,7 @@ body.dark-mode section .wave span:nth-child(3) {
   }
 }
 
-#toggle-daltonismo {
-  width: 45px;
-  height: 45px;
-  border-radius: 8px;
-  background-color: var(--hover);
-  color: white;
-  border: none;
-  position: fixed;
-  bottom: 20px;
-  right: 10px;
-  cursor: pointer;
-  z-index: 10000;
-  font-size: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: 0.5s;
-}
-
-#toggle-daltonismo:hover {
-  background-color: #4043db;
-}
-
-/* Painel Daltonismo (oculto por padrão) */
-.painel {
-  position: fixed;
-  display: flex;
-  right: 42px;
-  background: var(--hover);
-  padding: 10px;
-  border-radius: 10px;
-  z-index: 9999;
-  transform: translateX(0);
-  opacity: 0;
-  pointer-events: none;
-  transition: all 0.3s ease-in-out;
-}
-
-/* Quando visível */
-.painel.ativo {
-  transform: scale(1);
-  opacity: 1;
-  pointer-events: all;
-}
-
-/* Estilo interno */
-.painel label {
-  color: white;
-}
-
-.painel select,
-.painel button {
-  margin-top: 5px;
-  padding: 5px 10px;
-  font-size: 14px;
-}
-
-#daltonismo-btn {
-  background-color: white;
-  color: #007bff;
-  border: none;
-  border-radius: 5px;
-  margin-top: 5px;
-  transition: background 0.3s;
-}
-
-#daltonismo-btn:hover {
-  background-color: #efefef;
-}
-
-.painel-daltonismo {
-  position: absolute;
-  right: 2px;
-  bottom: 0;
-  transform: scale(0.8) translateX(20px); /* Movimento apenas na horizontal */
-  transform-origin: center right;
-  opacity: 0;
-  pointer-events: none;
-  background: var(--hover);
-  padding: 10px;
-  border-radius: 10px;
-  transition: transform 0.4s ease, opacity 0.4s ease;
-  display: flex;
-  gap: 10px;
-  align-items: center;
-}
-
-/* Quando ativo, volta à posição original */
-.painel-daltonismo.ativo {
-  transform: scale(1) translateX(0) translateY(0);
-  opacity: 1;
-  pointer-events: all;
-}
-
+/* Efeito de blur no fundo quando hover no container */
 body::before {
   content: "";
   position: fixed;
@@ -467,8 +322,8 @@ body::before {
   width: 100%;
   height: 100%;
   backdrop-filter: blur(3px);
-  background-color: rgba(52, 52, 52, 0.07); /* leve escurecimento opcional */
-  z-index: 9999;
+  background-color: rgba(52, 52, 52, 0.07);
+  z-index: 9998;
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.3s ease-in-out;
@@ -478,13 +333,63 @@ body::before {
 body.blur-ativa::before {
   opacity: 1;
 }
-/*686bff*/
 
-.container-nova-senha:hover{
-    transform: scale(110%);
-    box-shadow: 0 0 5px #8f8fc118;
+/* Responsividade */
+@media (max-width: 1024px) {
+  .container-nova-senha {
+    width: 70%;
+    height: auto;
+    min-height: 50%;
+  }
+
+  h3 {
+    font-size: 32px;
+  }
 }
 
-body.dark-mode .container-nova-senha:hover{
-    box-shadow: 0 0 5px #11111158;
+@media (max-width: 768px) {
+  .container-nova-senha {
+    width: 85%;
+    padding: 30px;
+    height: auto;
+    min-height: 45%;
+  }
+
+  h3 {
+    font-size: 28px;
+  }
+
+  .caminhos {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  #ou {
+    margin: 5px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .container-nova-senha {
+    width: 95%;
+    padding: 20px;
+  }
+
+  h3 {
+    font-size: 24px;
+  }
+
+  .toggle-mode {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+  }
+
+  .controls {
+    left: 20px;
+  }
+
+  #ver-termos {
+    padding-left: 20px;
+  }
 }
