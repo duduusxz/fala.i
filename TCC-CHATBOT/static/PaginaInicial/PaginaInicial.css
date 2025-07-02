@@ -1121,7 +1121,6 @@ body.blur-ativa::before {
   padding: 90px;
   padding-top: 10px;
   width: 100%;
-  background: linear-gradient(to bottom, var(--fundo-branco) 22%, var(--cor-principal), var(--roxo));
 }
 
 .videos-dicas{
@@ -1148,22 +1147,70 @@ iframe{
   font-family: Arial, Helvetica, sans-serif;
   margin-top: 10px;
   font-weight: 400;
-  color: var(--fundo-branco);
 }
 
 footer{
   padding: 90px;
+  padding-bottom: 30px;
   height: 100%;
-  padding-top: 45px
+  padding-top: 45px;
+  background-color: var(--roxo-claro);
 }
 
 #logo-footer{
   width: 80px;
 }
 
+.logo-footer{
+  display: flex;
+  align-items: center;
+  padding-bottom: 10px;
+  gap: 30px;
+  font-family: "Righteous";
+  font-size: 40px;
+  color: var(--cor-principal);
+}
+
 .footer-inicio{
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 30px;
+}
+
+hr{
+  width: 300%;
+  color: var(--cinza-medio);
+}
+
+.informacoes-footer{
+  text-align: center;
+  font-family: 'Titillium Web';
+  color: #626262;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.icons-footer{
+  text-decoration: none;
   gap: 15px;
+  display: flex;
+}
+
+.caminhos-footer{
+  display: flex;
+  color: #626262;
+  gap: 10px;
+  font-family: 'Titillium Web';
+}
+
+.caminhos-footer a{
+  text-decoration: none;
+  color: #626262;
+  font-family: 'Titillium Web';
+}
+
+.caminhos-footer a:hover{
+  text-decoration: underline;
 }
