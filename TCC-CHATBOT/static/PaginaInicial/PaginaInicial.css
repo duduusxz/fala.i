@@ -86,6 +86,10 @@
   transition: all 0.4s ease;
 }
 
+html{
+  scroll-behavior: smooth;
+}
+
 body {
   background-color: var(--fundo-branco);
   color: var(--texto-primario);
