@@ -254,6 +254,7 @@ h1:hover {
   transition: 0.4s;
   width: 100%;  
   backdrop-filter: blur(10px);
+  overflow-y: auto;
 }
 
 .calendar-icon:hover {
@@ -310,7 +311,6 @@ li:hover {
   display: flex;
   flex-direction: column;
   width: 100%;
-  overflow-y: auto;
 }
 
 .calendario {
