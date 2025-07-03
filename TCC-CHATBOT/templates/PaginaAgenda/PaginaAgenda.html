@@ -1,86 +1,138 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">  <!--Bibliotecas para fontes-->
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>  <!--Bibliotecas para fontes-->
-    <link href="https://fonts.googleapis.com/css2?family=Young+Serif&display=swap" rel="stylesheet"> 
-    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&family=Young+Serif&display=swap" rel="stylesheet"> <!--Bibliotecas para fontes-->
-    <link rel="shortcut icon" href="Images/Captura_de_tela_2025-03-14_174727-removebg-preview.png" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='PaginaAgenda/PaginaAgenda.css') }}">
-    <script src="https://kit.fontawesome.com/345c519b8f.js" crossorigin="anonymous"></script>
-     <link rel="shortcut icon" href="{{ url_for('static', filename='img/logo.png') }}" type="image/x-icon">
-    <title>Agenda</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Script para aplicar tema INSTANTANEAMENTE -->
+  <script>
+    (function() {
+      // Aplica o tema ANTES da página renderizar
+      const savedTheme = localStorage.getItem('theme');
+      const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      const theme = savedTheme || systemTheme;
+      
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Young+Serif&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&family=Young+Serif&display=swap" rel="stylesheet">
+  <link rel="shortcut icon" href="{{ url_for('static', filename='img/logo.png') }}" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='PaginaAgenda/PaginaAgenda.css') }}">
+  <script src="https://kit.fontawesome.com/345c519b8f.js" crossorigin="anonymous"></script>
+  <title>Agenda</title>
 </head>
+
 <body>
   <nav>
     <div class="nav-left">
-       <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo do Chatbot" id="logo" class="logo" width="60px"> 
+      <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo do Chatbot" id="logo" class="logo" width="60px">
     </div>
-  
     <ul class="nav-menu">
       <li><a href="../PaginaInicial/TelaInicial.html">Serviços</a></li>
       <li><a href="PaginaCadastro.html">Quem somos</a></li>
       <li><a href="PaginaInicial.html">Tutorial</a></li>
       <li><a href="PaginaInicial.html">Contato</a></li>
     </ul>
-  
     <div class="nav-right">
+      <!-- Botão de Toggle do Modo Escuro -->
+      <button id="toggle-dark-mode" class="toggle-mode" title="Alternar modo escuro">
+        <i class="fas fa-moon" id="theme-icon"></i>
+      </button>
+      <!-- Botão Minha Conta -->
       <form action="/minha_conta">
         <button class="account-btn" onclick="window.location.href='../PaginaConta/MinhaConta.html'">
-        <i class="fas fa-user"></i> Minha conta
-      </button>
+          <i class="fas fa-user"></i> Minha conta
+        </button>
       </form>
-      
     </div>
   </nav>
-    
-        <div class="main-content">
-          <div class="left">
-            <h1>Agende por aqui seus<br>próximos trabalhos!</h1>
-            <button class="add-task-btn" onclick="add_tarefa()">
-              <p class="add">+</p> Adicionar uma tarefa
-            </button>
-            <p id="texto"><b>Aqui você pode adicionar o trabalho como uma simples tarefa!</b></p>
-            <p id="texto2"><b>Conseguindo ver se está chegando para treinar ainda mais sua fala!</b></p>
-          </div>
-    
-          <div class="right">
-            <div class="calendar-icon">
-              <img src="/img/calendario.png" width="500px" alt="ícone de calendário">
-            </div>
-          </div>
 
-          <div id="overlay" class="overlay">
-            <div class="alerta-principal">
-              <p id="texto3"><b>Qual é a tarefa a ser adicionada??</b></p>
-              <div class="formulario">
-              <input type="date" class="data">
-              <input type="text" placeholder=" Digite o nome da tarefa!" class="tarefa">
-              <button onclick="fechar()">Add Tarefa</button>
-              <a href="../PaginaAgenda/Agenda.html" class="voltar">Voltar</a>
-            </div>
-            </div>
-          </div>
+  <div class="main-content">
+    <div class="left">
+      <h1>Agende seus próximos trabalhos por aqui!</h1>
+      <div class="btn-agenda">
+        <button class="add-task-btn" onclick="abrirModal()">
+          <p class="add">+</p> Adicionar uma tarefa
+        </button>
+        <p id="google-agenda">Integrado com Google Agenda*</p>
       </div>
+      <p id="texto" class="textos">Para adicionar seus trabalhos e apresentações clique no botão acima.</p>
+      <a href="https://calendar.google.com/calendar/u/0/r">
+        <button class="google-agenda">
+          <img src="{{ url_for('static', filename='img/google-agenda.png') }}" alt="" width="30px">
+          Google Agenda
+        </button>
+      </a>
+      <p id="texto2" class="textos">Ao adicionar uma tarefa, ela poderá ser vista no campo ao lado, ou, se preferir, clique no botão acima para acessar Google Agenda e veja suas tarefas por lá.</p>
+    </div>
 
-      <div vw class="enabled">
-            <div vw-access-button class="active"></div>
-                <div vw-plugin-wrapper>
-                    <div class="vw-plugin-top-wrapper"></div>
-                </div>  
+    <div class="right">
+      <div class="calendar-icon">
+        <div class="agendados">
+          <div class="calendario">
+            <h3>Aqui aparecerão todos os seus trabalhos agendados</h3>
+            <img src="{{ url_for('static', filename='img/calendario.png') }}" width="50px" alt="ícone de calendário">
+          </div>
+          <hr>
+          <div id="lista-tarefas">
+            <!-- As tarefas aparecerão aqui -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal para adicionar tarefa -->
+  <div id="modal-overlay" class="modal-overlay">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Adicionar Nova Tarefa</h2>
+        <button class="close-btn" onclick="fecharModal()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      
+      <form id="form-tarefa" class="task-form">
+        <div class="form-group">
+          <label for="nome-tarefa">Nome da Tarefa:</label>
+          <input type="text" id="nome-tarefa" name="nome-tarefa" placeholder="Digite o nome da tarefa" required>
         </div>
         
-        <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+        <div class="form-group">
+          <label for="data-tarefa">Data e Hora:</label>
+          <input type="datetime-local" id="data-tarefa" name="data-tarefa">
+        </div>
+        
+        <div class="form-group">
+          <label for="descricao-tarefa">Descrição (opcional):</label>
+          <textarea id="descricao-tarefa" name="descricao-tarefa" placeholder="Adicione uma descrição para sua tarefa" rows="3"></textarea>
+        </div>
+        
+        <div class="form-actions">
+          <button type="button" class="cancel-btn" onclick="fecharModal()">Cancelar</button>
+          <button type="submit" class="submit-btn">Adicionar Tarefa</button>
+        </div>
+      </form>
+    </div>
+  </div>
 
-        <script>
-        new window.VLibras.Widget('https://vlibras.gov.br/app');
-        </script>
-      
-      <script src="{{ url_for('static', filename='PaginaAgenda/PaginaAgenda.js')}}"></script>
-    </body>
-    </html>
+  <!-- VLibras -->
+  <div vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper>
+      <div class="vw-plugin-top-wrapper"></div>
+    </div>
+  </div>
+
+  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+  <script>
+    new window.VLibras.Widget('https://vlibras.gov.br/app');
+  </script>
+  <script src="{{ url_for('static', filename='PaginaAgenda/PaginaAgenda.js')}}"></script>
 </body>
 </html>
