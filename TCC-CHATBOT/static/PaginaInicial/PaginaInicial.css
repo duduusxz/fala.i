@@ -1,4 +1,5 @@
 :root {
+  /* Modo Claro */
   --fundo-branco: #ffffff;
   --cor-principal: #686bff;
   --hover: #5557ff;
@@ -8,6 +9,36 @@
   --roxo: #491f7a;
   --fundo-cinza: #efefef;
   --roxo-medio: #423291;
+  --texto-primario: #686bff;
+  --texto-secundario: #7779fd;
+  --texto-terciario: #1d1d1d;
+  --fundo-container: #b2b3ff54;
+  --border-color: none;
+  --shadow: rgba(0, 0, 0, 0.1);
+  --onda: #5c5ee2;
+  --onda2: #4f3cad;
+  --onda3: #423291;
+  --texto: #ffffff;
+}
+
+/* Modo Escuro */
+[data-theme="dark"] {
+  --fundo-branco: #1a1a1a;
+  --cor-principal: #8b8dff;
+  --hover: #c8ade9;
+  --cor-terciaria: #9b9dff;
+  --roxo-claro: #2a2a3a;
+  --cinza-medio: #404040;
+  --roxo: #e0d2f1;
+  --fundo-cinza: #2d2d2d;
+  --roxo-medio: #5a4291;
+  --texto-primario: #e0d2f1;
+  --texto-secundario: #9b9dff;
+  --fundo-container: #2825307e;
+  --border-color: #3c3c3c;
+  --shadow: rgba(0, 0, 0, 0.3);
+  --texto: #e8d6ff;
+  --texto-terciario: #e0d2f1;
 }
 
 /* FADE IN ANIMATION */
@@ -26,18 +57,23 @@
 .fade-delay-1 {
   transition-delay: 0.1s;
 }
+
 .fade-delay-2 {
   transition-delay: 0.2s;
 }
+
 .fade-delay-3 {
   transition-delay: 0.3s;
 }
+
 .fade-delay-4 {
   transition-delay: 0.4s;
 }
+
 .fade-delay-5 {
   transition-delay: 0.5s;
 }
+
 .fade-delay-6 {
   transition-delay: 0.6s;
 }
@@ -47,10 +83,12 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  transition: all 0.4s ease;
 }
 
 body {
-  background-color: #ffffff;
+  background-color: var(--fundo-branco);
+  color: var(--texto-primario);
   font-family: "Young Serif", sans-serif;
   width: 100%;
   height: 100%;
@@ -60,41 +98,13 @@ body {
 /* NAVEGAÇÃO - LAYOUT ORIGINAL DESKTOP */
 nav {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   padding: 20px 40px;
+  background-color: var(--fundo-branco);
 }
 
-nav ul {
-  display: flex;
-  list-style: none;
-  text-decoration: none;
-  align-items: center;
-  justify-content: center;
-  gap: 36px;
-  padding: 20px 0;
-  cursor: pointer;
-}
-
-nav ul li a {
-  color: #686bff;
-  text-decoration: none;
-  font-family: "Young Serif", sans-serif;
-  font-style: normal;
-  transition: 0.4s;
-}
-
-nav ul li a:hover {
-  color: #686bff;
-}
-
-.conta {
-  display: flex;
-  align-items: center;
-}
-
-.nav-left,
-.nav-right {
+.nav-left {
   flex: 1;
   display: flex;
   align-items: center;
@@ -111,8 +121,32 @@ nav ul li a:hover {
 }
 
 .nav-menu li a {
+  color: var(--texto-primario);
   text-decoration: none;
+  font-family: "Young Serif", sans-serif;
+  font-style: normal;
   font-weight: 500;
+  transition: 0.4s;
+}
+
+.nav-menu li a:hover {
+  color: var(--hover);
+}
+
+.nav-right {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 15px;
+}
+
+li {
+  transition: 0.2s;
+}
+
+li:hover {
+  transform: scale(1.1);
 }
 
 .logo {
@@ -120,23 +154,47 @@ nav ul li a:hover {
   animation: pulo 2s infinite;
 }
 
+/* Botão Toggle Modo Escuro */
+.toggle-mode {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background-color: var(--cor-principal);
+  color: var(--fundo-branco);
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.toggle-mode:hover {
+  background-color: var(--hover);
+  transform: scale(1.1);
+}
+
 .account-btn {
-  background-color: #686bff;
-  color: #feffec;
+  background-color: var(--cor-principal);
+  color: var(--fundo-branco);
   font-size: 16px;
   padding: 10px 20px;
   border: none;
   cursor: pointer;
   border-radius: 8px;
   transition: 0.4s;
-  position: absolute;
-  top: 20px;
-  right: 20px;
   width: 155px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
 .account-btn:hover {
-  background-color: #5557ff;
+  background-color: var(--hover);
   transform: scale(1.05);
 }
 
@@ -146,7 +204,7 @@ nav ul li a:hover {
   background: none;
   border: none;
   font-size: 24px;
-  color: #686bff;
+  color: var(--texto-primario);
   cursor: pointer;
 }
 
@@ -156,7 +214,7 @@ nav ul li a:hover {
 }
 
 .titulo {
-  color: #686bff;
+  color: var(--texto-primario);
   font-size: 60px;
   font-family: "Righteous";
   text-align: left;
@@ -179,7 +237,7 @@ header {
 }
 
 .titulo:hover {
-  color: #5557ff;
+  color: var(--hover);
   transform: scale(1.06);
 }
 
@@ -194,13 +252,13 @@ header {
 }
 
 #textinho {
-  color: #7779fd;
+  color: var(--texto-secundario);
   font-size: 20px;
   margin-top: 20px;
 }
 
 .botao-comecar button {
-  background-color: #686bff;
+  background-color: var(--cor-principal);
   border: none;
   width: 550px;
   height: 80px;
@@ -210,13 +268,13 @@ header {
   font-family: Titillium Web, sans-serif;
   text-align: center;
   margin-top: -200px;
-  color: #feffec;
+  color: var(--fundo-branco);
   transition: 0.4s;
-  box-shadow: 0 0 12px #5e06d8;
+  box-shadow: 0 0 12px var(--hover);
 }
 
 .botao-comecar button:hover {
-  background-color: #5557ff;
+  background-color: var(--hover);
   font-family: Titillium Web, sans-serif;
   transform: scale(1.015);
 }
@@ -224,7 +282,8 @@ header {
 .espaco {
   border-radius: 15px;
   padding: 15px;
-  background-color: var(--roxo-claro);
+  background-color: var(--fundo-container);
+  box-shadow: 0 0 10px var(--border-color);
   width: 670px;
   margin-top: 120px;
   margin-left: 100px;
@@ -236,6 +295,7 @@ header {
   display: flex;
   gap: 60px;
   justify-content: center;
+  backdrop-filter: blur(10px);
 }
 
 .balao-fala {
@@ -243,15 +303,20 @@ header {
   background-color: var(--fundo-branco);
   padding: 20px;
   border-radius: 30px;
-  width: 300px;
+  width: 100%;
+  max-width: 350px;
   color: var(--hover);
+  text-wrap: wrap;
+  text-align: justify;
+  display: flex;
+  align-items: center;
 }
 
 .balao-fala::after {
   content: "";
   position: absolute;
   left: -38px;
-  top: 20px;
+  top: 100px;
   border-width: 20px;
   border-style: solid;
   border-color: transparent var(--fundo-branco) transparent transparent;
@@ -295,7 +360,8 @@ header {
 .card-agenda,
 .card-microfone,
 .card-ranking {
-  background-color: var(--roxo-claro);
+  background-color: var(--fundo-container);
+  box-shadow: 0 0 10px var(--border-color);
   width: 500px;
   height: 380px;
   border-radius: 15px;
@@ -303,6 +369,7 @@ header {
   justify-content: center;
   align-items: center;
   transition: transform 0.3s ease;
+  backdrop-filter: blur(10px);
 }
 
 .card-agenda:hover,
@@ -313,8 +380,8 @@ header {
 
 .botao {
   width: 500px;
-  background-color: #686bff;
-  color: #feffec;
+  background-color: var(--cor-principal);
+  color: var(--fundo-branco);
   font-size: 18px;
   padding: 10px 20px;
   border: none;
@@ -326,20 +393,20 @@ header {
 }
 
 .botao:hover {
-  background-color: #5557ff;
+  background-color: var(--hover);
   transform: scale(1.06);
   font-family: Titillium Web, sans-serif;
 }
 
 .botao a {
   text-decoration: none;
-  color: #feffec;
+  color: var(--fundo-branco);
 }
 
 /* SEÇÃO DE CONTEÚDO - LAYOUT ORIGINAL */
 .conteudo {
-  background: linear-gradient(to bottom, #5c5ee2, #4f3cad, #423291);
-  padding: 60px 20px;
+  background: linear-gradient(to bottom, var(--onda), var(--onda), var(--onda3));
+  padding: 60px 90px;
   text-align: justify;
   color: white;
   position: relative;
@@ -351,6 +418,7 @@ header {
   padding: 90px;
   padding-top: 54px;
   margin: 0;
+  background-color: var(--fundo-branco);
 }
 
 #oratoria-img {
@@ -360,6 +428,7 @@ header {
   max-height: 430px;
   object-fit: cover;
   border-radius: 15px;
+  box-shadow: 0 0 10px var(--border-color);
 }
 
 .texto-oratoria {
@@ -405,6 +474,7 @@ h3 {
   padding: 90px;
   padding-top: 10px;
   margin: 0;
+  background-color: var(--fundo-branco);
 }
 
 .container-dicas {
@@ -473,7 +543,7 @@ h3 {
   justify-content: center;
   display: flex;
   align-items: center;
-  color: var(--fundo-branco);
+  color: var(--texto);
   font-family: "Unbounded";
   font-size: 19px;
   width: 350px;
@@ -490,6 +560,7 @@ h3 {
   font-size: 18px;
   text-indent: 1em;
   background-color: var(--fundo-branco);
+  box-shadow: 0 0 10px var(--border-color);
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -555,18 +626,21 @@ section.sessao-onda2 {
   opacity: 1;
   background-position-x: 600px;
 }
+
 #onda2,
 #onda6 {
   z-index: 999;
   opacity: 0.5;
   background-position-x: 400px;
 }
+
 #onda3,
 #onda7 {
   z-index: 998;
   opacity: 0.2;
   background-position-x: 200px;
 }
+
 #onda4,
 #onda8 {
   z-index: 997;
@@ -591,28 +665,110 @@ section.sessao-onda2 {
   }
 }
 
-/* ACESSIBILIDADE */
-#toggle-daltonismo {
-  width: 45px;
-  height: 45px;
-  border-radius: 8px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  z-index: 10000;
-  transition: 0.3s;
+/* SEÇÃO VÍDEOS */
+.sessao-videos {
+  padding: 90px;
+  padding-top: 10px;
+  width: 100%;
+  background-color: var(--fundo-branco);
 }
 
-#toggle-daltonismo:hover {
-  background-color: #0056b3;
+.videos-dicas {
+  gap: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+iframe {
+  border-radius: 10px;
+  width: 420px;
+  height: 238px;
+  box-shadow: 0 0 10px var(--border-color);
+}
+
+.video {
+  display: flex;
+  flex-direction: column;
+  text-wrap: wrap;
+  width: 420px;
+}
+
+.titulo-video {
+  font-family: Arial, Helvetica, sans-serif;
+  margin-top: 10px;
+  font-weight: 400;
+  color: var(--texto-terciario);
+}
+
+/* FOOTER */
+footer {
+  padding: 90px;
+  padding-bottom: 30px;
+  height: 100%;
+  padding-top: 45px;
+  background-color: var(--fundo-container);
+  box-shadow: 0 0 10px var(--border-color);
+  margin: 0;
+}
+
+#logo-footer {
+  width: 80px;
+}
+
+.logo-footer {
+  display: flex;
+  align-items: center;
+  padding-bottom: 10px;
+  gap: 30px;
+  font-family: "Righteous";
+  font-size: 40px;
+  color: var(--cor-principal);
+}
+
+.footer-inicio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+hr {
+  width: 300%;
+  color: var(--cinza-medio);
+  border-color: var(--border-color);
+}
+
+.informacoes-footer {
+  text-align: center;
+  font-family: "Titillium Web";
+  color: #626262;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.icons-footer {
+  text-decoration: none;
+  gap: 15px;
+  display: flex;
+}
+
+.caminhos-footer {
+  display: flex;
+  color: #626262;
+  gap: 10px;
+  font-family: "Titillium Web";
+}
+
+.caminhos-footer a {
+  text-decoration: none;
+  color: #626262;
+  font-family: "Titillium Web";
+}
+
+.caminhos-footer a:hover {
+  text-decoration: underline;
 }
 
 /* ========================================= */
@@ -796,19 +952,20 @@ section.sessao-onda2 {
     top: 100%;
     left: 0;
     right: 0;
-    background: white;
+    background: var(--fundo-branco);
+    box-shadow: 0 0 10px var(--border-color);
     flex-direction: column;
     padding: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px var(--shadow);
     gap: 15px;
     z-index: 1000;
   }
 
-  .sessao-dicas{
+  .sessao-dicas {
     margin-top: 120px;
   }
 
-  .espaco{
+  .espaco {
     width: 100%;
     min-width: 400px;
     height: 100%;
@@ -825,8 +982,12 @@ section.sessao-onda2 {
     top: 25px;
   }
 
+  .nav-right {
+    flex-direction: row;
+    gap: 10px;
+  }
+
   .account-btn {
-    position: static;
     font-size: 12px;
     padding: 8px 12px;
     width: auto;
@@ -835,6 +996,12 @@ section.sessao-onda2 {
 
   .account-btn span {
     display: none;
+  }
+
+  .toggle-mode {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
   }
 
   .titulo {
@@ -931,16 +1098,22 @@ section.sessao-onda2 {
     right: 120px;
   }
 
-  .espaco{
+  .espaco {
     width: 100%;
     height: 100%;
-    min-width: 320px
+    min-width: 320px;
   }
 
   .account-btn {
     font-size: 11px;
     padding: 6px 10px;
     min-width: 80px;
+  }
+
+  .toggle-mode {
+    width: 35px;
+    height: 35px;
+    font-size: 14px;
   }
 
   .geral {
@@ -965,7 +1138,7 @@ section.sessao-onda2 {
   .card-microfone,
   .card-ranking {
     width: 100%;
-    min-width: 20px;
+    min-width: 320px;
     height: 280px;
     margin: 0 auto;
   }
@@ -990,7 +1163,7 @@ section.sessao-onda2 {
     padding: 30px 15px;
   }
 
-  .sessao-dicas{
+  .sessao-dicas {
     margin-top: 160px;
   }
 
@@ -1007,7 +1180,6 @@ section.sessao-onda2 {
     min-width: 280px;
     height: 45px;
     padding: 6px;
-    height: 100%;
     line-height: 1.1;
   }
 
@@ -1061,7 +1233,7 @@ section.sessao-onda2 {
     font-size: 12px;
     height: 40px;
     padding: 5px;
-    line-height: 1.0;
+    line-height: 1;
   }
 
   .dica-exterior {
@@ -1105,7 +1277,7 @@ body::before {
   width: 100%;
   height: 100%;
   backdrop-filter: blur(3px);
-  background-color: rgba(52, 52, 52, 0.1); /* leve escurecimento opcional */
+  background-color: rgba(52, 52, 52, 0.1);
   z-index: 9999;
   pointer-events: none;
   opacity: 0;
@@ -1115,102 +1287,4 @@ body::before {
 /* Quando ativado */
 body.blur-ativa::before {
   opacity: 1;
-}
-
-.sessao-videos{
-  padding: 90px;
-  padding-top: 10px;
-  width: 100%;
-}
-
-.videos-dicas{
-  gap: 30px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-iframe{
-  border-radius: 10px;
-  width: 420px;
-  height: 238px;
-}
-
-.video{
-  display: flex;
-  flex-direction: column;
-  text-wrap: wrap;
-  width: 420px;
-}
-
-.titulo-video{
-  font-family: Arial, Helvetica, sans-serif;
-  margin-top: 10px;
-  font-weight: 400;
-}
-
-footer{
-  padding: 90px;
-  padding-bottom: 30px;
-  height: 100%;
-  padding-top: 45px;
-  background-color: var(--roxo-claro);
-}
-
-#logo-footer{
-  width: 80px;
-}
-
-.logo-footer{
-  display: flex;
-  align-items: center;
-  padding-bottom: 10px;
-  gap: 30px;
-  font-family: "Righteous";
-  font-size: 40px;
-  color: var(--cor-principal);
-}
-
-.footer-inicio{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 30px;
-}
-
-hr{
-  width: 300%;
-  color: var(--cinza-medio);
-}
-
-.informacoes-footer{
-  text-align: center;
-  font-family: 'Titillium Web';
-  color: #626262;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.icons-footer{
-  text-decoration: none;
-  gap: 15px;
-  display: flex;
-}
-
-.caminhos-footer{
-  display: flex;
-  color: #626262;
-  gap: 10px;
-  font-family: 'Titillium Web';
-}
-
-.caminhos-footer a{
-  text-decoration: none;
-  color: #626262;
-  font-family: 'Titillium Web';
-}
-
-.caminhos-footer a:hover{
-  text-decoration: underline;
 }
