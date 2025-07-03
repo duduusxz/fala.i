@@ -20,6 +20,11 @@
   --onda3: #423291;
   --texto: #ffffff;
   --texto2: #585bfc;
+  --border-color2: #e5e7eb;
+  --passos: #dedede2f;
+  --borda-input: #828282;
+  --fundo-input: #ffffff;
+  --cor-input: #333;
 }
 
 /* Modo Escuro */
@@ -36,11 +41,16 @@
   --texto-primario: #e0d2f1;
   --texto-secundario: #9b9dff;
   --fundo-container: #2825307e;
-  --border-color: #3c3c3c;
+  --border-color: #404040;
   --shadow: rgba(0, 0, 0, 0.3);
   --texto: #e8d6ff;
   --texto-terciario: #e0d2f1;
   --texto2: #c8ade9;
+  --border-color2: #404040;
+  --passos: #212127;
+  --borda-input: #2d2d2d;
+  --fundo-input: #b4b4b4;
+  --cor-input: #222222;
 }
 
 /* FADE IN ANIMATION */
@@ -86,6 +96,10 @@
   padding: 0;
   box-sizing: border-box;
   transition: all 0.4s ease;
+}
+
+html{
+  scroll-behavior: smooth;
 }
 
 body {
@@ -667,10 +681,172 @@ section.sessao-onda2 {
   }
 }
 
+.sessao-videochamada{
+  padding: 90px;
+  padding-top: 40px;
+  margin: 0;
+  background-color: var(--fundo-branco);
+  display: flex;
+  gap: 150px;
+  justify-content: center;
+}
+
+.chamada{
+  width: 100%;
+  max-width: 630px;
+  height: auto;
+  text-align: justify;
+}
+
+#chamada{
+  margin-left: 10px;
+}
+
+.videochamada{
+  font-family: "Titillium Web";
+  color: var(--roxo);
+  font-size: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.google-meet {
+  background-color: var(--fundo-branco);
+  color: var(--preto);
+  border: 2px solid var(--border-color2);
+  padding: 15px 20px;
+  font-weight: bold;
+  font-family: "Georgia", serif;
+  font-size: 18px;
+  border-radius: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 300px;
+  height: 60px;
+  transition: 0.4s;
+  margin: 0;
+  justify-content: center;
+  gap: 15px;
+  box-shadow: 0 0 10px var(--shadow);
+}
+
+.google-meet:hover {
+  transform: scale(1.03);
+  border-color: var(--cor-principal);
+}
+
+a{
+  text-decoration: none;
+}
+
+.fluxograma{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.passos-meet{
+  width: 100%;
+  height: 110px;
+  background-color: var(--passos);
+  color: var(--roxo);
+  border: 2px solid var(--border-color2);
+  padding: 15px 20px;
+  border-radius: 12px;
+  transition: 0.4s;
+  margin: 0;
+  box-shadow: 0 0 10px var(--shadow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  font-family: 'Titillium Web';
+  font-size: 18px;
+}
+
+.meet1:hover{
+  transform: translateY(-5px) scale(1.01);
+  box-shadow: 0 4px 8px var(--shadow);
+}
+
+.meet2:hover{
+  transform: translateY(0) scale(1.01);
+  box-shadow: 0 4px 8px var(--shadow);
+}
+
+.meet3:hover{
+  transform: translateY(5px) scale(1.01);
+  box-shadow: 0 4px 8px var(--shadow);
+}
+
+#criar{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px; /* Espaço entre ícone e texto */
+  padding: 10px 20px;
+  background-color: #1a73e8; /* Azul Google */
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  border-radius: 999px; /* Totalmente arredondado */
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+  border: none;
+  height: 45px;
+  pointer-events: none;
+}
+
+.icone {
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.input-codigo {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--borda-input);
+  border-radius: 16px;
+  padding: 8px 12px;
+  width: fit-content;
+  background-color: var(--fundo-input);
+  transition: border-color 0.3s;
+}
+
+.input-codigo input {
+  border: none;
+  outline: none;
+  font-size: 16px;
+  color: var(--cor-input);
+  padding-left: 8px;
+  font-family: Arial, sans-serif;
+  border: none;
+  pointer-events: none;
+  background-color: var(--fundo-input);
+}
+
+.input-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#pequeno-texto{
+  font-family: 'Titillium Web';
+  color: var(--roxo);
+  font-size: 18px;
+}
+
 /* SEÇÃO VÍDEOS */
 .sessao-videos {
   padding: 90px;
-  padding-top: 10px;
+  padding-top: 0;
   width: 100%;
   background-color: var(--fundo-branco);
 }
