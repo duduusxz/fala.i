@@ -254,6 +254,7 @@ h1:hover {
   transition: 0.4s;
   width: 100%;  
   backdrop-filter: blur(10px);
+  overflow-y: auto;
 }
 
 .calendar-icon:hover {
