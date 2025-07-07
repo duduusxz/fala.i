@@ -2,6 +2,7 @@ import google.generativeai as genai
 import os
 import sqlite3
 from dotenv import load_dotenv
+import pymysql
 # Aqui é realizado as importações para realizar
 
 

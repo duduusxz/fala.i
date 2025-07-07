@@ -19,7 +19,6 @@ from werkzeug.security import generate_password_hash, check_password_hash
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from flask import Flask, render_template, request, jsonify, redirect, url_for, flash
-from model.usuario_model import criar_tabela
 from model.chat import gerar_resposta
 from controller.auth_controller import auth_bp
 
@@ -29,8 +28,7 @@ app.config['SECRET_KEY'] = 'uma_chave_secreta_muito_longa_e_aleatoria_para_produ
 app.secret_key = 'chave_secreta_segura' 
 app.register_blueprint(auth_bp) #registra rotas com blueprint, para manipular com "auth.exemplo", sem problemas
 
-# ✅ Chamar a criação do banco/tabela
-criar_tabela()
+
 
 @app.route("/")
 def index():

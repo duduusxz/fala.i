@@ -932,7 +932,7 @@ hr {
   display: flex;
 }
 
-.caminhos-footer {
+.caminhos-footer, .copright {
   display: flex;
   color: #626262;
   gap: 10px;

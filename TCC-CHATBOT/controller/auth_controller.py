@@ -9,6 +9,7 @@ from model import usuario_model  # Usado para chamar criar_tabela(), se necessá
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask import jsonify
 import smtplib
+
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
@@ -20,7 +21,7 @@ from email.mime.multipart import MIMEMultipart
 auth_bp = Blueprint('auth', __name__) # começa a definir o blueprint para autenticação
 
 # define uma chave secreta para a aplicação, que é usada para proteger as sessões do usuário
-usuario_model.criar_tabela() 
+
 
 
 # chama a função criar_tabela do model.usuario_model, que vai criar a tabela de usuários no banco de dados se ela não existir
@@ -74,22 +75,28 @@ def login():
     if request.method == "POST":
         email = request.form["email"]
         rm = request.form["rm"]
-        senha = request.form["senha"] # pega os dados do formulário de login para verificar
-        # Verifica se o usuário existe e a senha está correta ( Ambos criados no banco UsuarioModel)
-        
+        senha = request.form["senha"]
+
         usuario = usuario_model.buscar_usuario_por_rm_e_email(rm, email)
 
-        if  usuario and check_password_hash(usuario['senha'], senha):
-            
-            session['usuario_id'] = usuario['id']  # Armazena o ID do usuário na sessão
-            session['usuario_email'] = usuario['email']  # Armazena o email do usuário na sessão
-            session['usuario_rm'] = usuario['rm']  # Armazena o RM do usuário na sessão
+        if usuario:
+            senha_hash = usuario['senha']
+            if isinstance(senha_hash, bytes):
+                senha_hash = senha_hash.decode('utf-8')
 
-            flash("Login realizado com sucesso!")
-            return redirect(url_for('auth.inicio'))
-            # se o usuário for encontrado, retorna essa mensagem
+            if check_password_hash(senha_hash, senha):
+                session['usuario_id'] = usuario['id']
+                session['usuario_email'] = usuario['email']
+                session['usuario_rm'] = usuario['rm']
+                flash("Login realizado com sucesso!")
+                return redirect(url_for('auth.inicio'))
+
+        # Se chegou aqui, login falhou
+        flash("RM, e-mail ou senha incorretos.")
 
     return render_template("PaginaLogin/PaginaLogin.html")
+    
+
 
 # Fim da pagina de login rota e configuração
 
@@ -106,11 +113,6 @@ def logout():
 
 #inicio para ver os users
 
-@auth_bp.route('/usuarios') # rota para ver os users, ele chama a importação do usuario_model para listar os usuários cadastrados
-def listar_usuarios():
-    from usuario_model import listar_todos_usuarios  # Certifique-se de ter essa função
-    usuarios = listar_todos_usuarios()
-    return render_template('users.html', usuarios=usuarios)
 
 #fim para ver os users
 
@@ -233,8 +235,6 @@ def esqueci_senha():
 #fim da rota esqueci senha
 
 
-
-
 #inicio da pagina de inicio e configuração
 @auth_bp.route('/inicio') # rota definida para a página inicial 
 def inicio():
@@ -253,6 +253,7 @@ def inicio():
 
 @auth_bp.route('/agenda')  # rota definida para a página de agenda
 def agenda():
+
     return render_template('PaginaAgenda/PaginaAgenda.html')
 
 #fim sistema agenda

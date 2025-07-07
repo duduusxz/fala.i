@@ -1,77 +1,61 @@
-import sqlite3
+import pymysql
+from werkzeug.security import generate_password_hash
 
+# Configurações da conexão
+db_config = {
+    "host": "localhost",
+    "user": "root",
+    "password": "",
+    "database": "tcc_sql"
+}
 
-#importações necessarias para fazer a requisição do banco e realizar o bycript
+def get_db_connection():
+    return pymysql.connect(**db_config)
 
-def get_db_connection(): #faz a requisição com o banco SQLIte3 que é um banco local
-    conn = sqlite3.connect("usuarios.db") #cria o nome do banco ( famoso schema)
-    conn.row_factory = sqlite3.Row
-    return conn
+def cadastrar(rm, email, senha_hash):
+    conn = get_db_connection()
+    try:
+        with conn.cursor() as cursor:
+            cursor.execute('''
+                INSERT INTO usuarios (rm, email, senha) VALUES (%s, %s, %s)
+            ''', (rm, email, senha_hash))
+            conn.commit()
+    finally:
+        conn.close()
 
-
-def criar_tabela(): # cria a tabela de usuarios, que vai conter as informações do user
-    with get_db_connection() as conn:
-        cursor = conn.cursor() # estabelece conexao
-        cursor.execute('''
-            CREATE TABLE IF NOT EXISTS usuarios (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                rm INTEGER UNIQUE NOT NULL,
-                email TEXT UNIQUE NOT NULL,
-                pontos INT,
-                senha BLOB NOT NULL
-            )
-        ''')
-
-        cursor.execute('SELECT * FROM usuarios')
-        usuarios = cursor.fetchall() #o fecthal pega todos os registros da tabela 
-
-        print("Usuários cadastrados atualmente:")
-        for usuarios in usuarios:
-            print(dict(usuarios)) #transforma em um dicionario legivel para ler
-        conn.commit()
-
-        resultados = cursor.fetchall()
-        print("Usuários cadastrados atualmente:", resultados)
-        print("Tabela de usuários criada com sucesso!") # caso a tabela seja criada com sucesso, ele retorna essa mensagem
-
-def cadastrar(rm, email, senha):
-    with get_db_connection() as conn:
-        conn.execute('''
-            INSERT INTO usuarios (rm, email, senha) VALUES (?, ?, ?)
-        ''', (rm, email, senha))
-        conn.commit()
-    
 def buscar_usuario_por_rm_e_email(rm, email):
-    with get_db_connection() as conn:
-        cursor = conn.cursor()
-        cursor.execute('SELECT * FROM usuarios WHERE rm = ? AND email = ?', (rm, email))
-        usuario = cursor.fetchone()
-        return dict(usuario) if usuario else None
-    
-#uma busca mais específica, sendo pelo email para verificar se o email já está cadastrado, especifico no campo 
+    conn = get_db_connection()
+    try:
+        with conn.cursor(pymysql.cursors.DictCursor) as cursor:
+            cursor.execute('SELECT * FROM usuarios WHERE rm = %s AND email = %s', (rm, email))
+            return cursor.fetchone()
+    finally:
+        conn.close()
+
 def buscar_usuario_por_email(email):
-    with get_db_connection() as conn:
-        cursor = conn.cursor()
-        cursor.execute('SELECT * FROM usuarios WHERE email = ?', (email,))
-        usuario = cursor.fetchone()
-        return dict(usuario) if usuario else None
-    
+    conn = get_db_connection()
+    try:
+        with conn.cursor(pymysql.cursors.DictCursor) as cursor:
+            cursor.execute('SELECT * FROM usuarios WHERE email = %s', (email,))
+            return cursor.fetchone()
+    finally:
+        conn.close()
 
 def atualizar_senha(email, nova_senha):
-    with get_db_connection() as conn:
-        conn.execute('UPDATE usuarios SET senha = ? WHERE email = ?', (nova_senha, email)) #Os ? são placeholders para proteger contra SQL Injection.
-        conn.commit()
-        
-
+    nova_senha_hash = generate_password_hash(nova_senha)
+    conn = get_db_connection()
+    try:
+        with conn.cursor() as cursor:
+            cursor.execute('UPDATE usuarios SET senha = %s WHERE email = %s', (nova_senha, email))
+            conn.commit()
+    finally:
+        conn.close()
 
 def listar_todos_usuarios():
-    with get_db_connection() as conn:
-        conn.row_factory = sqlite3.Row
-        cursor = conn.cursor()
-        cursor.execute('SELECT * FROM usuarios')
-        usuarios = cursor.fetchall()
-        return [dict(usuario) for usuario in usuarios]
-    
-
-if __name__ == "__main__":
-    criar_tabela()
+    conn = get_db_connection()
+    try:
+        with conn.cursor(pymysql.cursors.DictCursor) as cursor:
+            cursor.execute('SELECT * FROM usuarios')
+            return cursor.fetchall()
+    finally:
+        conn.close()
