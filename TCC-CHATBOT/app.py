@@ -13,8 +13,6 @@ from model import usuario_model  # importa o módulo usuario_model para manipula
 from werkzeug.security import generate_password_hash, check_password_hash 
 
 
-
-
 # Adiciona a raiz do projeto ao path ANTES dos imports locais
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 

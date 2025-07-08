@@ -85,6 +85,11 @@
   {% endif %}
 {% endwith %}
 
+{% if erro %}
+        <script>
+            alert("{{ erro }}");
+        </script>
+    {% endif %}
 
         <!--<div class="entrar-cadastro">
             <div class="linha-botoes">
@@ -99,8 +104,6 @@
         </div>
     </div>
   !-->
-
-
 
 
     <div vw class="enabled">

@@ -92,9 +92,8 @@ def login():
                 return redirect(url_for('auth.inicio'))
 
         # Se chegou aqui, login falhou
-        flash("RM, e-mail ou senha incorretos.")
 
-    return render_template("PaginaLogin/PaginaLogin.html")
+    return render_template("PaginaLogin/PaginaLogin.html", erro = "Usuário ou senha incorretos!")
     
 
 
