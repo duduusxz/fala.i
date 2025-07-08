@@ -1,11 +1,116 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+
+    <!-- Script para aplicar tema INSTANTANEAMENTE -->
+    <script>
+        (function () {
+            // Aplica o tema ANTES da página renderizar
+            const savedTheme = localStorage.getItem('theme');
+            const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            const theme = savedTheme || systemTheme;
+
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Young+Serif&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&family=Young+Serif&display=swap"
+        rel="stylesheet">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/logo.png') }}" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='PaginaRanking/PaginaRanking.css') }}">
+    <script src="https://kit.fontawesome.com/345c519b8f.js" crossorigin="anonymous"></script>
+    <title>Agenda</title>
 </head>
+
 <body>
-    <h1>Hello world</h1>
+    <nav>
+        <div class="nav-left">
+            <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo do Chatbot" id="logo" class="logo"
+                width="60px">
+        </div>
+        <ul class="nav-menu">
+            <li><a href="../PaginaInicial/TelaInicial.html">Serviços</a></li>
+            <li><a href="PaginaCadastro.html">Quem somos</a></li>
+            <li><a href="PaginaInicial.html">Tutorial</a></li>
+            <li><a href="PaginaInicial.html">Contato</a></li>
+        </ul>
+        <div class="nav-right">
+            <!-- Botão de Toggle do Modo Escuro -->
+            <button id="toggle-dark-mode" class="toggle-mode" title="Alternar modo escuro">
+                <i class="fas fa-moon" id="theme-icon"></i>
+            </button>
+            <!-- Botão Minha Conta -->
+            <form action="/minha_conta">
+                <button class="account-btn" onclick="window.location.href='../PaginaConta/MinhaConta.html'">
+                    <i class="fas fa-user"></i> Minha conta
+                </button>
+            </form>
+        </div>
+    </nav>
+
+    <div class="corpo">
+        <div class="tudo">
+            <div class="esquerda">
+                <div class="segundo colocacao">
+                    <div class="prata"></div>
+                    <div class="altura-segundo"></div>
+                </div>
+
+                <div class="primeiro colocacao">
+                    <div class="ouro"></div>
+                    <div class="altura-primeiro"></div>
+                </div>
+
+                <div class="terceiro colocacao">
+                    <div class="bronze"></div>
+                    <div class="altura-terceiro"></div>
+                </div>
+            </div>
+
+            <div class="direita">
+                <div class="posicao"></div>
+                <div class="posicao"></div>
+                <div class="posicao"></div>
+                <div class="posicao"></div>
+                <div class="posicao"></div>
+                <div class="posicao"></div>
+                <div class="posicao"></div>
+                <div class="posicao"></div>
+                <div class="posicao"></div>
+                <div class="posicao"></div>
+                <div class="posicao"></div>
+                <div class="posicao"></div>
+                <div class="posicao"></div>
+                <div class="posicao"></div>
+                <div class="posicao"></div>
+                <div class="posicao"></div>
+                <div class="posicao"></div>
+                <div class="posicao"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- VLibras -->
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
+    <script src="{{ url_for('static', filename='PaginaRanking/PaginaRanking.js')}}"></script>
 </body>
+
 </html>
