@@ -265,6 +265,14 @@ def termos():
 
 #fim dos termos
 
+#inicio ranking
+
+@auth_bp.route('/ranking')  # rota definida para a página de ranking
+def ranking():
+    return render_template('PaginaRanking/PaginaRanking.html')
+
+#fim do ranking
+
 
 #inicio da minha conta
 
@@ -279,9 +287,6 @@ def conta():
 @auth_bp.route('/aviso')
 def aviso():
     return render_template('aviso.html')
-
-#rota para ranking
-
 
 
 # aqui se inicia uma outra funçao que vai fazer a verificação e order by no ranking
