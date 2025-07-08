@@ -1,97 +1,59 @@
 import google.generativeai as genai
 import os
+import sqlite3
 from dotenv import load_dotenv
+import pymysql
+# Aqui é realizado as importações para realizar
 
-import sys
-import os
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from conexao import conectar
+load_dotenv() ## aqui ele carrega a API 
+api_key = os.getenv("GEMINI_API_KEY") #Faz a requisição 
 
-# === Configuração inicial ===
-load_dotenv()
-api_key = os.getenv("GEMINI_API_KEY")
 
 if not api_key:
-    raise ValueError("API KEY da Gemini não encontrada. Verifique o arquivo .env.")
+    raise ValueError("API KEY da Gemini não encontrada. Verifique o arquivo .env.") #Caso o campo esteja em branco ou esteja com o caminho errado vai falar que não encontrou
 
 genai.configure(api_key=api_key)
-model = genai.GenerativeModel("models/gemini-1.5-flash")
+model = genai.GenerativeModel("models/gemini-1.5-flash") #Realiza a config da API e qual o modelo do Gemini utilizar
+
+
 chat = model.start_chat(history=[
-    {"role": "user", "parts": ["Você é um cara legal que vai conversar sobre oratória, apresentações..."]}
-])
+    {
+        "role": "user",
+        "parts": ["Você é um cara legal que vai conversar sobre oratória, apresentações e ajudar os alunos, você vai ter a personalidade descolado, jovial e inteligente ao mesmo tempo sendo melhor auxiliador de todos e não vai comentar sobre sexo, drogas, agressão, qualquer coisa ruim você não pode responder pois é um sistema educacional!"]
+    }
+]) # No código acima é executado antes de começar o prompt, a ordem inicial que a IA vai respeitar e seguir com o que você disse, filtrando o jeito dela
 
-temas_permitidos = ["oratória", "apresentação", "falar em público", "comunicação"]
-palavras_proibidas = ["violência", "política", "arma", "sexo", "drogas"]
 
-# === Funções auxiliares ===
-def pergunta_permitida(texto):
-    return True  # Personalize se quiser limitar os temas
+chat = model.start_chat(history=[
+    {
+        "role": "user",
+        "parts": ["Eu quero que se a pessoa fugir muito do assunto você falar que só pode falar coisas realcionadas a ajudar na oratória do aluno tudo bem?"]
+    }
+]) 
+
+temas_permitidos = ["oratória", "apresentação", "falar em público", "comunicação"] # Aqui foi colocado os filtros e temas principais que vão fazer parte do sistema
+palavras_proibidas = ["violência", "política", "arma", "sexo", "drogas"] # Algumas palavras que são proibidas e não podem ser abordadas
+
+def pergunta_permitida(texto): # A função inicia da pergunta permitida
+    return True
 
 def resposta_segura(texto):
-    return not any(p in texto.lower() for p in palavras_proibidas)
-
-def salvar_mensagem(autor, mensagem):
-    conexao = conectar()
-    with conexao.cursor() as cursor:
-        sql = "INSERT INTO historico (autor, mensagem) VALUES (%s, %s)"
-        cursor.execute(sql, (autor, mensagem))
-        conexao.commit()
-    conexao.close()
-
-def obter_historico():
-    conexao = conectar()
-    with conexao.cursor() as cursor:
-        cursor.execute("SELECT autor, mensagem, timestamp FROM historico ORDER BY id ASC")
-        mensagens = cursor.fetchall()
-    conexao.close()
-    return mensagens
-
-def limpar_historico():
-    conexao = conectar()
-    with conexao.cursor() as cursor:
-        cursor.execute("DELETE FROM historico")
-        conexao.commit()
-    conexao.close()
+    return not any(p in texto.lower() for p in palavras_proibidas) # aqui ele vai verificar se o que você escreveu vai possuir respostas proibidas, no caso se isso acontecer ele vai dar um false, caso todas as palavras sejam permitidas ele volta true
 
 def gerar_resposta(pergunta):
-    if not pergunta.strip():
+    if not pergunta or not pergunta.strip():
         return "❌ Por favor, digite uma pergunta antes de enviar."
-    
-    salvar_mensagem("Usuário", pergunta)
-
-    if pergunta_permitida(pergunta) and resposta_segura(pergunta):
+    if pergunta_permitida(pergunta) and resposta_segura(pergunta): # Aqui ele verifica se a pergunta foi permitida e faz parte dela ser segura a API vai receber a pergunta do usuario e voltar no returno resposta.text
         try:
             resposta = chat.send_message(pergunta)
-            salvar_mensagem("IA", resposta.text)
             return resposta.text
         except Exception as e:
-            erro = f"❌ Erro ao gerar resposta: {e}"
-            salvar_mensagem("IA", erro)
-            return erro
+            return f"❌ Erro ao gerar resposta: {e}" #Caso não funcione ou de algum erro daria esse prompt
     else:
-        aviso = "❌ Só posso responder perguntas sobre oratória e apresentações."
-        salvar_mensagem("IA", aviso)
-        return aviso
-
-def mostrar_historico():
-    print("\n📜 Histórico da conversa:")
-    for msg in obter_historico():
-        print(f"[{msg['timestamp']}] {msg['autor']}: {msg['mensagem']}")
-
-# === Execução ===
-while True:
-    pergunta = input("\nVocê: ")
-    if pergunta.lower() in ["sair", "exit", "quit"]:
-        print("🛑 Encerrando o chat.")
-        break
-    elif pergunta.lower() == "limpar":
-        limpar_historico()
-        print("🧹 Histórico apagado.")
-        continue
-
-    resposta = gerar_resposta(pergunta)
-    print(f"IA: {resposta}")
-    mostrar_historico()
+        return "❌ Desculpe, só posso responder perguntas relacionadas à oratória e apresentações." #Se fosse algo proibido ele daria essas frase por conta das restrições configuradas acima
+    
+    
+    
 
 
