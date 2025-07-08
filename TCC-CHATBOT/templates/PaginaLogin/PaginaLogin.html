@@ -109,5 +109,11 @@
 </section>
 
 <script src="{{ url_for('static', filename='PaginaLogin/PaginaLogin.js') }}"></script>
+
+{% if erro %}
+        <script>
+            alert("{{ erro }}");
+        </script>
+    {% endif %}
 </body>
 </html>
