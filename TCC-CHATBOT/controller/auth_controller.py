@@ -92,9 +92,8 @@ def login():
                 return redirect(url_for('auth.inicio'))
 
         # Se chegou aqui, login falhou
-        flash("RM, e-mail ou senha incorretos.")
 
-    return render_template("PaginaLogin/PaginaLogin.html")
+    return render_template("PaginaLogin/PaginaLogin.html", erro = "Usuário ou senha incorretos!")
     
 
 
@@ -239,7 +238,6 @@ def esqueci_senha():
 @auth_bp.route('/inicio') # rota definida para a página inicial 
 def inicio():
     
-
     if 'usuario_id' not in session:
         flash("Você precisa fazer login primeiro.")
         return redirect(url_for('auth.login'))
@@ -263,7 +261,7 @@ def agenda():
 
 @auth_bp.route('/termos')  # rota definida para a página de termos de uso
 def termos():
-    return render_template('PaginaTermos/PaginaTermos.html')
+    return render_template('PaginaRanking/PaginaRanking.html')
 
 #fim dos termos
 
