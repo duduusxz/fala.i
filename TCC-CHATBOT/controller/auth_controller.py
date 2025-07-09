@@ -5,7 +5,7 @@ from flask import Blueprint, render_template, request, redirect, url_for, flash,
 from model.usuario_model import cadastrar, buscar_usuario_por_rm_e_email, listar_todos_usuarios
 from model.usuario_model import buscar_usuario_por_email  # ou outras funções
 from model.usuario_model import obter_ranking  
-
+from model.usuario_model import buscar_podio
 from model import usuario_model  # Usado para chamar criar_tabela(), se necessário
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask import jsonify
@@ -271,7 +271,8 @@ def termos():
 @auth_bp.route('/ranking')  # rota definida para a página de ranking
 def ranking():
     ranking = list(enumerate(obter_ranking()))
-    return render_template("PaginaRanking/PaginaRanking.html", ranking=ranking)
+    top3 = buscar_podio() # aqui ele vai buscar a funcao de listar o podio
+    return render_template("PaginaRanking/PaginaRanking.html", ranking=ranking, top3=top3) #exibe o ranking
 
 #fim do ranking
 
