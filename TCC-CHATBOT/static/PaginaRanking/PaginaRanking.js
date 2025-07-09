@@ -52,3 +52,23 @@ document.addEventListener("DOMContentLoaded", () => {
   // Inicializa animações de fade-in
   observeElements()
 })
+
+// Animação de fade-in
+function observeElements() {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("fade-animate")
+        }
+      })
+    },
+    {
+      threshold: 0.1,
+    },
+  )
+  const fadeElements = document.querySelectorAll(".fade-in")
+  fadeElements.forEach((element) => {
+    observer.observe(element)
+  })
+}
