@@ -59,3 +59,15 @@ def listar_todos_usuarios():
             return cursor.fetchall()
     finally:
         conn.close()
+
+def obter_ranking():
+    conn = get_db_connection()
+    try:
+         with conn.cursor() as cursor:
+            cursor.execute('''
+               SELECT nome, pontos FROM tb_ranking ORDER BY pontos DESC;
+
+            ''')
+            return cursor.fetchall()
+    finally:
+            conn.close()   
