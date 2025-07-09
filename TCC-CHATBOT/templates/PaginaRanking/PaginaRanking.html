@@ -64,11 +64,11 @@
                 {% if top3|length > 1 %}
                 <div class="segundo colocacao">
                     <div class="prata">
-                        <img src="{{ url_for('static', filename='img/prata.png') }}" alt="Troféu de prata" width="100px">
+                        <img src="{{ url_for('static', filename='img/prata.png') }}" alt="Troféu de prata" width="150px">
                     </div>
                     <div class="altura-segundo altura">
-                        <h2>🥈 {{ top3[1]['nome'] }}</h2>
-                        <p>{{ top3[1]['pontos'] }} pontos</p>
+                        <strong>{{ top3[1]['nome'] }}</strong>
+                        <strong>{{ top3[1]['pontos'] }} pontos</strong>
                     </div>
                 </div>  
             {% endif %}
@@ -76,11 +76,11 @@
             {% if top3|length > 0 %}
                 <div class="primeiro colocacao">
                     <div class="ouro">
-                        <img src="{{ url_for('static', filename='img/ouro.png') }}" alt="Troféu de ouro" width="100px">
+                        <img src="{{ url_for('static', filename='img/ouro.png') }}" alt="Troféu de ouro" width="180px">
                     </div>
                     <div class="altura-primeiro altura">
-                        <h2>🥇 {{ top3[0]['nome'] }}</h2>
-                        <p>{{ top3[0]['pontos'] }} pontos</p>
+                        <strong>{{ top3[0]['nome'] }}</strong>
+                        <strong>{{ top3[0]['pontos'] }} pontos</strong>
                     </div>
                 </div>  
             {% endif %}
@@ -88,11 +88,11 @@
             {% if top3|length > 2 %}
                 <div class="terceiro colocacao">
                     <div class="bronze">
-                        <img src="{{ url_for('static', filename='img/bronze.png') }}" alt="Troféu de bronze" width="100px">
+                        <img src="{{ url_for('static', filename='img/bronze.png') }}" alt="Troféu de bronze" width="140px">
                     </div>
                     <div class="altura-terceiro altura">
-                        <h2>🥉 {{ top3[2]['nome'] }}</h2> 
-                        <p>{{ top3[2]['pontos'] }} pontos</p>
+                        <strong>{{ top3[2]['nome'] }}</strong> 
+                        <strong>{{ top3[2]['pontos'] }} pontos</strong>
                     </div>
                 </div>
             {% endif %}
