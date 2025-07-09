@@ -5,7 +5,7 @@ from werkzeug.security import generate_password_hash
 db_config = {
     "host": "localhost",
     "user": "root",
-    "password": "",
+    "password": "12345678",
     "database": "tcc_sql",
      "cursorclass": pymysql.cursors.DictCursor # Isso é CRUCIAL para retornar dicionários!
 }
@@ -85,3 +85,17 @@ def buscar_podio():
         return []  # <- também retorna lista vazia se der erro
     finally:
         conn.close()
+
+def criar_titulo_tarefa():
+    conn = get_db_connection()
+    try:
+        with conn.cursor() as cursor:
+            cursor.execute('''
+                INSERT INTO usuarios (titulo) VALUES (%s)
+            ''', (titulo))
+            conn.commit()            
+    except Exception as e:
+        print("Erro ao criar tarefa")
+    finally:
+        conn.close()
+    

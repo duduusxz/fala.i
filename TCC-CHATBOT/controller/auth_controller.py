@@ -94,15 +94,13 @@ def login():
 
         # Se chegou aqui, login falhou
 
-    return render_template("PaginaLogin/PaginaLogin.html", erro = "Usuário ou senha incorretos!")
+    return render_template("PaginaLogin/PaginaLogin.html")
     
-
-
 # Fim da pagina de login rota e configuração
 
 #inicio para função de logout
 
-auth_bp.route('/logout')
+@auth_bp.route('/logout')
 def logout():
     session.clear()  # Limpa a sessão do usuário
     flash("Você foi desconectado com sucesso.")
