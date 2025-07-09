@@ -883,7 +883,6 @@ iframe {
 footer {
   padding: 90px;
   padding-bottom: 30px;
-  height: 100%;
   padding-top: 45px;
   background-color: var(--fundo-container);
   box-shadow: 0 0 10px var(--border-color);

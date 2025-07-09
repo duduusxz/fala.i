@@ -64,10 +64,6 @@
   padding: 0;
 }
 
-html {
-  overflow-y: hidden;
-}
-
 body {
   background-color: var(--fundo-branco);
   font-family: "Young Serif", sans-serif;
@@ -193,7 +189,7 @@ li:hover {
 /* Container principal */
 .container {
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -494,4 +490,109 @@ li:hover {
 .container {
     margin-left: 72px;
     transition: margin-left 0.3s ease;
+}
+
+footer {
+  padding: 90px;
+  padding-bottom: 30px;
+  padding-top: 45px;
+  background-color: var(--fundo-container);
+  box-shadow: 0 0 10px var(--border-color);
+  margin: 0;
+}
+
+#logo-footer {
+  width: 80px;
+}
+
+.logo-footer {
+  display: flex;
+  align-items: center;
+  padding-bottom: 10px;
+  gap: 30px;
+  font-family: "Righteous";
+  font-size: 40px;
+  color: var(--cor-principal);
+}
+
+.footer-inicio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+hr {
+  width: 300%;
+  color: var(--cinza-medio);
+  border-color: var(--border-color);
+}
+
+.informacoes-footer {
+  text-align: center;
+  font-family: "Titillium Web";
+  color: #626262;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.icons-footer {
+  text-decoration: none;
+  gap: 15px;
+  display: flex;
+}
+
+.caminhos-footer,
+.copright {
+  display: flex;
+  color: #626262;
+  gap: 10px;
+  font-family: "Titillium Web";
+}
+
+.caminhos-footer a {
+  text-decoration: none;
+  color: #626262;
+  font-family: "Titillium Web";
+}
+
+.caminhos-footer a:hover {
+  text-decoration: underline;
+}
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.fade-in.fade-animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Delays para efeito staggered */
+.fade-delay-1 {
+  transition-delay: 0.1s;
+}
+
+.fade-delay-2 {
+  transition-delay: 0.2s;
+}
+
+.fade-delay-3 {
+  transition-delay: 0.3s;
+}
+
+.fade-delay-4 {
+  transition-delay: 0.4s;
+}
+
+.fade-delay-5 {
+  transition-delay: 0.5s;
+}
+
+.fade-delay-6 {
+  transition-delay: 0.6s;
 }
