@@ -6,7 +6,8 @@ db_config = {
     "host": "localhost",
     "user": "root",
     "password": "",
-    "database": "tcc_sql"
+    "database": "tcc_sql",
+     "cursorclass": pymysql.cursors.DictCursor # Isso é CRUCIAL para retornar dicionários!
 }
 
 def get_db_connection():
@@ -71,3 +72,16 @@ def obter_ranking():
             return cursor.fetchall()
     finally:
             conn.close()   
+
+def buscar_podio():
+    conn = get_db_connection()
+    try:
+        with conn.cursor() as cursor:
+            cursor.execute("SELECT * FROM tb_ranking ORDER BY pontos DESC LIMIT 3")
+            resultado = cursor.fetchall()
+            return resultado if resultado else []  # <- aqui é a correção
+    except Exception as e:
+        print("Erro ao buscar pódio:", e)
+        return []  # <- também retorna lista vazia se der erro
+    finally:
+        conn.close()

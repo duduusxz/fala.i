@@ -61,35 +61,42 @@
     <div class="corpo">
         <div class="tudo">
             <div class="esquerda">
+                {% if top3|length > 1 %}
                 <div class="segundo colocacao">
                     <div class="prata">
                         <img src="{{ url_for('static', filename='img/prata.png') }}" alt="Troféu de prata" width="100px">
                     </div>
                     <div class="altura-segundo altura">
-                        <p>Nome usuário</p>
-                        <p>380 pontos</p>
+                        <h2>🥈 {{ top3[1]['nome'] }}</h2>
+                        <p>{{ top3[1]['pontos'] }} pontos</p>
                     </div>
-                </div>
+                </div>  
+            {% endif %}
 
+            {% if top3|length > 0 %}
                 <div class="primeiro colocacao">
                     <div class="ouro">
                         <img src="{{ url_for('static', filename='img/ouro.png') }}" alt="Troféu de ouro" width="100px">
                     </div>
                     <div class="altura-primeiro altura">
-                        <p>Nome usuário</p>
-                        <p>380 pontos</p>
+                        <h2>🥇 {{ top3[0]['nome'] }}</h2>
+                        <p>{{ top3[0]['pontos'] }} pontos</p>
                     </div>
-                </div>
+                </div>  
+            {% endif %}
 
+            {% if top3|length > 2 %}
                 <div class="terceiro colocacao">
                     <div class="bronze">
                         <img src="{{ url_for('static', filename='img/bronze.png') }}" alt="Troféu de bronze" width="100px">
                     </div>
                     <div class="altura-terceiro altura">
-                        <p>Nome usuário</p>
-                        <p>380 pontos</p>
+                        <h2>🥉 {{ top3[2]['nome'] }}</h2> 
+                        <p>{{ top3[2]['pontos'] }} pontos</p>
                     </div>
                 </div>
+            {% endif %}
+
             </div>
 
             <div class="esquerda2">
