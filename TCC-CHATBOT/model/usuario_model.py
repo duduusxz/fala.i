@@ -82,20 +82,19 @@ def buscar_podio():
             return resultado if resultado else []  # <- aqui é a correção
     except Exception as e:
         print("Erro ao buscar pódio:", e)
-        return []  # <- também retorna lista vazia se der erro
+        return []  
     finally:
         conn.close()
 
-def criar_titulo_tarefa():
+def criar_tarefa(titulo, data_tarefa, horario_tarefa, descricao=None):
     conn = get_db_connection()
     try:
         with conn.cursor() as cursor:
             cursor.execute('''
-                INSERT INTO usuarios (titulo) VALUES (%s)
-            ''', (titulo))
-            conn.commit()            
+                INSERT INTO tb_tarefas (titulo, descricao, data_tarefa, horario_tarefa VALUES (%s, %s, %s, %s)''', (titulo, descricao, data_tarefa, horario_tarefa))
+            conn.commit()
+            print("Tarefa criada com sucesso!")
     except Exception as e:
-        print("Erro ao criar tarefa")
+        print("Erro ao criar tarefa:", e)
     finally:
         conn.close()
-    
