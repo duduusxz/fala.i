@@ -5,7 +5,7 @@ from werkzeug.security import generate_password_hash
 db_config = {
     "host": "localhost",
     "user": "root",
-    "password": "12345678",
+    "password": "",
     "database": "tcc_sql",
      "cursorclass": pymysql.cursors.DictCursor # Isso é CRUCIAL para retornar dicionários!
 }
@@ -64,27 +64,27 @@ def listar_todos_usuarios():
 def obter_ranking():
     conn = get_db_connection()
     try:
-         with conn.cursor() as cursor:
-            cursor.execute('''
-               SELECT nome, pontos FROM tb_ranking ORDER BY pontos DESC;
+            with conn.cursor() as cursor:
+                cursor.execute('''
+                SELECT nome, pontos FROM tb_ranking ORDER BY pontos DESC;
 
-            ''')
-            return cursor.fetchall()
+                ''')
+                return cursor.fetchall()
     finally:
-            conn.close()   
+                conn.close()   
 
 def buscar_podio():
-    conn = get_db_connection()
-    try:
-        with conn.cursor() as cursor:
-            cursor.execute("SELECT * FROM tb_ranking ORDER BY pontos DESC LIMIT 3")
-            resultado = cursor.fetchall()
-            return resultado if resultado else []  # <- aqui é a correção
-    except Exception as e:
-        print("Erro ao buscar pódio:", e)
-        return []  
-    finally:
-        conn.close()
+        conn = get_db_connection()
+        try:
+            with conn.cursor() as cursor:
+                cursor.execute("SELECT * FROM tb_ranking ORDER BY pontos DESC LIMIT 3")
+                resultado = cursor.fetchall()
+                return resultado if resultado else []  # <- aqui é a correção
+        except Exception as e:
+            print("Erro ao buscar pódio:", e)
+            return []  
+        finally:
+            conn.close()
 
 def criar_tarefa(titulo, data_tarefa, horario_tarefa, descricao=None):
     conn = get_db_connection()

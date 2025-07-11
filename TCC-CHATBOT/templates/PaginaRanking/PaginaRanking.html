@@ -107,57 +107,24 @@
                         apresentações mais difíceis. Argumente, convença, conquiste e prove que sua voz merece ser
                         ouvida!</p>
                 </div>
+
+                
                 <div class="direita">
                     <p id="letra">Colocação</p>
+                    {% for usuario in restantes %}
                     <div class="posicao">
                         <div class="nome-posicao">
-                            <p id="letra">4°</p>
+                            <p id="letra">{{ loop.index + 3 }}°</p>
                             <p id="letra">|</p>
-                            <strong></strong>
+                            <strong>{{ usuario.nome }}</strong>
                         </div>
                         <div class="pontos">
-                            <strong></strong>
+                            <strong>{{ usuario.pontos }} pontos</strong>
                         </div>
                     </div>
-                    <div class="posicao">
-                        <div class="nome-posicao">
-                            <p id="letra">5°</p>
-                            <p id="letra">|</p>
-                            <strong></strong>
-                        </div>
-                        <div class="pontos">
-                            <strong></strong>
-                        </div>
-                    </div>
-                    <div class="posicao">
-                        <div class="nome-posicao">
-                            <p id="letra">6°</p>
-                            <p id="letra">|</p>
-                            <strong></strong>
-                        </div>
-                        <div class="pontos">
-                            <strong></strong>
-                        </div>
-                    </div>
-                    <div class="posicao">
-                        <div class="nome-posicao">
-                            <p id="letra">7°</p>
-                            <p id="letra">|</p>
-                            <strong></strong>
-                        </div>
-                        <div class="pontos">
-                            <strong></strong>
-                        </div>
-                    </div>
-                    <div class="posicao">
-                        <div class="nome-posicao">
-                            <p id="letra">8°</p>
-                            <p id="letra">|</p>
-                            <strong></strong>
-                        </div>
-                        <div class="pontos">
-                            <strong></strong>
-                        </div>
+                    {% endfor %}
+                   
+
                     </div>
                 </div>
             </div>
