@@ -91,7 +91,9 @@ def criar_tarefa(titulo, data_tarefa, horario_tarefa, descricao=None):
     try:
         with conn.cursor() as cursor:
             cursor.execute('''
-                INSERT INTO tb_tarefas (titulo, descricao, data_tarefa, horario_tarefa VALUES (%s, %s, %s, %s)''', (titulo, descricao, data_tarefa, horario_tarefa))
+                INSERT INTO tb_tarefas (titulo, descricao, data_tarefa, horario_tarefa)
+                VALUES (%s, %s, %s, %s)
+            ''', (titulo, descricao, data_tarefa, horario_tarefa))
             conn.commit()
             print("Tarefa criada com sucesso!")
     except Exception as e:
