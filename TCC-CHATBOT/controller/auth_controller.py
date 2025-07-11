@@ -6,6 +6,7 @@ from model.usuario_model import cadastrar, buscar_usuario_por_rm_e_email, listar
 from model.usuario_model import buscar_usuario_por_email  # ou outras funções
 from model.usuario_model import obter_ranking  
 from model.usuario_model import buscar_podio
+
 from model import usuario_model  # Usado para chamar criar_tabela(), se necessário
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask import jsonify
@@ -266,11 +267,17 @@ def termos():
 
 #inicio ranking
 
-@auth_bp.route('/ranking')  # rota definida para a página de ranking
+@auth_bp.route('/ranking')
 def ranking():
-    ranking = list(enumerate(obter_ranking()))
-    top3 = buscar_podio() # aqui ele vai buscar a funcao de listar o podio
-    return render_template("PaginaRanking/PaginaRanking.html", ranking=ranking, top3=top3) #exibe o ranking
+    ranking = obter_ranking()  # lista simples
+    top3 = buscar_podio()
+    restantes = ranking[3:]
+    return render_template("PaginaRanking/PaginaRanking.html", ranking=ranking, top3=top3, restantes=restantes)
+
+
+
+
+
 
 #fim do ranking
 

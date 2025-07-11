@@ -5,7 +5,7 @@ from werkzeug.security import generate_password_hash
 db_config = {
     "host": "localhost",
     "user": "root",
-    "password": "12345678",
+    "password": "",
     "database": "tcc_sql",
      "cursorclass": pymysql.cursors.DictCursor # Isso é CRUCIAL para retornar dicionários!
 }
@@ -64,38 +64,37 @@ def listar_todos_usuarios():
 def obter_ranking():
     conn = get_db_connection()
     try:
-         with conn.cursor() as cursor:
-            cursor.execute('''
-               SELECT nome, pontos FROM tb_ranking ORDER BY pontos DESC;
+            with conn.cursor() as cursor:
+                cursor.execute('''
+                SELECT nome, pontos FROM tb_ranking ORDER BY pontos DESC;
 
-            ''')
-            return cursor.fetchall()
+                ''')
+                return cursor.fetchall()
     finally:
-            conn.close()   
+                conn.close()   
 
 def buscar_podio():
-    conn = get_db_connection()
-    try:
-        with conn.cursor() as cursor:
-            cursor.execute("SELECT * FROM tb_ranking ORDER BY pontos DESC LIMIT 3")
-            resultado = cursor.fetchall()
-            return resultado if resultado else []  # <- aqui é a correção
-    except Exception as e:
-        print("Erro ao buscar pódio:", e)
-        return []  # <- também retorna lista vazia se der erro
-    finally:
-        conn.close()
+        conn = get_db_connection()
+        try:
+            with conn.cursor() as cursor:
+                cursor.execute("SELECT * FROM tb_ranking ORDER BY pontos DESC LIMIT 3")
+                resultado = cursor.fetchall()
+                return resultado if resultado else []  # <- aqui é a correção
+        except Exception as e:
+            print("Erro ao buscar pódio:", e)
+            return []  
+        finally:
+            conn.close()
 
-def criar_titulo_tarefa():
+def criar_tarefa(titulo, data_tarefa, horario_tarefa, descricao=None):
     conn = get_db_connection()
     try:
         with conn.cursor() as cursor:
             cursor.execute('''
-                INSERT INTO usuarios (titulo) VALUES (%s)
-            ''', (titulo))
-            conn.commit()            
+                INSERT INTO tb_tarefas (titulo, descricao, data_tarefa, horario_tarefa VALUES (%s, %s, %s, %s)''', (titulo, descricao, data_tarefa, horario_tarefa))
+            conn.commit()
+            print("Tarefa criada com sucesso!")
     except Exception as e:
-        print("Erro ao criar tarefa")
+        print("Erro ao criar tarefa:", e)
     finally:
         conn.close()
-    
