@@ -301,7 +301,7 @@ def conta():
 
 # fim minha conta
 
-# rota aviso
+# rota aviso abaixo
 
 @auth_bp.route('/aviso')
 def aviso():
