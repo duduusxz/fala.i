@@ -28,17 +28,7 @@ document.getElementById("decrease-font").addEventListener("click", function () {
     
 }); 
 
-        const entrar = document.getElementById('entrar');
-        const rm = document.getElementById('rm');
-        const senha = document.getElementById('senha');
-
-        entrar.addEventListener('click', () => {
-            if (rm.value === '123' && senha.value === '123') {
-                window.location.href = '../PaginaInicial/TelaInicial.html';
-            } else {
-                alert('Usuário ou senha inválidos');
-            };
-        });
+        
 
 let posicaoAtual = 0;
 

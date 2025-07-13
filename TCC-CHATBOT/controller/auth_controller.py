@@ -11,6 +11,7 @@ from model import usuario_model  # Usado para chamar criar_tabela(), se necessá
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask import jsonify
 import smtplib
+from functools import wraps
 
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -99,13 +100,23 @@ def login():
     
 # Fim da pagina de login rota e configuração
 
+#configuração de um wrap para guardar dentro dele a funcao de deslogar
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if 'usuario_id' not in session:
+            return redirect(url_for('auth_bp.login'))
+        return f(*args, **kwargs)
+    return decorated_function
+
+#fim da config wrap 
+
+
 #inicio para função de logout
 
 @auth_bp.route('/logout')
+@login_required
 def logout():
-    session.clear()  # Limpa a sessão do usuário
-    flash("Você foi desconectado com sucesso.")
-    
     return redirect(url_for('auth.login'))  # Redireciona para a página de login após o logout
 
 # Ffim da pagina de inicio e configuração
