@@ -5,7 +5,7 @@ from werkzeug.security import generate_password_hash
 db_config = {
     "host": "localhost",
     "user": "root",
-    "password": "",
+    "password": "12345678",
     "database": "tcc_sql",
      "cursorclass": pymysql.cursors.DictCursor # Isso é CRUCIAL para retornar dicionários!
 }
