@@ -8,7 +8,7 @@ from email.mime.multipart import MIMEMultipart #padrão de envio de mensagem, ma
 from email.mime.text import MIMEText #para enviar e-mails com texto
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 
-from model import usuario_model  # importa o módulo usuario_model para manipular o banco de dados de ususuarioss
+from model import usuario_model  # importa o módulo usuario_model para manipular o banco de dados de ususuarios
 
 from werkzeug.security import generate_password_hash, check_password_hash 
 
