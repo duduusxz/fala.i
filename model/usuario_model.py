@@ -47,7 +47,8 @@ def cadastrar(rm, email, senha_hash): #comentario ingl~es:  # the function serve
     finally:
         conn.close() #close connection
 
-def buscar_usuario_por_rm_e_email(rm, email): #create function to search rm and email
+#abaixo comentarios em ingles afim de treinar e aprender
+def buscar_usuario_por_rm_e_email(rm, email): #comentario em ingles para treino #create function to search rm and email
     conn = get_db_connection()
     try:
         with conn.cursor() as cursor:
