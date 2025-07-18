@@ -21,16 +21,16 @@ def get_db_connection():
     port = result.port
 
     try:
-        conn = psycopg2.connect(
+        conn = psycopg2.connect(  #its import for generate connection with Postgrees
             host=hostname,
             database=database,
             user=username,
             password=password,
             port=port,
-            cursor_factory=psycopg2.extras.DictCursor #
+            cursor_factory=psycopg2.extras.DictCursor # generate book with information
         )
-        return conn
-    except Exception as e:
+        return conn # return connection
+    except Exception as e: #exception case nothing have database or the get failed
         print(f"Erro ao conectar ao banco de dados: {e}")
         raise 
 

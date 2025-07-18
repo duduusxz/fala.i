@@ -1,6 +1,6 @@
 :root {
   /* Modo Claro */
-
+  --fundo-branco: #ffffff;
   --cor-principal: #686bff;
   --hover: #5557ff;
   --cor-terciaria: #7779fd;
