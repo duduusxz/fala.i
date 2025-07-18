@@ -310,8 +310,7 @@ def aviso():
 
 # aqui se inicia uma outra funçao que vai fazer a verificação e order by no ranking
 
-def verificar():
-    return None
+
 
 
 
