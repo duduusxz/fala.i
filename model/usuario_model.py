@@ -9,6 +9,7 @@ def get_database_url():
     
     return os.environ.get('DATABASE_URL', 'postgresql://tcc_sql_user:WPhNIdziJ4K6pvYu3dl3XAtAZQmV8rKc@dpg-d1snqure5dus73cdlutg-a.oregon.render.com/tcc_sql_db')
 
+def get_db_connection():
     db_url = get_database_url()
 
     # Parseia a URL para extrair os componentes (host, user, password, dbname, port)
