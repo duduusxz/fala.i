@@ -2,7 +2,7 @@ import os # puxar tudo das outras importações
 import psycopg2
 import psycopg2.extras # Para usar DictCursor com psycopg2
 from urllib.parse import urlparse # Para parsear a URL do banco de dados
-from werkzeug.security import generate_password_hash # Manter se ainda for usado aqui
+from werkzeug.security import generate_password_hash 
 
 # settings to generate connections with database
 def get_database_url():
@@ -27,16 +27,16 @@ def get_db_connection():
             user=username,
             password=password,
             port=port,
-            cursor_factory=psycopg2.extras.DictCursor # Isso faz com que os cursores retornem dicionários
+            cursor_factory=psycopg2.extras.DictCursor #
         )
         return conn
     except Exception as e:
         print(f"Erro ao conectar ao banco de dados: {e}")
-        raise # Levanta a exceção para que o app saiba que falhou a conexão
+        raise 
 
 
 
-def cadastrar(rm, email, senha_hash): # the function serves to register user in BD, if its possible with password_hash, to upgrade security.
+def cadastrar(rm, email, senha_hash): #comentario ingl~es:  # the function serves to register user in BD, if its possible with password_hash, to upgrade security.
     conn = get_db_connection()
     try:
         with conn.cursor() as cursor:
