@@ -1,4 +1,4 @@
-import os
+import os # puxar tudo das outras importações
 import psycopg2
 import psycopg2.extras # Para usar DictCursor com psycopg2
 from urllib.parse import urlparse # Para parsear a URL do banco de dados
