@@ -179,7 +179,7 @@ def esqueci_senha():
         banner_url = "https://i.postimg.cc/QNmfFJKx/banner.png"
 
 
-        link   = f"https://chatbot-tcc.onrender.com/nova_senha={email}" # cria o link para a página de nova senha, passando o email do usuário
+        link = f"https://chatbot-tcc.onrender.com/nova_senha= {email}" # cria o link para a página de nova senha, passando o email do usuário
         linkSuporte = f"http://localhost:5000/inicio?email={email}"
 
         corpo_html = f"""
