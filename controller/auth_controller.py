@@ -249,12 +249,12 @@ def esqueci_senha():
 @auth_bp.route('/inicio') # rota definida para a página inicial 
 def inicio():
     
-    if 'usuario_id' not in session:
-        flash("Você precisa fazer login primeiro.")
-        return redirect(url_for('auth.login'))
+    #if 'usuario_id' not in session:
+        #flash("Você precisa fazer login primeiro.")
+        #return redirect(url_for('auth.login'))#
     
-    return render_template('PaginaInicial/PaginaInicial.html', usuario_email=session ['usuario_email'], usuario_rm=session['usuario_rm'])  # renderiza a página inicial, que é a PaginaInicial.html, passando o email e o RM do usuário logado na sessão
-
+        #return render_template('PaginaInicial/PaginaInicial.html', usuario_email=session ['usuario_email'], usuario_rm=session['usuario_rm'])  # renderiza a página inicial, que é a PaginaInicial.html, passando o email e o RM do usuário logado na sessão
+        return render_template('PaginaInicial/PaginaInicial.html')
 #fim da pagina de inicio e configuração
 
 
