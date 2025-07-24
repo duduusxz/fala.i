@@ -1,126 +1,140 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <!-- Script para aplicar tema INSTANTANEAMENTE -->
     <script>
-        (function() {
+        (function () {
             // Aplica o tema ANTES da página renderizar
             const savedTheme = localStorage.getItem('theme');
             const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
             const theme = savedTheme || systemTheme;
-            
+
             document.documentElement.setAttribute('data-theme', theme);
         })();
     </script>
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Young+Serif&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&family=Young+Serif&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&family=Young+Serif&display=swap"
+        rel="stylesheet">
     <link rel="shortcut icon" href="{{ url_for('static', filename='img/logo.png') }}" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='PaginaEsqueciSenha/PaginaEsqueciSenha.css') }}">
-    
+
     <title>Esqueci a Senha - Fala.i</title>
     <script src="https://kit.fontawesome.com/345c519b8f.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
-<section>
-    <div class="wave">
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
-    
-    <!-- Botão de Toggle do Modo Escuro -->
-    <button id="toggle-dark-mode" class="toggle-mode" title="Alternar modo escuro">
-        <i class="fas fa-moon" id="theme-icon"></i>
-    </button>
-    
-    <div class="controls">
-        <button id="increase-font">A+</button>
-        <button id="decrease-font">A-</button>
-    </div>
-    
-    <div class="titulo-logo">
-        <div class="container-bem-vindo">
-            <div class="titulo-bem-vindo">
-                <h1>Bem Vindo ao FALA.I</h1>
-            </div>
-            <div class="texto-apresentacao-bem-vindo">
-                <p id="texto-apresentacao-bem-vindo"></p>
-            </div>
-            <div class="logo-bem-vindo">
-                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo do Chatbot" id="logo" class="logo">
-            </div>
+    <section>
+        <div class="wave">
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
-    </div>
-    
-    <div class="tudo">
-        <div class="senha-esquecida" id="senha-esquecida">
-            <div class="esquecida">
-                <h3>Esqueceu a Senha?</h3>
-                <form method="POST">
-                    <label>Email:</label>
-                    <input type="email" name="email" required minlength="10" maxlength="40" placeholder="Digite seu email">
-                    
-                    <label>RM:</label>
-                    <input type="text" name="rm" required minlength="5" maxlength="5" placeholder="Digite seu RM">
-                    
-                    <div class="entrar-cadastro">
-                        <div class="linha-botoes">
-                            <button type="submit" id="entrar">Enviar</button>
-                            <p>Ao digitar seu e-mail e seu RM, um link será enviado em seu endereço de e-mail. Clique no link, redefina sua senha, após isso volte para a página de Login e entre com sua nova senha.</p>
+
+        <!-- Botão de Toggle do Modo Escuro -->
+        <button id="toggle-dark-mode" class="toggle-mode" title="Alternar modo escuro">
+            <i class="fas fa-moon" id="theme-icon"></i>
+        </button>
+
+        <div class="controls">
+            <button id="increase-font">A+</button>
+            <button id="decrease-font">A-</button>
+        </div>
+
+        <div class="tudo">
+            <div class="esquerda">
+                <div class="titulo-logo">
+                    <div class="container-bem-vindo">
+                        <div class="titulo-bem-vindo">
+                            <h1>Bem Vindo ao FALA.I</h1>
                         </div>
-                        <div class="caminhos">
-                            <a id="login-caminho" href="/">Login</a>
-                            <p id="ou">ou</p>
-                            <a href="/cadastro" id="login-caminho">Cadastro</a>
+                        <div class="texto-apresentacao-bem-vindo">
+                            <p id="texto-apresentacao-bem-vindo"></p>
+                        </div>
+                        <div class="logo-bem-vindo">
+                            <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo do Chatbot" id="logo"
+                                class="logo">
                         </div>
                     </div>
-                </form>
+                </div>
+            </div>
+
+            <div class="direita">
+                <div class="senha-esquecida" id="senha-esquecida">
+                    <div class="esquecida">
+                        <h3>Esqueceu a Senha?</h3>
+                        <form method="POST">
+                            <label>Email:</label>
+                            <input type="email" name="email" required minlength="10" maxlength="40"
+                                placeholder="Digite seu email">
+
+                            <label>RM:</label>
+                            <input type="text" name="rm" required minlength="5" maxlength="5"
+                                placeholder="Digite seu RM">
+
+                            <div class="entrar-cadastro">
+                                <div class="linha-botoes">
+                                    <button type="submit" id="entrar">Enviar</button>
+                                    <p id="texto-senha">Ao digitar seu e-mail e seu RM, um link será enviado em seu endereço de e-mail.
+                                        Clique no link, redefina sua senha, após isso volte para a página de Login e
+                                        entre com sua nova senha.</p>
+                                </div>
+                                <div class="caminhos">
+                                    <a id="login-caminho" href="/">Login</a>
+                                    <p id="ou">ou</p>
+                                    <a href="/  cadastro" id="login-caminho">Cadastro</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    
-    <!-- Mensagens Flash -->
-    {% with messages = get_flashed_messages() %}
+
+        <!-- Mensagens Flash -->
+        {% with messages = get_flashed_messages() %}
         {% if messages %}
-            <div class="flash-messages">
-                {% for msg in messages %}
-                    <div class="flash-message">{{ msg }}</div>
-                {% endfor %}
-            </div>
+        <div class="flash-messages">
+            {% for msg in messages %}
+            <div class="flash-message">{{ msg }}</div>
+            {% endfor %}
+        </div>
         {% endif %}
-    {% endwith %}
-    
-    {% if erro %}
+        {% endwith %}
+
+        {% if erro %}
         <script>
             alert("{{ erro }}");
         </script>
-    {% endif %}
-    
-    <!-- VLibras -->
-    <div vw class="enabled">
-        <div vw-access-button class="active"></div>
-        <div vw-plugin-wrapper>
-            <div class="vw-plugin-top-wrapper"></div>
-        </div>
-    </div>
-    
-    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-    <script>
-        new window.VLibras.Widget('https://vlibras.gov.br/app');
-    </script>
-    
-    <footer>
-        <a href="/termos" id="ver-termos">Ver termos e condições</a>
-    </footer>
-</section>
+        {% endif %}
 
-<script src="{{ url_for('static', filename='PaginaEsqueciSenha/PaginaEsqueciSenha.js') }}"></script>
+        <!-- VLibras -->
+        <div vw class="enabled">
+            <div vw-access-button class="active"></div>
+            <div vw-plugin-wrapper>
+                <div class="vw-plugin-top-wrapper"></div>
+            </div>
+        </div>
+
+        <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+        <script>
+            new window.VLibras.Widget('https://vlibras.gov.br/app');
+        </script>
+
+        <footer>
+            <a href="/termos" id="ver-termos">Ver termos e condições</a>
+        </footer>
+    </section>
+
+    <script src="{{ url_for('static', filename='PaginaEsqueciSenha/PaginaEsqueciSenha.js') }}"></script>
 </body>
+
 </html>

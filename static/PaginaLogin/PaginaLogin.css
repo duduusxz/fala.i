@@ -54,7 +54,7 @@ body {
 
 #logo {
   width: 200px;
-  margin-top: 70px;
+  margin-top: 10%;
 }
 
 .logo {
@@ -107,24 +107,37 @@ input::placeholder {
   color: var(--wave-1);
 }
 
-.tudo {
+.tudo{
+  height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 6%;
+  gap: 50px;
+}
+
+.esquerda{
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 20px;
+}
+
+.direita {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .container-login {
-  position: absolute;
-  top: 47%;
-  right: 10%;
-  transform: translateY(-50%);
+  position: relative;
   background-color: var(--fundo-container);
   height: auto;
   padding: 40px;
   padding-bottom: 80px;
-  width: 40%;
+  width: 90%;
   align-items: center;
   justify-content: center;
   display: flex;
@@ -298,9 +311,7 @@ button{
 }
 
 .container-bem-vindo {
-  position: absolute;
-  left: 135px;
-  top: 150px;
+  position: relative;
 }
 
 footer {
@@ -385,78 +396,5 @@ section .wave span:nth-child(3) {
   }
   100% {
     transform: translate(-50%, -75%) rotate(360deg);
-  }
-}
-
-/* Responsividade */
-@media (max-width: 1024px) {
-  .container-login {
-    width: 80%;
-    right: 10%;
-    left: auto;
-  }
-
-  .linha-rm-senha {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  input,
-  button {
-    width: 100%;
-  }
-
-  .container-bem-vindo {
-    left: 50%;
-    transform: translateX(-50%);
-    top: 100px;
-    text-align: center;
-  }
-
-  #logo {
-    width: 150px;
-    margin-top: 40px;
-  }
-}
-
-@media (max-width: 600px) {
-  .tudo {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .container-login {
-    width: 90%;
-    padding: 20px;
-    right: 5%;
-    left: auto;
-  }
-
-  .container-bem-vindo {
-    position: static;
-    transform: none;
-    text-align: center;
-    margin-bottom: 20px;
-  }
-
-  h3 {
-    font-size: 28px;
-  }
-
-  .titulo-bem-vindo,
-  .texto-apresentacao-bem-vindo {
-    font-size: 18px;
-  }
-
-  .toggle-mode {
-    width: 40px;
-    height: 40px;
-    font-size: 16px;
-  }
-
-  .painel-daltonismo {
-    flex-direction: column;
-    right: 10px;
-    bottom: 80px;
   }
 }
