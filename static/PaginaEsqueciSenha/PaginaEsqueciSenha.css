@@ -104,8 +104,7 @@ label {
 
 input {
   border-radius: 13px;
-  width: 100%;
-  min-width: 529px;
+  width: 529px;
   height: 36px;
   border: solid 1px var(--cor-principal);
   background-color: transparent;
@@ -123,22 +122,38 @@ input:focus {
   outline: solid 2px var(--cor-principal);
 }
 
-.tudo {
+.tudo{
+  height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 6%;
+  gap: 50px;
+}
+
+.esquerda{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.direita {
+  display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .senha-esquecida {
-  position: absolute;
-  top: 50%;
-  right: 10%;
-  transform: translateY(-50%);
+  position: relative;
   background-color: var(--fundo-container);
   height: auto;
-  padding: 40px;
-  width: 40%;
+  padding: 70px;
+  padding-bottom: 40px;
+  padding-top: 40px;
+  width: 90%;
   align-items: center;
   justify-content: center;
   display: flex;
@@ -182,17 +197,16 @@ p {
   color: var(--texto-primario);
 }
 
-button {
+button{
   background-color: var(--cor-principal);
   border-radius: 10px;
-  width: 100%;
+  width: 529px;
   height: 39px;
   border: none;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: 500;
   cursor: pointer;
   color: white;
-  transition: background-color 0.3s ease;
 }
 
 button:hover {
@@ -211,6 +225,8 @@ button:hover {
   flex-direction: column;
   gap: 15px;
   margin-bottom: 15px;
+  width: 100%;
+  max-width: 529px;
 }
 
 .linha-botoes p {
@@ -221,9 +237,7 @@ button:hover {
 }
 
 .container-bem-vindo {
-  position: absolute;
-  left: 135px;
-  top: 150px;
+  position: relative;
 }
 
 /* Controles de acessibilidade */
@@ -409,75 +423,5 @@ section .wave span:nth-child(3) {
   }
   100% {
     transform: translate(-50%, -75%) rotate(360deg);
-  }
-}
-
-/* Responsividade */
-@media (max-width: 1024px) {
-  .senha-esquecida {
-    width: 80%;
-    right: 10%;
-    left: auto;
-  }
-
-  input {
-    min-width: auto;
-    width: 100%;
-  }
-
-  .container-bem-vindo {
-    left: 50%;
-    transform: translateX(-50%);
-    top: 100px;
-    text-align: center;
-  }
-
-  #logo {
-    width: 150px;
-    margin-top: 40px;
-  }
-}
-
-@media (max-width: 600px) {
-  .tudo {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .senha-esquecida {
-    width: 90%;
-    padding: 20px;
-    right: 5%;
-    left: auto;
-  }
-
-  .container-bem-vindo {
-    position: static;
-    transform: none;
-    text-align: center;
-    margin-bottom: 20px;
-  }
-
-  h3 {
-    font-size: 28px;
-  }
-
-  .titulo-bem-vindo,
-  .texto-apresentacao-bem-vindo {
-    font-size: 18px;
-  }
-
-  .toggle-mode {
-    width: 40px;
-    height: 40px;
-    font-size: 16px;
-  }
-
-  .controls {
-    left: 20px;
-  }
-
-  #ver-termos {
-    padding-left: 20px;
   }
 }

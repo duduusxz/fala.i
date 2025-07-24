@@ -427,6 +427,11 @@ header {
   color: white;
   position: relative;
   margin: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
 }
 
 /* SEÇÃO ORATÓRIA - LAYOUT ORIGINAL DESKTOP */
@@ -946,6 +951,29 @@ hr {
 
 .caminhos-footer a:hover {
   text-decoration: underline;
+}
+
+.quem-somos{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+}
+
+.quem-somos #quem-somos{
+  color: white;
+}
+
+.sobre{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: 15px;
+  font-family: 'Titillium Web';
+  font-size: 18px;
 }
 
 /* ========================================= */
