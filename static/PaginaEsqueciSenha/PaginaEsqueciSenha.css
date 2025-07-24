@@ -1,4 +1,5 @@
 :root {
+  /* Modo Claro */
   --fundo-branco: #ffffff;
   --cor-principal: #686bff;
   --hover: #5557ff;
@@ -7,6 +8,32 @@
   --cinza-medio: #cfd4d8;
   --roxo: #491f7a;
   --fundo-cinza: #efefef;
+  --texto-primario: #686bff;
+  --texto-secundario: #c0c0ca;
+  --fundo-container: #b2b3ff54;
+  --wave-1: #9f90c3;
+  --wave-2: #afb0e1;
+  --wave-3: #ffffff;
+  --wave-bg: #7274cd;
+  --link-color: #0062cb;
+  --link-hover: #72c7ff;
+}
+
+/* Modo Escuro */
+[data-theme="dark"] {
+  --fundo-branco: #1a1a1a;
+  --cor-principal: #8b8dff;
+  --hover: #7779ff;
+  --cor-terciaria: #9b9dff;
+  --roxo-claro: #2a2a3a;
+  --cinza-medio: #404040;
+  --roxo: #6b4f8a;
+  --fundo-cinza: #2d2d2d;
+  --texto-primario: #b8baff;
+  --fundo-container: #2825307e;
+  --wave-3: #1a1a1a;
+  --link-color: #4a9eff;
+  --link-hover: #72c7ff;
 }
 
 * {
@@ -38,20 +65,17 @@ body {
 }
 
 .titulo-bem-vindo {
-  color: #afb0e1;
-  font-family: sans-serif;
+  color: var(--texto-primario);
   font-family: "Young Serif", serif;
   font-weight: 400;
   font-style: normal;
   font-size: 27px;
-  margin-top: 50px;
   margin-top: 0;
   cursor: default;
 }
 
 .texto-apresentacao-bem-vindo {
-  color: #afb0e1;
-  font-family: sans-serif;
+  color: var(--texto-primario);
   font-family: "Young Serif", serif;
   font-weight: 400;
   font-style: normal;
@@ -62,17 +86,20 @@ body {
 
 h3 {
   font-family: "Titillium Web", sans-serif;
-  font-weight: 200;
   font-weight: 400;
   font-style: normal;
   font-size: 40px;
-  color: white;
+  color: var(--texto-primario);
   margin-bottom: 15px;
-  margin-top: -20px; /* Adicionar uma margem negativa aqui */
+  margin-top: -20px;
 }
 
-label{
-  color: var(--fundo-branco);
+label {
+  color: var(--texto-primario);
+  font-family: "Titillium Web", sans-serif;
+  font-weight: 400;
+  margin-bottom: 5px;
+  display: block;
 }
 
 input {
@@ -80,12 +107,20 @@ input {
   width: 100%;
   min-width: 529px;
   height: 36px;
-  border: solid 1px white;
+  border: solid 1px var(--cor-principal);
   background-color: transparent;
-  color: white;
+  color: var(--texto-primario);
   margin-top: 10px;
   margin-bottom: 10px;
   padding: 5px;
+}
+
+input::placeholder {
+  color: var(--wave-1);
+}
+
+input:focus {
+  outline: solid 2px var(--cor-principal);
 }
 
 .tudo {
@@ -97,59 +132,54 @@ input {
 
 .senha-esquecida {
   position: absolute;
-  top: 47%;
+  top: 50%;
   right: 10%;
   transform: translateY(-50%);
-  background-color: #37353c7e;
+  background-color: var(--fundo-container);
   height: auto;
   padding: 40px;
-  padding-top: 0px;
-  min-height: 460px;
-  padding-bottom: 80px;
   width: 40%;
-  align-items: center;  
+  align-items: center;
   justify-content: center;
   display: flex;
   border-radius: 10px;
   transition: transform 1s ease;
-}
-
-.esquecida {
-  padding: 1px 30px 20px 30px; /* Reduzir o primeiro valor (padding superior) */
+  backdrop-filter: blur(10px);
+  border: none;
 }
 
 p {
-  color: white;
-}
-
-input:focus {
-  outline: solid 2px var(--cor-principal);
+  color: var(--texto-primario);
 }
 
 #texto-apresentacao-bem-vindo {
-  color: #afb0e1;
+  color: var(--texto-primario);
   max-width: 500px;
 }
 
-#login-caminho{
-    margin-top: 10px;
-    font-family: Arial, Helvetica, sans-serif;
-    color:#72c7ff;
-    cursor: pointer;
-    text-decoration: underline;
-    font-size: 15px;
+#login-caminho {
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--link-color);
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: 15px;
+  transition: color 0.3s ease;
 }
 
-.caminhos{
+#login-caminho:hover {
+  color: var(--link-hover);
+}
+
+.caminhos {
   display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 15px;
 }
 
-#ou{
-  margin: 10px;
-}
-
-.controls button{
-    width: 300px;
+#ou {
+  margin: 0;
+  color: var(--texto-primario);
 }
 
 button {
@@ -162,20 +192,32 @@ button {
   font-weight: 500;
   cursor: pointer;
   color: white;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: var(--hover);
 }
 
 .entrar-cadastro {
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 30px;
+  margin-top: 20px;
 }
 
 .linha-botoes {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  margin-top: 20px;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.linha-botoes p {
+  font-size: 14px;
+  line-height: 1.4;
+  text-align: justify;
+  margin: 0;
 }
 
 .container-bem-vindo {
@@ -184,103 +226,14 @@ button {
   top: 150px;
 }
 
-body.dark-mode {
-  background-color: var(--fundo-branco);
-  color: #feffec;
-}
-body.light-mode {
-  background-color: #29272f;
-  color: #feffec;
-}
-.toggle-mode {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: #feffec;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-body.dark-mode #login-caminho{
-    color: #0062cb;
-}
-
-body.dark-mode #texto-apresentacao-bem-vindo {
-  color: var(--cor-terciaria);
-}
-
-body.dark-mode p {
-  color: var(--cor-principal);
-}
-
-body.dark-mode h3 {
-  color: var(--cor-principal);
-  font-family: "Titillium Web", sans-serif;
-  font-weight: 200;
-  font-weight: 400;
-  font-style: normal;
-  font-size: 40px;
-  color: var(--hover);
-  margin-bottom: 15px;
-  margin-top: -20px; /* Adicionar uma margem negativa aqui */
-}
-
-body.dark-mode .titulo-bem-vindo {
-  color: var(--cor-principal);
-}
-
-body.dark-mode label{
-  color: var(--cor-principal);
-}
-
-body.dark-mode input {
-  border-radius: 13px;
-  width: 100%;
-  min-width: 529px;
-  height: 36px;
-  border: solid 1px var(--cor-principal);
-  background-color: transparent;
-  color: var(--cor-principal);
-  margin-top: 10px;
-  margin-bottom: 10px;
-  padding: 5px;
-}
-
-body.dark-mode .senha-esquecida {
-  position: absolute;
-  top: 47%;
-  right: 10%;
-  transform: translateY(-50%);
-  background-color: var(--roxo-claro);
-  height: auto;
-  padding: 40px;
-  padding-top: 0px;
-  min-height: 460px;
-  padding-bottom: 80px;
-  width: 40%;
-  align-items: center;  
-  justify-content: center;
-  display: flex;
-  border-radius: 10px;
-  transition: transform 1s ease;
-}
-
+/* Controles de acessibilidade */
 .controls {
   position: fixed;
   top: 20px;
-  left: 100px;
+  left: 130px;
   z-index: 9999;
   display: flex;
-  gap: 4px; /* diminui o espaço entre eles */
-}
-
-#increase-font,
-#decrease-font {
-  position: initial; /* remove o posicionamento relativo que bagunçava */
-  max-width: 100px;
+  gap: 4px;
 }
 
 .controls button {
@@ -288,33 +241,84 @@ body.dark-mode .senha-esquecida {
   border: none;
   font-size: 15px;
   cursor: pointer;
-  color: #007bff;
-  margin: 0; /* Remove margens dos botões */
-  display: inline-block; /* Garante que os botões fiquem na mesma linha */
+  color: var(--cor-principal);
+  margin: 0;
+  display: inline-block;
+  max-width: 50px;
+  width: auto;
+  height: auto;
 }
 
 .controls button:hover {
   text-decoration: underline;
 }
 
-.account-btn {
-  background-color: #686bff;
-  color: #feffec;
-  font-size: 16px;
-  padding: 10px 20px;
-  border: none;
-  cursor: pointer;
-  border-radius: 8px;
-  transition: 0.4s;
-  position: absolute;
+/* Botão Toggle Modo Escuro */
+.toggle-mode {
+  position: fixed;
   top: 20px;
   right: 20px;
-  width: 150px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--cor-principal);
+  color: var(--fundo-branco);
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-.account-btn:hover {
-  background-color: #5557ff;
-  transform: scale(1.05);
+.toggle-mode:hover {
+  background-color: var(--hover);
+  transform: scale(1.1);
+}
+
+/* Flash Messages */
+.flash-messages {
+  position: fixed;
+  top: 100px;
+  right: 20px;
+  z-index: 9999;
+  max-width: 300px;
+}
+
+.flash-message {
+  background-color: var(--cor-principal);
+  color: white;
+  padding: 10px 15px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+#increase-font, #decrease-font{
+  background-color: transparent;
+  border-radius: 10px;
+  width: 360px;
+  height: 39px;
+  border: none;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 500;
+  cursor: pointer;
+  color: var(--cor-principal);
 }
 
 footer {
@@ -327,9 +331,14 @@ footer {
 
 #ver-termos {
   text-decoration: underline;
-  color: #c0c0ca;
+  color: var(--texto-secundario);
   cursor: pointer;
   padding-left: 140px;
+  transition: color 0.3s ease;
+}
+
+#ver-termos:hover {
+  color: var(--texto-primario);
 }
 
 @keyframes pulo {
@@ -338,57 +347,11 @@ footer {
     transform: translateY(0);
   }
   50% {
-    transform: translateY(
-      -20px
-    ); /* Ajuste a altura do pulo conforme necessário */
+    transform: translateY(-20px);
   }
 }
 
-.painel {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 9999;
-  background: #007bff;
-  padding: 10px;
-  border-radius: 10px;
-}
-
-.painel label {
-  color: var(--fundo-branco);
-}
-
-.painel select,
-.painel button {
-  margin: 5px;
-  padding: 5px 10px;
-  font-size: 14px;
-}
-
-#daltonismo-btn {
-  background-color: var(--fundo-branco);
-  color: #007bff;
-  transition: 0.4s;
-}
-
-#daltonismo-btn:hover {
-  background-color: var(--fundo-cinza);
-}
-
-#daltonismo {
-  border: none;
-  border-radius: 5px;
-  height: 33px;
-  background-color: var(--fundo-branco);
-  color: #007bff;
-  cursor: pointer;
-  transition: 0.4s;
-}
-
-#daltonismo:hover {
-  background-color: var(--fundo-cinza);
-}
-
+/* Animação das ondas */
 @import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap");
 
 section {
@@ -401,15 +364,17 @@ section {
   align-items: center;
   min-height: 100vh;
 }
+
 section .wave {
   position: absolute;
   left: 0;
   width: 100%;
   height: 100%;
-  background: #7274cd;
+  background: var(--wave-bg);
   box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.5);
   transition: 0.5s;
 }
+
 section .wave span {
   content: "";
   position: absolute;
@@ -418,27 +383,24 @@ section .wave span {
   top: 0;
   left: 50%;
   transform: translate(-50%, -75%);
-  background: #7778cf;
 }
+
 section .wave span:nth-child(1) {
   border-radius: 45%;
-  background: #9f90c3;
+  background: var(--wave-1);
   animation: animate 5s linear infinite;
 }
 
 section .wave span:nth-child(2) {
   border-radius: 40%;
-  background: #afb0e1;
+  background: var(--wave-2);
   animation: animate 10s linear infinite;
 }
+
 section .wave span:nth-child(3) {
   border-radius: 42.5%;
-  background: #2a2a2a;
+  background: var(--wave-3);
   animation: animate 15s linear infinite;
-}
-
-body.dark-mode section .wave span:nth-child(3) {
-  background-color: #ffffff;
 }
 
 @keyframes animate {
@@ -450,96 +412,72 @@ body.dark-mode section .wave span:nth-child(3) {
   }
 }
 
-#toggle-daltonismo {
-  width: 45px;
-  height: 45px;
-  border-radius: 8px;
-  background-color: var(--hover);
-  color: white;
-  border: none;
-  position: fixed;
-  bottom: 20px;
-  right: 10px;
-  cursor: pointer;
-  z-index: 10000;
-  font-size: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: 0.5s;
+/* Responsividade */
+@media (max-width: 1024px) {
+  .senha-esquecida {
+    width: 80%;
+    right: 10%;
+    left: auto;
+  }
+
+  input {
+    min-width: auto;
+    width: 100%;
+  }
+
+  .container-bem-vindo {
+    left: 50%;
+    transform: translateX(-50%);
+    top: 100px;
+    text-align: center;
+  }
+
+  #logo {
+    width: 150px;
+    margin-top: 40px;
+  }
 }
 
-#toggle-daltonismo:hover {
-  background-color: #4043db;
-}
+@media (max-width: 600px) {
+  .tudo {
+    flex-direction: column;
+    align-items: center;
+  }
 
-/* Painel Daltonismo (oculto por padrão) */
-.painel {
-  position: fixed;
-  display: flex;
-  right: 42px;
-  background: var(--hover);
-  padding: 10px;
-  border-radius: 10px;
-  z-index: 9999;
-  transform: translateX(0);
-  opacity: 0;
-  pointer-events: none;
-  transition: all 0.3s ease-in-out;
-}
+  .senha-esquecida {
+    width: 90%;
+    padding: 20px;
+    right: 5%;
+    left: auto;
+  }
 
-/* Quando visível */
-.painel.ativo {
-  transform: scale(1);
-  opacity: 1;
-  pointer-events: all;
-}
+  .container-bem-vindo {
+    position: static;
+    transform: none;
+    text-align: center;
+    margin-bottom: 20px;
+  }
 
-/* Estilo interno */
-.painel label {
-  color: white;
-}
+  h3 {
+    font-size: 28px;
+  }
 
-.painel select,
-.painel button {
-  margin-top: 5px;
-  padding: 5px 10px;
-  font-size: 14px;
-}
+  .titulo-bem-vindo,
+  .texto-apresentacao-bem-vindo {
+    font-size: 18px;
+  }
 
-#daltonismo-btn {
-  background-color: white;
-  color: #007bff;
-  border: none;
-  border-radius: 5px;
-  margin-top: 5px;
-  transition: background 0.3s;
-}
+  .toggle-mode {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+  }
 
-#daltonismo-btn:hover {
-  background-color: #efefef;
-}
+  .controls {
+    left: 20px;
+  }
 
-.painel-daltonismo {
-  position: absolute;
-  right: 2px;
-  bottom: 0;
-  transform: scale(0.8) translateX(20px); /* Movimento apenas na horizontal */
-  transform-origin: center right;
-  opacity: 0;
-  pointer-events: none;
-  background: var(--hover);
-  padding: 10px;
-  border-radius: 10px;
-  transition: transform 0.4s ease, opacity 0.4s ease;
-  display: flex;
-  gap: 10px;
-  align-items: center;
-}
-
-/* Quando ativo, volta à posição original */
-.painel-daltonismo.ativo {
-  transform: scale(1) translateX(0) translateY(0);
-  opacity: 1;
-  pointer-events: all;
+  #ver-termos {
+    padding-left: 20px;
+  }
 }
