@@ -7,6 +7,7 @@
   --roxo-claro: #b2b3ff54;
   --cinza-medio: #cfd4d8;
   --roxo: #491f7a;
+  --roxo2: #686bff;
   --fundo-cinza: #efefef;
   --roxo-medio: #423291;
   --texto-primario: #686bff;
@@ -36,6 +37,7 @@
   --roxo-claro: #2a2a3a;
   --cinza-medio: #404040;
   --roxo: #e0d2f1;
+  --roxo2: #e0d2f1;
   --fundo-cinza: #2d2d2d;
   --roxo-medio: #5a4291;
   --texto-primario: #e0d2f1;
@@ -321,7 +323,7 @@ header {
   border-radius: 30px;
   width: 100%;
   max-width: 350px;
-  color: var(--texto2);
+  color: var(--roxo2);
   text-wrap: wrap;
   text-align: justify;
   display: flex;
@@ -891,7 +893,7 @@ footer {
   padding-top: 45px;
   background-color: var(--fundo-container);
   box-shadow: 0 0 10px var(--border-color);
-  margin: 0;
+  margin-bottom: 0;
 }
 
 #logo-footer {
