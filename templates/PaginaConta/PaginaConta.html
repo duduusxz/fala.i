@@ -26,7 +26,7 @@
   <div class="menu-lateral">
     <div class="item-lista">
     <ul>
-      <li>Minha Conta</li>
+      <li id="principal">Minha Conta</li>
       <li>Ajuda/Suporte</li>
       <li>Termos de Uso</li>
       <li>Acessibilidade</li>
@@ -81,7 +81,28 @@
   </nav>
 
   <div class="tudo">
+    <div class="conteudo">
+      <div class="nomePrincipal">
+        <p>Eduardo de Ataíde Melo</p>
+      </div>
 
+      <div class="foto">
+        <img src="{{ url_for('static', filename='img/lamborghini.jpg') }}" alt="" class="fotoPerfil">
+        <button>Editar foto</button>
+      </div>
+
+      <div class="informacoes">
+        <div class="conjunto">
+          <label for="">Email: </label>
+          <p>Owhewknpekcewc@gmail.com</p>
+        </div>
+        
+        <div class="conjunto">
+        <label for="">Nome Completo: </label>
+        <p>lknlknlkencwnc</p>
+      </div>
+      </div>
+    </div>
   </div>
 
   <script src="{{ url_for('static', filename='PaginaConta/PaginaConta.js') }}"></script>
