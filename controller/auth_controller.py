@@ -6,6 +6,7 @@ from model.usuario_model import cadastrar, buscar_usuario_por_rm_e_email, listar
 from model.usuario_model import buscar_usuario_por_email  # ou outras funções
 from model.usuario_model import obter_ranking  
 from model.usuario_model import buscar_podio
+from model.usuario_model import criar_tarefa, listar_tarefas
 
 from model import usuario_model  # Usado para chamar criar_tabela(), se necessário
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -260,10 +261,28 @@ def inicio():
 
 #Começo sistema agenda
 
-@auth_bp.route('/agenda')  # rota definida para a página de agenda
+@auth_bp.route("/agenda", methods=["GET", "POST"])
 def agenda():
+    if request.method == "POST":
+        titulo = request.form.get("nome-tarefa")
+        data_hora = request.form.get("data-tarefa")
+        descricao = request.form.get("descricao-tarefa")
 
-    return render_template('PaginaAgenda/PaginaAgenda.html')
+        if data_hora:
+            data_tarefa, horario_tarefa = data_hora.split("T")
+        else:
+            data_tarefa, horario_tarefa = None, None
+
+        # CHAMANDO A FUNÇÃO QUE INSERE NO BANCO
+        criar_tarefa(titulo, data_tarefa, horario_tarefa, descricao)
+
+        return redirect(url_for("auth.agenda"))
+
+    tarefas = listar_tarefas()
+    return render_template("PaginaAgenda/PaginaAgenda.html", tarefas=tarefas)
+        
+
+    # Se for GET, busca todas as tarefas no banco e mostra
 
 #fim sistema agenda
 
@@ -287,7 +306,9 @@ def ranking():
 
 
 
-
+@auth_bp.route('/listarTarefas')
+def listarTarefas():
+    return render_template("PaginaListar/PaginaListar.html")
 
 
 #fim do ranking
