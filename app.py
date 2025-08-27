@@ -32,18 +32,29 @@ app.register_blueprint(auth_bp) #register the routes with blueprints, example: a
 def index():
     return render_template("PaginaLogin/PaginaLogin.html") # here he return paginalogin because its route first
 
-@app.route("/resposta", methods=["POST", "GET"]) # here configured for get methods post and get for validation information and verify with database
+@app.route("/resposta", methods=["POST", "GET"])
 def resposta():
+    # Se for requisição AJAX/voz (JSON)
+    if request.is_json:
+        data = request.get_json()
+        pergunta = data.get("message", "")
+        resposta_chatbot = gerar_resposta(pergunta)
+        return jsonify({"resposta": resposta_chatbot})
+
+    # Se for requisição de formulário (HTML)
     pergunta = None
     resposta_chatbot = None
 
     if request.method == "POST":
-        pergunta = request.form.get("pergunta") # he to do request in names that were configured in html
-        if pergunta: #if your question is true, he to go valid your question and generate the response
-            resposta_chatbot = gerar_resposta(pergunta) # get the craete function
+        pergunta = request.form.get("pergunta")
+        if pergunta:
+            resposta_chatbot = gerar_resposta(pergunta)
 
     return render_template("PaginaChatbot/PaginaChatbot.html", pergunta=pergunta, resposta=resposta_chatbot)
 
+
+if __name__ == "__main__":
+    app.run(debug=True)
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))

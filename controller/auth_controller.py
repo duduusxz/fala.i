@@ -6,7 +6,11 @@ from model.usuario_model import cadastrar, buscar_usuario_por_rm_e_email, listar
 from model.usuario_model import buscar_usuario_por_email  # ou outras funções
 from model.usuario_model import obter_ranking  
 from model.usuario_model import buscar_podio
+<<<<<<< HEAD
+from model.usuario_model import get_db_connection
+=======
 from model.usuario_model import criar_tarefa, listar_tarefas
+>>>>>>> 64f36a066273b72f9ca995694e6c5589844e5c30
 
 from model import usuario_model  # Usado para chamar criar_tabela(), se necessário
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -284,6 +288,52 @@ def agenda():
 
     # Se for GET, busca todas as tarefas no banco e mostra
 
+@auth_bp.route('/tarefas', methods=['GET'])
+def listar_tarefas():
+    try:
+        conn = get_db_connection()
+        with conn.cursor() as cursor:
+            cursor.execute('SELECT * FROM tb_tarefas ORDER BY data_tarefa, horario_tarefa')
+            tarefas = cursor.fetchall()
+        return jsonify(tarefas), 200
+    except Exception as e:
+        print("Erro ao buscar tarefas:", e)
+        return jsonify({'erro': 'Erro ao buscar tarefas'}), 500
+    finally:
+        conn.close()
+
+# ---------------------------
+# FUNÇÃO DE ADICIONAR TAREFA
+# ---------------------------
+@auth_bp.route('/tarefas', methods=['POST'])
+def adicionar_tarefa():
+    dados = request.get_json()
+
+    titulo = dados.get('titulo')
+    descricao = dados.get('descricao')
+    data_tarefa = dados.get('data_tarefa')
+    horario_tarefa = dados.get('horario_tarefa')
+
+    # Verifica se os campos obrigatórios foram enviados
+    if not all([titulo, data_tarefa, horario_tarefa]):
+        return jsonify({'erro': 'Campos obrigatórios faltando'}), 400
+
+    try:
+        conn = get_db_connection()
+        with conn.cursor() as cursor:
+            cursor.execute('''
+                INSERT INTO tb_tarefas (titulo, descricao, data_tarefa, horario_tarefa)
+                VALUES (%s, %s, %s, %s)
+            ''', (titulo, descricao, data_tarefa, horario_tarefa))
+            conn.commit()
+        return jsonify({'mensagem': 'Tarefa salva com sucesso'}), 201
+
+    except Exception as e:
+        print('Erro ao salvar tarefa:', e)
+        return jsonify({'erro': 'Erro no servidor'}), 500
+
+    finally:
+        conn.close()
 #fim sistema agenda
 
 

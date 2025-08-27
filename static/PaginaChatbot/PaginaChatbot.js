@@ -113,3 +113,61 @@ function observeElements() {
     observer.observe(element);
   });
 }
+
+// audio chatbot
+
+async function enviarMensagem(mensagem) {
+    if (!mensagem.trim()) return;
+
+    // Mostra mensagem do usuário
+    document.getElementById("userText").innerText = mensagem;
+
+    try {
+        const res = await fetch("/resposta", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message: mensagem })
+        });
+
+        const data = await res.json();
+
+        // Mostra resposta da IA
+        document.getElementById("respostaText").innerText = data.resposta;
+
+    } catch (err) {
+        console.error("Erro ao enviar mensagem:", err);
+        document.getElementById("respostaText").innerText = "❌ Erro ao se comunicar com o servidor.";
+    }
+}
+
+// Reconhecimento de voz
+let recognition = null;
+
+function iniciarReconhecimento() {
+    recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+    recognition.lang = "pt-BR";
+    recognition.continuous = false;
+    recognition.interimResults = false;
+    recognition.start();
+
+    // Mostra aviso de que está ouvindo
+    document.getElementById("userText").innerText = "🎙️ Ouvindo...";
+
+    recognition.onresult = function(event) {
+        const texto = event.results[0][0].transcript;
+        enviarMensagem(texto);
+    };
+
+    recognition.onerror = (event) => {
+        console.error("Erro:", event.error);
+        document.getElementById("userText").innerText = "❌ Erro no reconhecimento de voz";
+    };
+}
+
+function pararReconhecimento() {
+    if (recognition) {
+        recognition.stop();
+        recognition = null;
+        document.getElementById("userText").innerText = "🛑 Reconhecimento de voz parado.";
+    }
+}

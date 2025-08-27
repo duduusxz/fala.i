@@ -78,11 +78,23 @@
             </div>
 
             <!-- Chat input centralizado abaixo do main-container -->
+
+          
+
+
             <div class="chat">
                 <form action="/resposta" method="post" id="form">
+                       <div class="voz-controles">
+              <button type="button" onclick="iniciarReconhecimento()">🎙️ Começar a falar</button>
+        <button type="button" onclick="pararReconhecimento()">⏹️ Parar</button>
+          </div>
+       
+
                     <textarea class="pergunta" name="pergunta" id="pergunta" placeholder="Fala aí!"></textarea>
                     <button type="Submit" class="enviar"><i class="bi bi-arrow-up-circle-fill"></i></button>
                 </form>
+                       <p><strong>Você disse:</strong> <span id="userText"></span></p>
+    <p><strong>Resposta da IA:</strong> <span id="respostaText"></span></p>
             </div>
         </div>
     </div>
