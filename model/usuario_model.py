@@ -1,125 +1,188 @@
-import os # puxar tudo das outras importações
-import psycopg2
-import psycopg2.extras # Para usar DictCursor com psycopg2
-from urllib.parse import urlparse # Para parsear a URL do banco de dados
-from werkzeug.security import generate_password_hash 
-
-# settings to generate connections with database
-def get_database_url():
-    
-    return os.environ.get('DATABASE_URL', 'postgresql://tcc_sql_user:WPhNIdziJ4K6pvYu3dl3XAtAZQmV8rKc@dpg-d1snqure5dus73cdlutg-a.oregon.render.com/tcc_sql_db')
+import sqlite3
+from werkzeug.security import generate_password_hash
 
 def get_db_connection():
-    db_url = get_database_url()
+    """
+    Cria conexão com o banco SQLite
+    O arquivo 'tcc.db' será criado automaticamente
+    """
+    conn = sqlite3.connect('tcc.db')
+    conn.row_factory = sqlite3.Row  # Permite acessar colunas por nome
+    return conn
 
-    # Parseia a URL para extrair os componentes (host, user, password, dbname, port)
-    result = urlparse(db_url)
-    username = result.username
-    password = result.password
-    database = result.path[1:] # Remove a barra inicial
-    hostname = result.hostname
-    port = result.port
+def init_db():
+    """
+    Inicializa o banco de dados com todas as tabelas necessárias
+    """
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    
+    # Tabela de usuários
+    cursor.execute('''
+    CREATE TABLE IF NOT EXISTS usuarios (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        rm TEXT UNIQUE NOT NULL,
+        email TEXT UNIQUE NOT NULL,
+        senha TEXT NOT NULL,
+        data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )
+    ''')
+    
+    # Tabela de ranking
+    cursor.execute('''
+    CREATE TABLE IF NOT EXISTS tb_ranking (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        nome TEXT NOT NULL,
+        pontos INTEGER DEFAULT 0,
+        data_atualizacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )
+    ''')
+    
+    # Tabela de tarefas
+    cursor.execute('''
+    CREATE TABLE IF NOT EXISTS tb_tarefas (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        titulo TEXT NOT NULL,
+        descricao TEXT,
+        data_tarefa DATE NOT NULL,
+        horario_tarefa TIME NOT NULL,
+        data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )
+    ''')
 
+    
+    cursor.execute("INSERT INTO tb_ranking (nome, pontos) VALUES ('andre', '234')")
+    cursor.execute("INSERT INTO tb_ranking (nome, pontos) VALUES ('bruno', '444')")
+    cursor.execute("INSERT INTO tb_ranking (nome, pontos) VALUES ('carlos', '555')")    
+
+    conn.commit()
+    conn.close()
+    print("inicializei o banco")
+
+# Exemplo de uso para testar a conexão
+def testar_conexao():
     try:
-        conn = psycopg2.connect(  #its import for generate connection with Postgrees
-            host=hostname,
-            database=database,
-            user=username,
-            password=password,
-            port=port,
-            cursor_factory=psycopg2.extras.DictCursor # generate book with information
-        )
-        return conn # return connection
-    except Exception as e: #exception case nothing have database or the get failed
-        print(f"Erro ao conectar ao banco de dados: {e}")
-        raise 
+        init_db()  # Garante que as tabelas existem
+        connection = get_db_connection()
+        cursor = connection.cursor()
+        
+        # Listar tabelas do banco
+        cursor.execute("SELECT name FROM sqlite_master WHERE type='table'")
+        tables = cursor.fetchall()
+        
+        print("Tabelas no banco de dados:")
+        for table in tables:
+            print(f" - {table['name']}")
+        
+        cursor.close()
+        connection.close()
+        print("conexao fechoy")
+        
+    except Exception as e:
+        print(" erro banco {e}")
 
-
-
-def cadastrar(rm, email, senha_hash): #comentario ingl~es:  # the function serves to register user in BD, if its possible with password_hash, to upgrade security.
+def cadastrar(rm, email, senha_hash):
     conn = get_db_connection()
     try:
-        with conn.cursor() as cursor:
-            cursor.execute('''
-                INSERT INTO usuarios (rm, email, senha) VALUES (%s, %s, %s) 
-            ''', (rm, email, senha_hash)) #protect data, to login 
-            conn.commit()
+        cursor = conn.cursor()
+        cursor.execute('''
+            INSERT INTO usuarios (rm, email, senha) VALUES (?, ?, ?)
+        ''', (rm, email, senha_hash))
+        conn.commit()
+    except sqlite3.IntegrityError:
+        print("RM ou email já existem!")
+        raise
     finally:
-        conn.close() #close connection
+        conn.close()
 
-#abaixo comentarios em ingles afim de treinar e aprender
-def buscar_usuario_por_rm_e_email(rm, email): #comentario em ingles para treino #create function to search rm and email
+def buscar_usuario_por_rm_e_email(rm, email):
     conn = get_db_connection()
     try:
-        with conn.cursor() as cursor:
-            cursor.execute('SELECT * FROM usuarios WHERE rm = %s AND email = %s', (rm, email))
-            return cursor.fetchone()
+        cursor = conn.cursor()
+        cursor.execute('SELECT * FROM usuarios WHERE rm = ? AND email = ?', (rm, email))
+        return cursor.fetchone()
     finally:
-        conn.close() #close connection
+        conn.close()
 
-def buscar_usuario_por_email(email): #create function to search just email 
+def buscar_usuario_por_email(email):
     conn = get_db_connection()
     try:
-        with conn.cursor() as cursor:
-            cursor.execute('SELECT * FROM usuarios WHERE email = %s', (email,))
-            return cursor.fetchone()
+        cursor = conn.cursor()
+        cursor.execute('SELECT * FROM usuarios WHERE email = ?', (email,))
+        return cursor.fetchone()
     finally:
-        conn.close() #close connection
+        conn.close()
 
 def atualizar_senha(email, nova_senha):
     nova_senha_hash = generate_password_hash(nova_senha)
     conn = get_db_connection()
     try:
-        with conn.cursor() as cursor:
-           
-            cursor.execute('UPDATE usuarios SET senha = %s WHERE email = %s', (nova_senha_hash, email))
-            conn.commit()
+        cursor = conn.cursor()
+        cursor.execute('UPDATE usuarios SET senha = ? WHERE email = ?', (nova_senha_hash, email))
+        conn.commit()
     finally:
         conn.close()
 
-def listar_todos_usuarios(): #function created to list all users
-    conn = get_db_connection() #open connection again with bd
-    try:
-        with conn.cursor() as cursor:
-            cursor.execute('SELECT * FROM usuarios')
-            return cursor.fetchall()
-    finally:
-        conn.close() #close connection again
-
-def obter_ranking(): #function its very important to search ranking, and compare points of all users in BD 
+def listar_todos_usuarios():
     conn = get_db_connection()
     try:
-            with conn.cursor() as cursor:
-                cursor.execute('''
-                SELECT nome, pontos FROM tb_ranking ORDER BY pontos DESC;
-
-                ''')
-                return cursor.fetchall()
+        cursor = conn.cursor()
+        cursor.execute('SELECT * FROM usuarios')
+        return cursor.fetchall()
     finally:
-                conn.close()    # close connection again
+        conn.close()
 
-def buscar_podio(): #here he to search your  three first what have more points, and update BD
-        conn = get_db_connection()
-        try:
-            with conn.cursor() as cursor:
-                cursor.execute("SELECT * FROM tb_ranking ORDER BY pontos DESC LIMIT 3")
-                resultado = cursor.fetchall()
-                return resultado if resultado else []  # <- aqui é a correção
-        except Exception as e:
-            print("Erro ao buscar pódio:", e)
-            return []  
-        finally:
-            conn.close() #close connection BD again
-
-def criar_tarefa(titulo, data_tarefa, horario_tarefa, descricao=None): #function created to created task
+def obter_ranking():
     conn = get_db_connection()
     try:
-        with conn.cursor() as cursor:
-            cursor.execute('''
-                INSERT INTO tb_tarefas (titulo, descricao, data_tarefa, horario_tarefa ) VALUES (%s, %s, %s, %s)''', (titulo, descricao, data_tarefa, horario_tarefa))
-            conn.commit()
-            print("Tarefa criada com sucesso!")
+        cursor = conn.cursor()
+        cursor.execute('SELECT nome, pontos FROM tb_ranking ORDER BY pontos DESC')
+        return cursor.fetchall()
+    finally:
+        conn.close()
+
+def buscar_podio():
+    conn = get_db_connection()
+    try:
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM tb_ranking ORDER BY pontos DESC LIMIT 3")
+        resultado = cursor.fetchall()
+        return resultado if resultado else []
+    except Exception as e:
+        print("Erro ao buscar pódio:", e)
+        return []  
+    finally:
+        conn.close()
+
+def listar_tarefas():
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM tb_tarefas")
+    tarefas = cursor.fetchall()
+    conn.close()
+    print("Tarefas no banco:", tarefas)  # <-- debug
+    return tarefas
+
+    
+
+def criar_tarefa(titulo, data_tarefa, horario_tarefa, descricao=None):
+    conn = get_db_connection()
+    try:
+        cursor = conn.cursor()
+        cursor.execute('''
+            INSERT INTO tb_tarefas (titulo, descricao, data_tarefa, horario_tarefa) 
+            VALUES (?, ?, ?, ?)
+        ''', (titulo, descricao, data_tarefa, horario_tarefa))
+        conn.commit()
+        print("Tarefa criada com sucesso!")  # <-- vai aparecer no terminal
     except Exception as e:
         print("Erro ao criar tarefa:", e)
+        raise
     finally:
-        conn.close() #close connnection
+        conn.close()
+# Inicializa o banco automaticamente quando o módulo é importado
+init_db()
+
+# Teste opcional
+if __name__ == "__main__":
+    testar_conexao()
