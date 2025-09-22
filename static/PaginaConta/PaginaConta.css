@@ -258,12 +258,10 @@ li:hover {
   font-size: 20px;
   width: 100%;
   min-width: 220px;
-  transition: 0.1s ease-in-out;
+  transition: 0.4s ease-in-out;
 }
 
 .menu-lateral li:hover{
-  background-color: var(--cor-input);
-  height: 50px;
   align-items: center;
   display: flex;
   padding: 10px;
@@ -328,6 +326,13 @@ svg:hover{
 .conteudo{
   display: flex;
   flex-direction: column;
+  background-color: var(--fundo-menu);
+  padding: 50px;
+  width: 60vw;
+  border-radius: 2rem;
+  margin-left: 10%;
+  justify-content: center;
+  align-items: center;
 }
 
 .nomePrincipal{
@@ -340,9 +345,11 @@ svg:hover{
   width: 100%;
   display: flex;
   flex-direction: column;
-  margin-top: 10%;
-  margin-bottom: 10%;
+  margin-top: 5%;
+  margin-bottom: 7%;
   gap: 20px;
+  justify-content: center;
+  align-items: center;
 }
 
 .foto button{
@@ -350,18 +357,32 @@ svg:hover{
 }
 
 .fotoPerfil{
-  width: 250px;
-  border-radius: 100%;
+  width: 25%;
+  border-radius: 50%;
 }
 
 .informacoes{
-  gap: 30px;
+  gap: 20px;
   display: flex;
   flex-direction: column;
+  align-self: flex-start;
 }
 
 .conjunto{
   gap: 10px;
   display: flex;
   flex-direction: row;
+}
+
+button{
+  background-color: var(--onda);
+  border: none;
+  border-radius: 5px;
+  height: auto;
+  padding: 5px;
+  color: var(--border-color2);
+  cursor: pointer;
+  font-family: 'Titillium Web';
+  font-weight: 500;
+  font-size: 15px;
 }
