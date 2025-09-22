@@ -1,4 +1,4 @@
-// Array para armazenar as tarefas (agora vindas do banco)
+// Array para armazenar as tarefas
 let tarefas = [];
 
 // Gerenciamento do Modo Escuro (igual ao da tela de login)
@@ -8,6 +8,8 @@ class ThemeManager {
   }
 
   init() {
+    // O tema já foi aplicado pelo script inline no head
+    // Aqui apenas configuramos o botão e atualizamos o ícone
     const currentTheme =
       document.documentElement.getAttribute("data-theme") || "light";
     this.updateToggleIcon(currentTheme);
@@ -23,7 +25,11 @@ class ThemeManager {
   updateToggleIcon(theme) {
     const icon = document.getElementById("theme-icon");
     if (icon) {
-      icon.className = theme === "dark" ? "fas fa-sun" : "fas fa-moon";
+      if (theme === "dark") {
+        icon.className = "fas fa-sun";
+      } else {
+        icon.className = "fas fa-moon";
+      }
     }
   }
 
@@ -43,217 +49,206 @@ class ThemeManager {
   }
 }
 
+// Função para abrir o modal
 function abrirModal() {
   const modal = document.getElementById("modal-overlay");
   modal.classList.add("show");
-  document.body.style.overflow = "hidden";
+  document.body.style.overflow = "hidden"; // Impede scroll da página
 }
 
+// Função para fechar o modal
 function fecharModal() {
   const modal = document.getElementById("modal-overlay");
   modal.classList.remove("show");
-  document.body.style.overflow = "auto";
+  document.body.style.overflow = "auto"; // Restaura scroll da página
+
+  // Limpar formulário
   document.getElementById("form-tarefa").reset();
 }
 
-document.getElementById("modal-overlay").addEventListener("click", function (e) {
-  if (e.target === this) fecharModal();
-});
+// Função para fechar modal clicando fora dele
+document
+  .getElementById("modal-overlay")
+  .addEventListener("click", function (e) {
+    if (e.target === this) {
+      fecharModal();
+    }
+  });
 
-document.getElementById("form-tarefa").addEventListener("submit", async (e) => {
+// Função para adicionar tarefa (sem validação de data)
+document.getElementById("form-tarefa").addEventListener("submit", (e) => {
   e.preventDefault();
 
   const nomeTarefa = document.getElementById("nome-tarefa").value;
+  const dataTarefa = document.getElementById("data-tarefa").value;
   const descricaoTarefa = document.getElementById("descricao-tarefa").value;
-  const dataHora = document.getElementById("data-tarefa").value;
 
-  if (!nomeTarefa || !dataHora) {
-    mostrarMensagem("Preencha todos os campos obrigatórios!", "erro");
+  // Criar objeto da tarefa sem validação de data
+  const novaTarefa = {
+    id: Date.now(),
+    nome: nomeTarefa,
+    data: dataTarefa,
+    descricao: descricaoTarefa,
+  };
+
+  // Adicionar à lista de tarefas
+  tarefas.push(novaTarefa);
+  salvarTarefas(); // Salvar no localStorage
+  atualizarListaTarefas();
+  fecharModal();
+  mostrarMensagem("Tarefa adicionada com sucesso!", "sucesso");
+});
+
+// Função para atualizar a lista de tarefas na tela (ordenada por data)
+function atualizarListaTarefas() {
+  const listaTarefas = document.getElementById("lista-tarefas");
+
+  if (tarefas.length === 0) {
+    listaTarefas.innerHTML = "";
     return;
   }
 
-  const [dataTarefa, horarioTarefa] = dataHora.split("T");
+  // Ordenar tarefas por data
+  const tarefasOrdenadas = [...tarefas].sort((a, b) => {
+    // Se uma tarefa não tem data, coloca no final
+    if (!a.data && !b.data) return 0;
+    if (!a.data) return 1;
+    if (!b.data) return -1;
 
-  try {
-    const response = await fetch("/tarefas", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        titulo: nomeTarefa,
-        descricao: descricaoTarefa,
-        data_tarefa: dataTarefa,
-        horario_tarefa: horarioTarefa,
-      }),
-    });
+    // Comparar as datas
+    const dataA = new Date(a.data);
+    const dataB = new Date(b.data);
 
-    const resultado = await response.json();
+    return dataA - dataB;
+  });
 
-    if (response.ok) {
-      mostrarMensagem("Tarefa adicionada com sucesso!", "sucesso");
-      fecharModal();
-      document.getElementById("form-tarefa").reset();
-      // aqui pode chamar atualizarListaTarefas() se quiser exibir
-    } else {
-      mostrarMensagem(resultado.erro || "Erro ao salvar tarefa!", "erro");
-    }
-  } catch (erro) {
-    console.error("Erro:", erro);
-    mostrarMensagem("Erro ao conectar com o servidor!", "erro");
-  }
-});
+  let html = "";
+  tarefasOrdenadas.forEach((tarefa) => {
+    const dataFormatada = formatarData(tarefa.data);
+    html += `
+            <div class="tarefa-item">
+                <h4>${tarefa.nome}</h4>
+                <div class="data">${dataFormatada}</div>
+                ${
+                  tarefa.descricao
+                    ? `<div class="descricao">${tarefa.descricao}</div>`
+                    : ""
+                }
+            </div>
+        `;
+  });
 
-
-async function salvarTarefaNoBanco(tarefa) {
-  try {
-    await fetch("http://localhost:5000/tarefas", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        titulo: tarefa.nome,
-        descricao: tarefa.descricao,
-        data_tarefa: tarefa.data,
-        horario_tarefa: tarefa.horario
-      }),
-    });
-
-    mostrarMensagem("Tarefa salva com sucesso no banco!", "sucesso");
-    carregarTarefasDoBanco();
-    fecharModal();
-  } catch (error) {
-    console.error("Erro ao salvar tarefa:", error);
-    mostrarMensagem("Erro ao salvar tarefa no banco.", "erro");
-  }
+  listaTarefas.innerHTML = html;
 }
 
-async function carregarTarefasDoBanco() {
-  try {
-    const resposta = await fetch("http://localhost:5000/tarefas");
-    const dados = await resposta.json();
-    tarefas = dados.map(t => ({
-      nome: t.titulo,
-      descricao: t.descricao,
-      data: t.data_tarefa,
-      horario: t.horario_tarefa
-    }));
-    atualizarListaTarefas();
-  } catch (error) {
-    console.error("Erro ao carregar tarefas:", error);
-    mostrarMensagem("Erro ao carregar tarefas do banco.", "erro");
-  }
-}
-
-async function atualizarListaTarefas() {
-  const listaTarefas = document.getElementById("lista-tarefas");
-
-  try {
-    console.log("Chamando /tarefas para buscar do banco...");
-    const response = await fetch("/tarefas");
-    const dados = await response.json();
-
-    if (!Array.isArray(dados) || dados.length === 0) {
-      listaTarefas.innerHTML = "<p>Nenhuma tarefa cadastrada.</p>";
-      return;
-    }
-
-    let html = "";
-    dados.forEach((tarefa) => {
-      const dataHoraFormatada = formatarData(`${tarefa.data_tarefa}T${tarefa.horario_tarefa}`);
-      html += `
-        <div class="tarefa-item">
-          <h4>${tarefa.titulo}</h4>
-          <div class="data">${dataHoraFormatada}</div>
-          ${
-            tarefa.descricao
-              ? `<div class="descricao">${tarefa.descricao}</div>`
-              : ""
-          }
-        </div>
-      `;
-    });
-
-    listaTarefas.innerHTML = html;
-
-  } catch (erro) {
-    console.error("Erro ao buscar tarefas:", erro);
-    listaTarefas.innerHTML = "<p>Erro ao carregar tarefas do banco.</p>";
-  }
-}
-
-// Atualiza a lista assim que a página carregar
-document.addEventListener("DOMContentLoaded", () => {
-  new ThemeManager();
-  observeElements();
-  atualizarListaTarefas(); // <- ESSA LINHA É O QUE FAZ BUSCAR DO BANCO
-});
-
-
-
-function formatarData(dataString, horarioString) {
+// Função para formatar data (sem erro para data inválida)
+function formatarData(dataString) {
   if (!dataString) return "Data não informada";
+
   try {
-    const data = new Date(`${dataString}T${horarioString || "00:00:00"}`);
-    return data.toLocaleString("pt-BR", {
+    const data = new Date(dataString);
+    const opcoes = {
       day: "2-digit",
       month: "2-digit",
       year: "numeric",
       hour: "2-digit",
       minute: "2-digit",
-    });
+    };
+    return data.toLocaleDateString("pt-BR", opcoes);
   } catch (error) {
-    return dataString;
+    return dataString; // Retorna a data original se não conseguir formatar
   }
 }
 
+// Função para mostrar mensagens (opcional)
 function mostrarMensagem(texto, tipo) {
+  // Criar elemento da mensagem
   const mensagem = document.createElement("div");
   mensagem.className = `mensagem ${tipo}`;
   mensagem.textContent = texto;
   mensagem.style.cssText = `
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    padding: 15px 20px;
-    border-radius: 8px;
-    color: white;
-    font-weight: bold;
-    z-index: 1001;
-    animation: slideInRight 0.3s ease-out;
-  `;
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 15px 20px;
+        border-radius: 8px;
+        color: white;
+        font-weight: bold;
+        z-index: 1001;
+        animation: slideInRight 0.3s ease-out;
+    `;
 
-  if (tipo === "sucesso") mensagem.style.backgroundColor = "#10b981";
-  else if (tipo === "erro") mensagem.style.backgroundColor = "#ef4444";
+  if (tipo === "sucesso") {
+    mensagem.style.backgroundColor = "#10b981";
+  } else if (tipo === "erro") {
+    mensagem.style.backgroundColor = "#ef4444";
+  }
 
   document.body.appendChild(mensagem);
 
+  // Remover mensagem após 3 segundos
   setTimeout(() => {
     mensagem.style.animation = "slideOutRight 0.3s ease-out";
-    setTimeout(() => document.body.removeChild(mensagem), 300);
+    setTimeout(() => {
+      document.body.removeChild(mensagem);
+    }, 300);
   }, 3000);
 }
 
+// Adicionar estilos para as animações das mensagens
 const style = document.createElement("style");
 style.textContent = `
-  @keyframes slideInRight {
-    from { transform: translateX(100%); opacity: 0; }
-    to { transform: translateX(0); opacity: 1; }
-  }
-  @keyframes slideOutRight {
-    from { transform: translateX(0); opacity: 1; }
-    to { transform: translateX(100%); opacity: 0; }
-  }
+    @keyframes slideInRight {
+        from {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+    
+    @keyframes slideOutRight {
+        from {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        to {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+    }
 `;
 document.head.appendChild(style);
 
+// Fechar modal com tecla ESC
 document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") fecharModal();
+  if (e.key === "Escape") {
+    fecharModal();
+  }
 });
 
+const tarefasSalvas = localStorage.getItem("tarefas");
+if (tarefasSalvas) {
+  tarefas = JSON.parse(tarefasSalvas);
+  atualizarListaTarefas();
+}
+
+// Salvar tarefas no localStorage sempre que a lista for atualizada
+function salvarTarefas() {
+  localStorage.setItem("tarefas", JSON.stringify(tarefas));
+}
+
+// Inicialização quando a página carregar
 document.addEventListener("DOMContentLoaded", () => {
+  // Inicializa o gerenciador de tema
   new ThemeManager();
+  // Inicializa animações de fade-in
   observeElements();
-  carregarTarefasDoBanco();
 });
 
+// Animação de fade-in
 function observeElements() {
   const observer = new IntersectionObserver(
     (entries) => {
@@ -263,8 +258,12 @@ function observeElements() {
         }
       });
     },
-    { threshold: 0.1 }
+    {
+      threshold: 0.1,
+    }
   );
   const fadeElements = document.querySelectorAll(".fade-in");
-  fadeElements.forEach((element) => observer.observe(element));
+  fadeElements.forEach((element) => {
+    observer.observe(element);
+  });
 }
