@@ -316,3 +316,11 @@ def aviso():
 
 # inicio rota nova senha
 
+# início rota suporte
+
+@auth_bp.route('/suporte')  # rota definida para a página de suporte
+def suporte():
+
+    return render_template('PaginaConta/PaginaSuporte.html')
+
+# fim da rota suporte

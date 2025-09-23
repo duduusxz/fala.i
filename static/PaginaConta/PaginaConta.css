@@ -27,6 +27,9 @@
   --fundo-input: #ffffff;
   --cor-input: #333;
   --fundo-menu: #e4e9f0;
+  --principal-fundo: #5c5ee2;
+  --texto-informacao: #5c5ee2;
+  --nome: #5c5ee2;
 }
 
 /* Modo Escuro */
@@ -54,7 +57,10 @@
   --borda-input: #2d2d2d;
   --fundo-input: #b4b4b4;
   --cor-input: #222222;
+  --principal-fundo: #3b3b3b;
   --fundo-menu: #101010;
+  --texto-informacao: #ffffff;
+  --nome: #ffffff;
 }
 
 /* FADE IN ANIMATION */
@@ -275,13 +281,13 @@ li:hover {
   width: 100%;
   min-width: 220px;
   transition: 0.1s ease-in-out;
-  background-color: var(--cor-input);
+  background-color: var(--principal-fundo);
   height: 50px;
   align-items: center;
   display: flex;
   padding: 10px;
   border-radius: 10px;
-  color: var(--texto-primario);
+  color: white;
   transform: scale(1.1);
 }
 
@@ -336,7 +342,7 @@ svg:hover{
 }
 
 .nomePrincipal{
-  color: var(--texto-primario);
+  color: var(--nome);
   font-size: 35px;
   font-weight: bold;
 }
@@ -366,6 +372,7 @@ svg:hover{
   display: flex;
   flex-direction: column;
   align-self: flex-start;
+  color: var(--texto-informacao);
 }
 
 .conjunto{
@@ -375,14 +382,25 @@ svg:hover{
 }
 
 button{
-  background-color: var(--onda);
+  background-color: var(--principal-fundo);
   border: none;
   border-radius: 5px;
   height: auto;
   padding: 5px;
-  color: var(--border-color2);
+  color: white;
   cursor: pointer;
   font-family: 'Titillium Web';
   font-weight: 500;
   font-size: 15px;
+  transition: all ease-in-out 0.2s;
+}
+
+button:hover{
+  background-color: #423291;
+  transform: scale(1.02);
+}
+
+a{
+  text-decoration: none;
+  color: #888;
 }
