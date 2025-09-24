@@ -17,7 +17,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Young+Serif&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <script src="https://kit.fontawesome.com/345c519b8f.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="{{ url_for('static', filename='PaginaConta/PaginaConta.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='PaginaConta/PaginaSuporte.css') }}">
   <link rel="shortcut icon" href="{{ url_for('static', filename='img/logo.png') }}" type="image/x-icon">
   <script src="Conta.js"></script>
 </head>
@@ -26,8 +26,8 @@
   <div class="menu-lateral">
     <div class="item-lista">
     <ul>
-      <li id="principal">Minha Conta</li>
-      <li><a href="/suporte">Ajuda/Suporte</a></li>
+      <li><a href="/minha_conta">Minha Conta</a></li>
+      <li id="principal">Ajuda/Suporte</li>
       <li>Termos de Uso</li>
       <li>Acessibilidade</li>
       <li>Feedback</li>
@@ -83,40 +83,20 @@
   <div class="tudo">
     <div class="conteudo">
       <div class="nomePrincipal">
-        <p>Eduardo de Ataíde Melo</p>
+        <p>Relatar Problema</p>
       </div>
 
-      <div class="foto">
-        <img src="{{ url_for('static', filename='img/lamborghini.jpg') }}" alt="" class="fotoPerfil">
-        <button>Editar foto</button>
-      </div>
-
-      <div class="informacoes">
-        <div class="conjunto">
-          <label for="">Email: </label>
-          <p>Owhewknpekcewc@gmail.com</p>
-        </div>
-        
-        <div class="conjunto">
-        <label for="">Nome Completo: </label>
-        <p>lknlknlkencwnc</p>
-        <button>Alterar nome</button>
-        </div>
-
-        <div class="conjunto">
-          <label for="">Sair da conta: </label>
-          <button>Logout</button>
-        </div>
-
-        <div class="conjunto">
-          <label for="">Alterar Senha: </label>
-          <button>Alterar senha</button>
-        </div>
+      <div class="problema">
+        <p>No espaço abaixo relate o problema que está enfrentando ao usar nossa plataforma para que possamos ajudar através do nosso suporte</p>
+        <textarea name="" id=""></textarea>
+        <button type="submit">Enviar</button>
+        <p>Após relatar o problema, espere a resposta na sua caixa de e-mail.</p>
       </div>
     </div>
   </div>
 
-  <script src="{{ url_for('static', filename='PaginaConta/PaginaConta.js') }}"></script>
 </body>
+
+  <script src="{{ url_for('static', filename='PaginaConta/PaginaSuporte.js') }}"></script>
 
 </html>

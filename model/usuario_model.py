@@ -186,3 +186,4 @@ init_db()
 # Teste opcional
 if __name__ == "__main__":
     testar_conexao()
+    
