@@ -339,7 +339,7 @@ def aviso():
 
 # início rota suporte
 
-@auth_bp.route('/suporte') # rota definida para a página de suporte
+@auth_bp.route('/suporte')  # rota definida para a página de suporte abaixo
 def suporte():
 
     return render_template('PaginaConta/PaginaSuporte.html')
