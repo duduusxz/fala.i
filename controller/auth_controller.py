@@ -337,7 +337,13 @@ def aviso():
 
 # inicio rota nova senha
 
+<<<<<<< HEAD
 @auth_bp.route('/suporte')  # rota definida para a página de suporte
+=======
+# início rota suporte
+
+@auth_bp.route('/suporte')  ## rota definida para a página de suporte abaixo
+>>>>>>> ee45e2b42142f764113d90a2ce7c598227dde242
 def suporte():
 
     return render_template('PaginaConta/PaginaSuporte.html')
