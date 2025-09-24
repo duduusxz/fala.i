@@ -318,6 +318,7 @@ def listarTarefas():
 
 @auth_bp.route('/minha_conta')
 def conta():
+    
     return render_template('PaginaConta/PaginaConta.html')
 
 # fim minha conta

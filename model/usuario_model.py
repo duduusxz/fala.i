@@ -141,6 +141,15 @@ def obter_ranking():
     finally:
         conn.close()
 
+def obter_email_conta():
+    conn = get_db_connection()
+    try:
+        cursor = conn.cursor()
+        cursor.execute('SELECT rm, email, senha FROM tb_usuarios')
+        return cursor.fetchall();
+    finally:
+        conn.close()
+
 def buscar_podio():
     conn = get_db_connection()
     try:
