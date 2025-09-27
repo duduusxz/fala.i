@@ -324,3 +324,12 @@ def suporte():
     return render_template('PaginaConta/PaginaSuporte.html')
 
 # fim da rota suporte
+
+# início rota termos config
+
+@auth_bp.route('/termos_config')  # rota definida para a página de termos config
+def termos_config   ():
+
+    return render_template('PaginaConta/PaginaTermosConfig.html')
+
+# fim da rota termos config

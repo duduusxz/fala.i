@@ -441,3 +441,12 @@ textarea{
   display: flex;
   align-self: flex-start;
 }
+
+a{
+  text-decoration: none;
+  color: #888;
+} 
+
+a:hover{
+  color: var(--texto-primario);
+}

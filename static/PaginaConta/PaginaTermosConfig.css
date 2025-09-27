@@ -30,6 +30,7 @@
   --principal-fundo: #5c5ee2;
   --texto-informacao: #5c5ee2;
   --nome: #5c5ee2;
+  --textarea: #fff
 }
 
 /* Modo Escuro */
@@ -61,6 +62,7 @@
   --fundo-menu: #101010;
   --texto-informacao: #ffffff;
   --nome: #ffffff;
+  --textarea: #222222;
 }
 
 /* FADE IN ANIMATION */
@@ -327,6 +329,7 @@ svg:hover{
   align-items: center;
   justify-content: center;
   margin: 20px;
+  margin-top: 3rem;
 }
 
 .conteudo{
@@ -339,6 +342,22 @@ svg:hover{
   margin-left: 10%;
   justify-content: center;
   align-items: center;
+  height: auto;
+  max-height: 500px;
+  gap: 30px;
+}
+
+.conteudo ul {
+  max-height: 60vh;   /* define a altura máxima só para a lista */
+  overflow-y: auto;   /* ativa scroll só na lista */
+  padding-right: 10px; /* espaço pro scroll não colar no texto */
+  scrollbar-width: thin;
+  scrollbar-color: var(--texto-primario) transparent;
+}
+
+.conteudo li:hover{
+    transform: scale(1.0);
+    cursor: text;
 }
 
 .nomePrincipal{
@@ -393,6 +412,8 @@ button{
   font-weight: 500;
   font-size: 15px;
   transition: all ease-in-out 0.2s;
+  display: flex;
+  align-self: flex-end;
 }
 
 button:hover{
@@ -405,6 +426,17 @@ a{
   color: #888;
 }
 
+
+a{
+  text-decoration: none;
+  color: #888;
+} 
+
 a:hover{
   color: var(--texto-primario);
+}
+
+.conteudo ul{
+    text-align: justify;
+    font-family: 'Titillium Web';
 }
