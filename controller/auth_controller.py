@@ -6,6 +6,7 @@ from model.usuario_model import cadastrar, buscar_usuario_por_rm_e_email, listar
 from model.usuario_model import buscar_usuario_por_email  # ou outras funções
 from model.usuario_model import obter_ranking  
 from model.usuario_model import buscar_podio
+from model.usuario_model import mostrar_informacoes
 
 from model import usuario_model  # Usado para chamar criar_tabela(), se necessário
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -285,19 +286,23 @@ def ranking():
     restantes = ranking[3:]
     return render_template("PaginaRanking/PaginaRanking.html", ranking=ranking, top3=top3, restantes=restantes)
 
-
-
-
-
-
 #fim do ranking
 
 
 #inicio da minha conta
 
 @auth_bp.route('/minha_conta')
+@login_required
 def conta():
-    return render_template('PaginaConta/PaginaConta.html')
+
+    usuario_id = session.get('usuario_id')
+
+    if not usuario_id:
+        flash("Você precisa estar logado para entrar nessa pagina")
+        return redirect(url_for("auth.login"))
+
+    informacoes = mostrar_informacoes(usuario_id)
+    return render_template('PaginaConta/PaginaConta.html', informacoes=informacoes)
 
 # fim minha conta
 
