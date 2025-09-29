@@ -21,6 +21,7 @@ def init_db():
     cursor.execute('''
     CREATE TABLE IF NOT EXISTS usuarios (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
+        nome TEXT NOT NULL,
         rm TEXT UNIQUE NOT NULL,
         email TEXT UNIQUE NOT NULL,
         senha TEXT NOT NULL,

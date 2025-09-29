@@ -34,10 +34,12 @@ auth_bp = Blueprint('auth', __name__) # começa a definir o blueprint para auten
 @auth_bp.route('/cadastro', methods=['GET', 'POST'])  # define nessa linha a rota de cadastro, que vai pegar as informações do usuário e postar no form
 def cadastro():
     if request.method == "POST":
+        nome = request.form["nome"]
         email = request.form["email"]
         rm = request.form["rm"]
         senha = request.form["senha"]  # pega os dados do formulário de cadastro para verificar
         confirmarSenha = request.form["confirmarSenha"]  # pega a confirmação de senha do formulário
+        
         
         if confirmarSenha != senha:  # verifica se a confirmação de senha é igual à senha
             flash("Erro, coloque a senha igual ")  # se não for igual, retorna erro
@@ -77,6 +79,7 @@ def cadastro():
 @auth_bp.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
+        nome = request.form["nome"]
         email = request.form["email"]
         rm = request.form["rm"]
         senha = request.form["senha"]
