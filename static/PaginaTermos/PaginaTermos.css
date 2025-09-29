@@ -56,7 +56,7 @@ h1{
     padding: 20px;
     font-size: 35px;
     color: var(--cor-principal);
-    font-family: 'Young Serif';
+    font-family: 'Titillium Web';
 }
 
 ul, li{
@@ -68,7 +68,7 @@ li{
     padding: 15px;
     padding-left: 0;
     font-size: 23px;
-    font-family: 'Young Serif';
+    font-family: 'Titillium Web';
     color: #2c0b52;
 }
 
@@ -81,7 +81,7 @@ p{
 }
 
 a{
-    font-family: 'Young Serif';
+    font-family: 'Titillium Web';
     text-decoration: none;
     color: var(--cor-principal);
 }
