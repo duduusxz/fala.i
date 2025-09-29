@@ -25,6 +25,7 @@ def init_db():
         rm TEXT UNIQUE NOT NULL,
         email TEXT UNIQUE NOT NULL,
         senha TEXT NOT NULL,
+        username VARCHAR(30),
         data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )
     ''')
@@ -83,13 +84,13 @@ def testar_conexao():
     except Exception as e:
         print(" erro banco {e}")
 
-def cadastrar(rm, email, senha_hash):
+def cadastrar(nome, rm, email, senha_hash):
     conn = get_db_connection()
     try:
         cursor = conn.cursor()
         cursor.execute('''
-            INSERT INTO usuarios (rm, email, senha) VALUES (?, ?, ?)
-        ''', (rm, email, senha_hash))
+            INSERT INTO usuarios (nome, rm, email, senha) VALUES (?, ?, ?, ?)
+        ''', (nome, rm, email, senha_hash))
         conn.commit()
         
     except sqlite3.IntegrityError:
@@ -148,7 +149,7 @@ def mostrar_informacoes(usuario_id):
     conn = get_db_connection()
     try:
         cursor = conn.cursor()
-        cursor.execute("SELECT rm, email FROM usuarios WHERE id = ?", (usuario_id,))
+        cursor.execute("SELECT nome, rm, email FROM usuarios WHERE id = ?", (usuario_id,))
         return cursor.fetchone()
     finally:
         conn.close()

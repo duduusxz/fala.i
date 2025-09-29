@@ -62,7 +62,7 @@ def cadastro():
             return redirect(url_for("auth.cadastro"))  # se o usuário já estiver cadastrado, redireciona para a página de login
         
         senha_hash = generate_password_hash(senha)
-        usuario_model.cadastrar(rm, email, senha_hash) # chama a função cadastrar do model.usuario_model, que vai inserir os dados no banco de dados
+        usuario_model.cadastrar(nome, rm, email, senha_hash) # chama a função cadastrar do model.usuario_model, que vai inserir os dados no banco de dados
         
         print("Usuário cadastrado com sucesso!") # se o usuário for cadastrado com sucesso, retorna essa mensagem
         return redirect(url_for("auth.login"))  # redireciona para a página de login após o cadastro
@@ -79,7 +79,7 @@ def cadastro():
 @auth_bp.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
-        nome = request.form["nome"]
+        
         email = request.form["email"]
         rm = request.form["rm"]
         senha = request.form["senha"]
@@ -341,3 +341,30 @@ def termos_config   ():
     return render_template('PaginaConta/PaginaTermosConfig.html')
 
 # fim da rota termos config
+
+
+@auth_bp.route('/feedback')
+def feedback():
+    if request.method == 'POST':
+       feedback = request.form['feedback']
+
+        host = "smtp.gmail.com"  # servidor SMTP do Gmail
+        port = 587  # porta para envio de email
+        login = "fala.i.contact@gmail.com"
+        password = "veitocpyuezkjcbe"
+        
+        #conecta a porta e configura o server
+        
+        server = smtplib.SMTP(host, port)
+        server.ehlo() # inicia a conexão com o servidor SMTP
+        server.starttls() # inicia a conexão TLS para segurança
+        server.login(login, password)  # faz o login no servidor SMTP com o email e senha
+        
+        #cria o link e envia o email
+
+        banner_url = "https://i.postimg.cc/QNmfFJKx/banner.png"
+
+
+        link = f"https://chatbot-tcc.onrender.com/feedback" # cria o link para a página de nova senha, passando o email do usuário
+        linkSuporte = f"http://localhost:5000/inicio?email={email}"
+    return render_template('PaginaConta/PaginaFeedback.html')
