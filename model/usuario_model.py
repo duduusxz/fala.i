@@ -90,6 +90,7 @@ def cadastrar(rm, email, senha_hash):
             INSERT INTO usuarios (rm, email, senha) VALUES (?, ?, ?)
         ''', (rm, email, senha_hash))
         conn.commit()
+        
     except sqlite3.IntegrityError:
         print("RM ou email já existem!")
         raise
@@ -142,6 +143,15 @@ def obter_ranking():
     finally:
         conn.close()
 
+def mostrar_informacoes(usuario_id):
+    conn = get_db_connection()
+    try:
+        cursor = conn.cursor()
+        cursor.execute("SELECT rm, email FROM usuarios WHERE id = ?", (usuario_id,))
+        return cursor.fetchone()
+    finally:
+        conn.close()
+
 def buscar_podio():
     conn = get_db_connection()
     try:
@@ -155,7 +165,7 @@ def buscar_podio():
     finally:
         conn.close()
 
-def listar_tarefas():
+def listar_tarefas(usuario_id): #comecando a listar as tarefas pelo proprio ID, espernado o java terminar a parte dele
     conn = get_db_connection()
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM tb_tarefas")
@@ -181,6 +191,8 @@ def criar_tarefa(titulo, data_tarefa, horario_tarefa, descricao=None):
         raise
     finally:
         conn.close()
+
+
 
 
 
