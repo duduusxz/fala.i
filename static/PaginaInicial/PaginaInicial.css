@@ -300,8 +300,7 @@ header {
 .espaco {
   border-radius: 15px;
   padding: 15px;
-  background-color: var(--fundo-container);
-  box-shadow: 0 0 10px var(--border-color);
+  background-color: var(--fundo-branco);
   width: 670px;
   margin-top: 120px;
   margin-left: 100px;
@@ -313,12 +312,12 @@ header {
   display: flex;
   gap: 60px;
   justify-content: center;
-  backdrop-filter: blur(10px);
+  transition: all 0.4s;
 }
 
 .balao-fala {
   position: relative;
-  background-color: var(--fundo-branco);
+  background-color: var(--fundo-container);
   padding: 20px;
   border-radius: 30px;
   width: 100%;
@@ -328,16 +327,7 @@ header {
   text-align: justify;
   display: flex;
   align-items: center;
-}
-
-.balao-fala::after {
-  content: "";
-  position: absolute;
-  left: -38px;
-  top: 100px;
-  border-width: 20px;
-  border-style: solid;
-  border-color: transparent var(--fundo-branco) transparent transparent;
+  box-shadow: 0 0 10px var(--border-color);
 }
 
 #logo-container {
