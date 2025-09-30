@@ -7,6 +7,8 @@ from model.usuario_model import buscar_usuario_por_email  # ou outras funções
 from model.usuario_model import obter_ranking  
 from model.usuario_model import buscar_podio
 from model.usuario_model import mostrar_informacoes
+from model.usuario_model import criar_tarefa
+from model.usuario_model import listar_tarefas
 
 from model import usuario_model  # Usado para chamar criar_tabela(), se necessário
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -55,6 +57,7 @@ def cadastro():
         if len (senha) < 8 or len (senha) > 50:
             return jsonify({"erro": "Senha deve ter entre 8 e 50 caracteres."})
         
+
         # verifica se a senha e a confirmação de senha são iguais
 
         if usuario_model.buscar_usuario_por_email( email):
@@ -264,10 +267,24 @@ def inicio():
 
 #Começo sistema agenda
 
-@auth_bp.route('/agenda')  # rota definida para a página de agenda
+@auth_bp.route('/agenda', methods=["GET", "POST"])
 def agenda():
+    if request.method == "POST":
+        titulo = request.form['titulo']
+        descricao = request.form['descricao']
+        data_hora_str = request.form['data_hora']
 
-    return render_template('PaginaAgenda/PaginaAgenda.html')
+        from datetime import datetime
+        data_hora = datetime.fromisoformat(data_hora_str)
+
+        criar_tarefa(titulo, descricao, data_hora)
+        print("Tarefa feita com sucesso!")
+        
+        return redirect(url_for('auth.agenda'))
+
+    tarefas = listar_tarefas()
+    return render_template('PaginaAgenda/PaginaAgenda.html', agenda=tarefas)
+
 
 #fim sistema agenda
 
@@ -345,26 +362,5 @@ def termos_config   ():
 
 @auth_bp.route('/feedback')
 def feedback():
-    if request.method == 'POST':
-       feedback = request.form['feedback']
 
-        host = "smtp.gmail.com"  # servidor SMTP do Gmail
-        port = 587  # porta para envio de email
-        login = "fala.i.contact@gmail.com"
-        password = "veitocpyuezkjcbe"
-        
-        #conecta a porta e configura o server
-        
-        server = smtplib.SMTP(host, port)
-        server.ehlo() # inicia a conexão com o servidor SMTP
-        server.starttls() # inicia a conexão TLS para segurança
-        server.login(login, password)  # faz o login no servidor SMTP com o email e senha
-        
-        #cria o link e envia o email
-
-        banner_url = "https://i.postimg.cc/QNmfFJKx/banner.png"
-
-
-        link = f"https://chatbot-tcc.onrender.com/feedback" # cria o link para a página de nova senha, passando o email do usuário
-        linkSuporte = f"http://localhost:5000/inicio?email={email}"
     return render_template('PaginaConta/PaginaFeedback.html')

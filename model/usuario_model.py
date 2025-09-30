@@ -84,6 +84,7 @@ def testar_conexao():
     except Exception as e:
         print(" erro banco {e}")
 
+#cadastrando users
 def cadastrar(nome, rm, email, senha_hash):
     conn = get_db_connection()
     try:
