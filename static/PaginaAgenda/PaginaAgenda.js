@@ -78,7 +78,7 @@ document
 // Função para adicionar tarefa (sem validação de data)
 document.getElementById("form-tarefa").addEventListener("submit", (e) => {
   e.preventDefault();
-
+// commit
   const nomeTarefa = document.getElementById("nome-tarefa").value;
   const dataTarefa = document.getElementById("data-tarefa").value;
   const descricaoTarefa = document.getElementById("descricao-tarefa").value;

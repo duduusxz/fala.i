@@ -84,6 +84,7 @@ def testar_conexao():
     except Exception as e:
         print(" erro banco {e}")
 
+#cadastrando users
 def cadastrar(nome, rm, email, senha_hash):
     conn = get_db_connection()
     try:
@@ -176,8 +177,7 @@ def listar_tarefas(usuario_id): #comecando a listar as tarefas pelo proprio ID, 
     print("Tarefas no banco:", tarefas)  # <-- debug
     return tarefas
 
-    
-
+ 
 def criar_tarefa(titulo, data_tarefa, horario_tarefa, descricao=None):
     conn = get_db_connection()
     try:
