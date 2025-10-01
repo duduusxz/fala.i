@@ -267,7 +267,7 @@ def inicio():
 
 #Começo sistema agenda
 
-@auth_bp.route('/agenda', methods=["GET", "POST"])
+@auth_bp.route('/agenda', methods=["GET", "POST"]) 
 def agenda():
     if request.method == "POST":
         titulo = request.form['titulo']  
@@ -282,7 +282,9 @@ def agenda():
         
         return redirect(url_for('auth.agenda'))
 
-    tarefas = listar_tarefas()
+    usuario_id = session.get('usuario_id')
+    tarefas = listar_tarefas(usuario_id)\
+    
     return render_template('PaginaAgenda/PaginaAgenda.html', agenda=tarefas)
 
 
