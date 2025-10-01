@@ -178,7 +178,7 @@ def listar_tarefas(usuario_id): #comecando a listar as tarefas pelo proprio ID, 
     return tarefas
 
     
-
+ 
 def criar_tarefa(titulo, data_tarefa, horario_tarefa, descricao=None):
     conn = get_db_connection()
     try:
