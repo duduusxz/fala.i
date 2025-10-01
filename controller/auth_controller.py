@@ -270,7 +270,7 @@ def inicio():
 @auth_bp.route('/agenda', methods=["GET", "POST"])
 def agenda():
     if request.method == "POST":
-        titulo = request.form['titulo'] 
+        titulo = request.form['titulo']  
         descricao = request.form['descricao']
         data_hora_str = request.form['data_hora']
 
