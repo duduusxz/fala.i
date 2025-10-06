@@ -20,9 +20,7 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
 
-
 #importações  para realizar o sistema de autenticação
-
 
 auth_bp = Blueprint('auth', __name__) # começa a definir o blueprint para autenticação
 
