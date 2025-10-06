@@ -2,7 +2,10 @@ import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from flask import Flask, session
-from controller.auth_controller import auth_bp
+from controller.aviso_controller import auth_bp
+
+
+
 import smtplib #smtp é o recurso usado para enviar e-mails, criar servers e enviar email
 from email.mime.multipart import MIMEMultipart #padrão de envio de mensagem, manda por mime ( codificado )
 from email.mime.text import MIMEText #para enviar e-mails com texto

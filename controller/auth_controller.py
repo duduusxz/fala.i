@@ -1,7 +1,7 @@
 # Controller para autenticação de usuários
 # controller/auth_controller.py
 
-from flask import Blueprint, render_template, request, redirect, url_for, flash, session
+'''from flask import Blueprint, render_template, request, redirect, url_for, flash, session
 from model.usuario_model import cadastrar, buscar_usuario_por_rm_e_email, listar_todos_usuarios
 from model.usuario_model import buscar_usuario_por_email  # ou outras funções
 from model.usuario_model import obter_ranking  
@@ -364,3 +364,4 @@ def termos_config   ():
 def feedback():
 
     return render_template('PaginaConta/PaginaFeedback.html')
+    '''
