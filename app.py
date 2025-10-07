@@ -2,7 +2,9 @@ import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from flask import Flask, session
-from controller.auth_controller import auth_bp
+
+
+
 import smtplib #smtp é o recurso usado para enviar e-mails, criar servers e enviar email
 from email.mime.multipart import MIMEMultipart #padrão de envio de mensagem, manda por mime ( codificado )
 from email.mime.text import MIMEText #para enviar e-mails com texto
@@ -18,14 +20,36 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from flask import Flask, render_template, request, jsonify, redirect, url_for, flash
 from model.chat import gerar_resposta
-from controller.auth_controller import auth_bp
+
+# importa todos os blueprints
+from controller.aviso_controller import aviso_bp
+from controller.suporte_controller import suporte_bp
+from controller.agenda_controller import agenda_bp
+from controller.cadastro_controller import cadastro_bp
+from controller.conta_controller import conta_bp
+from controller.feedback_controller import feedback_bp
+from controller.login_controller import login_bp
+from controller.minhaConta_controller import minhaConta_bp
+from controller.ranking_controller import ranking_bp
+from controller.senha_controller import senha_bp
+
 
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'uma_chave_secreta_muito_longa_e_aleatoria_para_producao_1234567890'
-app.secret_key = 'chave_secreta_segura' 
-app.register_blueprint(auth_bp) #register the routes with blueprints, example: auth.example, and he integrate with auth_controler, for not have  problems with route, others = entre outros or outros.
-
+app.secret_key = 'chave_secreta_segura'
+ 
+# registra todos os blueprints
+app.register_blueprint(aviso_bp)
+app.register_blueprint(suporte_bp)
+app.register_blueprint(agenda_bp)
+app.register_blueprint(cadastro_bp)
+app.register_blueprint(conta_bp)
+app.register_blueprint(feedback_bp)
+app.register_blueprint(login_bp)
+app.register_blueprint(minhaConta_bp)
+app.register_blueprint(ranking_bp)
+app.register_blueprint(senha_bp)
 
 
 @app.route("/")
