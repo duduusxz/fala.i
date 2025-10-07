@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template
 
-auth_bp = Blueprint('auth', __name__)
+suporte_bp = Blueprint('suporte', __name__)
 
 @suporte_bp.route('/suporte')
 def suporte():

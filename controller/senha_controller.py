@@ -5,7 +5,8 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
-auth_bp = Blueprint('auth', __name__)
+senha_bp = Blueprint('senha', __name__)
+
 # Rota de nova senha
 @senha_bp.route('/nova_senha', methods=['GET', 'POST'])
 def nova_senha():

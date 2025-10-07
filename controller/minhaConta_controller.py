@@ -1,31 +1,18 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash, session
-from model.usuario_model import cadastrar, buscar_usuario_por_rm_e_email, listar_todos_usuarios
-from model.usuario_model import buscar_usuario_por_email  # ou outras funções
-from model.usuario_model import obter_ranking  
-from model.usuario_model import buscar_podio
+from flask import Blueprint, render_template, redirect, url_for, flash, session
+from controller.login_controller import login_required
 from model.usuario_model import mostrar_informacoes
-from model.usuario_model import criar_tarefa
-from model.usuario_model import listar_tarefas
 
-from model import usuario_model  # Usado para chamar criar_tabela(), se necessário
-from werkzeug.security import generate_password_hash, check_password_hash
-from flask import jsonify
-import smtplib
-from functools import wraps
+# Cria o Blueprint da "Minha Conta"
+minhaConta_bp = Blueprint('minhaConta', __name__, template_folder='../view')
 
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
-
-
-@auth_bp.route('/minha_conta')
+@minhaConta_bp.route('/minha_conta')
 @login_required
-def conta():
-
+def minha_conta():
     usuario_id = session.get('usuario_id')
 
     if not usuario_id:
-        flash("Você precisa estar logado para entrar nessa pagina")
-        return redirect(url_for("auth.login"))
+        flash("Você precisa estar logado para acessar essa página.")
+        return redirect(url_for("login.login"))
 
     informacoes = mostrar_informacoes(usuario_id)
-    return render_template('PaginaConta/PaginaConta.html', informacoes=informacoes)
+    return render_template('PaginaConta/PaginaMinhaConta.html', informacoes=informacoes)
