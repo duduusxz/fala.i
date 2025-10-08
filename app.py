@@ -32,6 +32,7 @@ from controller.login_controller import login_bp
 from controller.minhaConta_controller import minhaConta_bp
 from controller.ranking_controller import ranking_bp
 from controller.senha_controller import senha_bp
+from controller.inicio_controller import inicio_bp
 
 
 
@@ -50,6 +51,7 @@ app.register_blueprint(login_bp)
 app.register_blueprint(minhaConta_bp)
 app.register_blueprint(ranking_bp)
 app.register_blueprint(senha_bp)
+app.register_blueprint(inicio_bp)
 
 
 @app.route("/")

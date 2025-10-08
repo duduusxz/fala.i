@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template
-from model.usuario_model import obter_ranking, buscar_podio
+from model.ranking_model import obter_ranking, buscar_podio
 
 # Cria o Blueprint específico para o ranking
 ranking_bp = Blueprint('ranking', __name__)
