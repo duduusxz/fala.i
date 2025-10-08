@@ -22,9 +22,10 @@ def init_db():
     CREATE TABLE IF NOT EXISTS usuarios (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         nome TEXT NOT NULL,
-        rm TEXT UNIQUE NOT NULL,
+        rm TEXT UNIQUE,                 -- ALTERADO: removido NOT NULL
         email TEXT UNIQUE NOT NULL,
-        senha TEXT NOT NULL,
+        senha TEXT,                     -- ALTERADO: removido NOT NULL
+        google_id TEXT UNIQUE,          -- NOVO: ID único do Google
         username VARCHAR(30),
         data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )
@@ -109,12 +110,40 @@ def buscar_usuario_por_rm_e_email(rm, email):
     finally:
         conn.close()
 
+# Seu arquivo usuario_model.py
+
+# ... (suas funções existentes)
+
 def buscar_usuario_por_email(email):
+    # Função que você já tem, essencial para o Google Login!
     conn = get_db_connection()
     try:
         cursor = conn.cursor()
         cursor.execute('SELECT * FROM usuarios WHERE email = ?', (email,))
         return cursor.fetchone()
+    finally:
+        conn.close()
+
+# NOVO: Função para criar um usuário que vem do Google
+def criar_usuario_google(email, nome, google_id):
+    conn = get_db_connection()
+    try:
+        cursor = conn.cursor()
+        # Inserimos apenas o que o Google nos dá: nome, email e google_id.
+        # Os campos rm e senha serão NULL.
+        cursor.execute('''
+            INSERT INTO usuarios (nome, email, google_id) VALUES (?, ?, ?)
+        ''', (nome, email, google_id))
+        conn.commit()
+        
+        # Retorna o ID do novo usuário (útil para iniciar a sessão)
+        return cursor.lastrowid 
+        
+    except sqlite3.IntegrityError:
+        # Teoricamente não deve acontecer se a lógica no controller estiver correta,
+        # pois o controller já deve ter verificado o email.
+        print("Email ou google_id já existem!")
+        raise
     finally:
         conn.close()
 

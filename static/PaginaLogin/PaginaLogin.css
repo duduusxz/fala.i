@@ -136,7 +136,7 @@ input::placeholder {
   background-color: var(--fundo-container);
   height: auto;
   padding: 40px;
-  padding-bottom: 80px;
+  padding-bottom: 8.4rem;
   width: 90%;
   align-items: center;
   justify-content: center;
@@ -397,4 +397,26 @@ section .wave span:nth-child(3) {
   100% {
     transform: translate(-50%, -75%) rotate(360deg);
   }
+}
+
+
+.g-signin2 {
+    
+    margin-top: 15px; 
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center ;
+}
+
+.g-signin2 > .abcRioButton{
+  width: 
+  100%  !important;
+
+  border-radius: 0.6em;
+  box-shadow: none;
+}
+
+.abcRioButtonContentWrapper{
+  width: 70vw;
 }

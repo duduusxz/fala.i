@@ -2,6 +2,7 @@
 <html lang="pt-br">
 
 <head>
+    <meta name="google-signin-client_id" content="43885387685-llf78in1j7n8tkco2laoao676q04oepf.apps.googleusercontent.com   ">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -15,7 +16,11 @@
 
             document.documentElement.setAttribute('data-theme', theme);
         })();
+
+        
     </script>
+
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -67,7 +72,7 @@
                     </div>
                 </div>
             </div>
-
+            
             <div class="direita">
                 <div class="container-login" id="container-login">
                     <div class="login">
@@ -93,6 +98,8 @@
                                     <p id="ou">ou</p>
                                     <a href="/cadastro" id="cadastrar">Cadastrar</a>
                                 </div>
+                                
+                            <div class="g-signin2" data-onsuccess="onSignIn"></div>
                                 <a id="esqueci-senha" href="/esqueci_senha">Esqueci minha senha</a>
                             </div>
                         </form>
